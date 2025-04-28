@@ -1,0 +1,29 @@
+.btn {
+  width: 486px;
+  height: 44px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Inter;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+  color: #ffffffff; /* white */
+  /* Apple gray */
+  opacity: 1;
+  border: none;
+  border-radius: 6px; /* border-m */
+  gap: 6px;
+}
+
+.apple {
+  /* Facebook blue */
+  background: #9095A0FF;
+}
+.google {
+  background: #DE3B40FF;
+}
+.facebook {
+  background: #335CA6FF;
+}

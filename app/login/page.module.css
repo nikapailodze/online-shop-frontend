@@ -1,0 +1,125 @@
+.page {
+    width: 100%;
+    height: 100vh;
+    background-color: cadetblue;
+    display: flex;
+    position: relative;
+
+}
+
+.leftPart {
+    max-width: 540px;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    background-image: url('/shopfinalbss-removebg-preview.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 150%;
+}
+
+.signUpIndicator {
+    position: absolute;
+    top: 64px;
+    right: 113px;
+    font-family: Archivo;
+    /* Heading */
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    color: #171A1FFF;
+    /* neutral-900 */
+
+}
+
+.rightPart {
+    width: 100%;
+    height: 100%;
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signUpIndicatorAnch {
+    text-decoration: none;
+    color: #AC1947FF;
+    /* secondary-700 */
+}
+
+.btnsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.title {
+    font-family: Archivo;
+    /* Heading */
+    font-size: 32px;
+    line-height: 48px;
+    font-weight: 700;
+    color: black;
+    /* primary-500 */
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 43px;
+}
+
+.conntentUpper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.orWrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 16px 0;
+}
+
+.orText {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    color: #565E6CFF;
+}
+
+.orLine {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #E0E0E0;
+    /* neutral-300 */
+}
+
+.labelWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    font-family: Inter;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 700;
+}
+
+.input {
+    width: 486px;
+    height: 52px;
+    padding-left: 20px;
+    padding-right: 52px;
+    font-family: Inter;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+    background: #F3F4F6FF;
+    /* neutral-200 */
+    border-radius: 6px;
+    /* border-m */
+    border-width: 0px;
+    outline: none;
+}
