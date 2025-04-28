@@ -51,106 +51,107 @@ export default function Home() {
 
           <div className={styles.contentLower}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-              <div className={styles.row}>
-                <div className={styles.labelWrapper}>
-                  <label className={styles.label} htmlFor="firstName">
-                    First Name
-                  </label>
-                  <input
-                    id="firstName"
-                    {...register("firstName", {
-                      required: "First name is required",
-                    })}
-                    placeholder="First Name"
-                    className={styles.input}
-                  />
-                  {errors.firstName && (
-                    <span className={styles.error}>
-                      {errors.firstName.message as string}
-                    </span>
-                  )}
+              <div className={styles.maininputWrapper}>
+                <div className={styles.row}>
+                  <div className={styles.labelWrapper}>
+                    <label className={styles.label} htmlFor="firstName">
+                      First Name
+                    </label>
+                    <input
+                      id="firstName"
+                      {...register("firstName", {
+                        required: "First name is required",
+                      })}
+                      placeholder="First Name"
+                      className={styles.input}
+                    />
+                    {errors.firstName && (
+                      <span className={styles.error}>
+                        {errors.firstName.message as string}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className={styles.labelWrapper}>
+                    <label className={styles.label} htmlFor="lastName">
+                      Last Name
+                    </label>
+                    <input
+                      id="lastName"
+                      {...register("lastName", {
+                        required: "Last name is required",
+                      })}
+                      placeholder="Last Name"
+                      className={styles.input}
+                    />
+                    {errors.lastName && (
+                      <span className={styles.error}>
+                        {errors.lastName.message as string}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div className={styles.labelWrapper}>
-                  <label className={styles.label} htmlFor="lastName">
-                    Last Name
+                  <label className={styles.label} htmlFor="email">
+                    Email
                   </label>
                   <input
-                    id="lastName"
-                    {...register("lastName", {
-                      required: "Last name is required",
-                    })}
-                    placeholder="Last Name"
+                    id="email"
+                    {...register("email", { required: "Email is required" })}
+                    placeholder="Email"
+                    type="email"
                     className={styles.input}
                   />
-                  {errors.lastName && (
+                  {errors.email && (
                     <span className={styles.error}>
-                      {errors.lastName.message as string}
+                      {errors.email.message as string}
+                    </span>
+                  )}
+                </div>
+                <div className={styles.labelWrapper}>
+                  <label className={styles.label} htmlFor="password">
+                    Password
+                  </label>
+                  <input
+                    id="password"
+                    {...register("password", {
+                      required: "Password is required",
+                    })}
+                    placeholder="Password"
+                    type="password"
+                    className={styles.input}
+                  />
+                  {errors.password && (
+                    <span className={styles.error}>
+                      {errors.password.message as string}
                     </span>
                   )}
                 </div>
               </div>
-
-              <div className={styles.labelWrapper}>
-                <label className={styles.label} htmlFor="email">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  {...register("email", { required: "Email is required" })}
-                  placeholder="Email"
-                  type="email"
-                  className={styles.input}
-                />
-                {errors.email && (
-                  <span className={styles.error}>
-                    {errors.email.message as string}
-                  </span>
-                )}
+              <div className={styles.lowerInputWrapper}>
+                <div className={styles.terms}>
+                  <input
+                    {...register("terms", {
+                      required: "You must accept the terms and policies",
+                    })}
+                    type="checkbox"
+                    className={styles.checkbox}
+                    id="terms"
+                  />
+                  <label className={styles.termsText} htmlFor="terms">
+                    I agree to the terms and policies
+                  </label>
+                  {errors.terms && (
+                    <span className={styles.error}>
+                      {errors.terms.message as string}
+                    </span>
+                  )}
+                </div>
+                <button type="submit" className={styles.submitButton}>
+                  Create an Account
+                </button>
               </div>
-
-              <div className={styles.labelWrapper}>
-                <label className={styles.label} htmlFor="password">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  {...register("password", {
-                    required: "Password is required",
-                  })}
-                  placeholder="Password"
-                  type="password"
-                  className={styles.input}
-                />
-                {errors.password && (
-                  <span className={styles.error}>
-                    {errors.password.message as string}
-                  </span>
-                )}
-              </div>
-
-              <div className={styles.terms}>
-                <input
-                  {...register("terms", {
-                    required: "You must accept the terms and policies",
-                  })}
-                  type="checkbox"
-                  className={styles.checkbox}
-                  id="terms"
-                />
-                <label className={styles.termsText} htmlFor="terms">
-                  I agree to the terms and policies
-                </label>
-                {errors.terms && (
-                  <span className={styles.error}>
-                    {errors.terms.message as string}
-                  </span>
-                )}
-              </div>
-
-              <button type="submit" className={styles.submitButton}>
-                Create an Account
-              </button>
             </form>
           </div>
         </div>
