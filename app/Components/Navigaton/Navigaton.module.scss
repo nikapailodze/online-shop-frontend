@@ -1,0 +1,36 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 19px;
+}
+
+.logoText {
+  font-size: 22px;
+  letter-spacing: 0;
+  line-height: 13px;
+  color: black;
+  font-weight: 400;
+}
+
+.navItemsRight {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.timeWrapper {
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 13px;
+  font-weight: 200;
+  font-family: "Host Grotesk", sans-serif;
+}
+.burgerMenu svg {
+  width: 28px;
+  height: 28px;
+}
+
+.cartIcon svg {
+  width: 32px;
+  height: 32px;
+}
