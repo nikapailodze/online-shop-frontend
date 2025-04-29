@@ -31,7 +31,7 @@ const SignupWithButton = (props: Props) => {
       )}
 
       <span>
-        Sign in with {props.type.charAt(0).toUpperCase() + props.type.slice(1)}
+        Sign up with {props.type.charAt(0).toUpperCase() + props.type.slice(1)}
       </span>
     </button>
   );

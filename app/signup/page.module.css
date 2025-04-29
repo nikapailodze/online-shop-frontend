@@ -71,8 +71,6 @@
     display: flex;
     flex-direction: column;
     gap: 43px;
-    width: 100%;
-    max-width: 486px;;
 }
 
 .conntentUpper {
