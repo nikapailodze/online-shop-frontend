@@ -1,3 +1,4 @@
+'use client'
 import styles from "./Navigaton.module.scss";
 import { BsCart4 } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
