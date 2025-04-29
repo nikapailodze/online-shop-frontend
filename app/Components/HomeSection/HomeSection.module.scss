@@ -43,3 +43,11 @@
     font-weight: 500;
     color: #545454;
 }
+
+.homeSectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease-out; // Add smooth scaling
+  will-change: transform; // Optimize performance
+}
