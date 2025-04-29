@@ -34,7 +34,7 @@ export default function Home() {
       <div className={styles.rightPart}>
         <div className={styles.content}>
           <div className={styles.conntentUpper}>
-            <h1 className={styles.title}>Sign In</h1>
+            <h1 className={styles.title}>Sign Up</h1>
 
             <div className={styles.btnsWrapper}>
               <SignupWithButton type="google" />
@@ -53,7 +53,7 @@ export default function Home() {
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
               <div className={styles.maininputWrapper}>
                 <div className={styles.row}>
-                  {/* <div className={styles.labelWrapper}>
+                  <div className={styles.labelWrapper}>
                     <label className={styles.label} htmlFor="firstName">
                       First Name
                     </label>
@@ -70,9 +70,9 @@ export default function Home() {
                         {errors.firstName.message as string}
                       </span>
                     )}
-                  </div> */}
+                  </div>
 
-                  {/* <div className={styles.labelWrapper}>
+                  <div className={styles.labelWrapper}>
                     <label className={styles.label} htmlFor="lastName">
                       Last Name
                     </label>
@@ -89,7 +89,7 @@ export default function Home() {
                         {errors.lastName.message as string}
                       </span>
                     )}
-                  </div> */}
+                  </div>
                 </div>
 
                 <div className={styles.labelWrapper}>
@@ -130,8 +130,26 @@ export default function Home() {
                 </div>
               </div>
               <div className={styles.lowerInputWrapper}>
+                <div className={styles.terms}>
+                  <input
+                    {...register("terms", {
+                      required: "You must accept the terms and policies",
+                    })}
+                    type="checkbox"
+                    className={styles.checkbox}
+                    id="terms"
+                  />
+                  <label className={styles.termsText} htmlFor="terms">
+                    I agree to the terms and policies
+                  </label>
+                  {errors.terms && (
+                    <span className={styles.error}>
+                      {errors.terms.message as string}
+                    </span>
+                  )}
+                </div>
                 <button type="submit" className={styles.submitButton}>
-                  Sign In
+                  Create an Account
                 </button>
               </div>
             </form>
