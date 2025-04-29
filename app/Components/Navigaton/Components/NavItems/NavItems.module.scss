@@ -1,16 +1,23 @@
 .navItems {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.4s ease-in-out; 
-  
-    &.open {
-      max-height: 500px; 
-    }
-  
-    &.closed {
-      max-height: 0;
-    }
+  position: absolute;
+  top: 80px; // right below your sticky navbar height
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s ease-in-out;
+  background-color: white; // or whatever background you need
+  z-index: 998; // or slightly less than your navWrapper if needed
+
+  &.open {
+    max-height: 500px; // or 1000px if needed
   }
+
+  &.closed {
+    max-height: 0;
+  }
+}
+
   
   .list {
     display: flex;
@@ -26,5 +33,6 @@
     line-height: 1.4;
     font-weight: 300;
     font-family: 'Host Grotesk', sans-serif;
+
   }
   

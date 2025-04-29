@@ -3,12 +3,14 @@
     flex-direction: column;
     position: sticky;
     top: 0;
+    background-color: white;
+    z-index: 100;
 }
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 19px;
+  padding: 25px 0;
 }
 
 .logoText {
