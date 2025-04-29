@@ -1,5 +1,6 @@
 "use client";
 import HomeSection from "./Components/HomeSection/HomeSection";
+import ProductionSection from "./Components/ProductionSection/ProductionSection";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -9,9 +10,15 @@ export default function Home() {
         <HomeSection/>
       </div>
 
-      <div className={styles.aboutSection}>{/* About Us content */}</div>
+      <div className={styles.productionSection}>
+        <ProductionSection dropNumber="001"/>
+      </div>
 
       <div className={styles.contactSection}>{/* Contact content */}</div>
+
+      <div className={styles.productionSection}>
+        <ProductionSection dropNumber="002"/>
+      </div>
     </div>
   );
 }

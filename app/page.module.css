@@ -12,16 +12,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color:forestgreen; */
 }
 
-.aboutSection {
+.productionSection {
     height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: cadetblue;
 }
 
 .contactSection {
@@ -30,11 +28,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: lightslategray;
 }
 
-/* .homeSection,
+.homeSection,
 .aboutSection,
 .contactSection {
   scroll-snap-align: start;
-} */
+}

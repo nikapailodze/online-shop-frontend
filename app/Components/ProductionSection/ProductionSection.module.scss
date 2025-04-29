@@ -1,0 +1,31 @@
+.productionSection{
+    padding: 100px 0;
+    width: 100%;
+    height: 100%;
+}
+.content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.productionTitle{
+    font-family: 'Host Grotesk', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0;
+    line-height: 1.4em;
+    margin-bottom: 40px;
+    color: #252525;
+    font-weight: 300;
+}
+
+.productionItemsWrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+
+}
