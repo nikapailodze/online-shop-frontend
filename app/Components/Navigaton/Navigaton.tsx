@@ -1,8 +1,9 @@
 import styles from "./Navigaton.module.scss";
 import { BsCart4 } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
-import NavItems from "../NavItems/NavItems";
+import NavItems from "./Components/NavItems/NavItems";
 import { useState } from "react";
+import Clock from "./Components/Clock/Clock";
 
 const Navigaton = () => {
   const [showNavItems, setShowNavItems] = useState(false);
@@ -16,7 +17,7 @@ const Navigaton = () => {
 
         <div className={styles.navItemsRight}>
           <div className={styles.timeWrapper}>
-            <p>12:00:08</p>
+            <Clock/>
           </div>
           <div onClick={() => setShowNavItems((prev) => !prev)}>
             <div className={styles.burgerMenu}>
