@@ -8,7 +8,7 @@ const HomeSection = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const maxScroll = window.innerHeight; // 1 screen = 100vh
+      const maxScroll = window.innerHeight; 
       const newScale = Math.max(0.8, 1 - (scrollTop / maxScroll) * 0.2);
       setScale(newScale);
     };
