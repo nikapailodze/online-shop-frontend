@@ -33,7 +33,6 @@ const Navigaton = () => {
         </div>
       </nav>
 
-      {/* Always render NavItems and toggle its className */}
       <NavItems isOpen={showNavItems} />
     </div>
   );

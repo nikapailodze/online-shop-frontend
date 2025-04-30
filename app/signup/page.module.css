@@ -40,13 +40,11 @@
     justify-content: center;
     align-items: center;
     padding: 207px 90px;
-    /* max-width: 900px; */
 }
 
 .signUpIndicatorAnch {
     text-decoration: none;
     color: #AC1947FF;
-    /* secondary-700 */
 }
 
 .btnsWrapper {

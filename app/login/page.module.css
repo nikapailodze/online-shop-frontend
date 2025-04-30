@@ -40,13 +40,11 @@
     justify-content: center;
     align-items: center;
     padding: 207px 90px;
-    /* max-width: 900px; */
 }
 
 .signUpIndicatorAnch {
     text-decoration: none;
     color: #AC1947FF;
-    /* secondary-700 */
 }
 
 .btnsWrapper {
@@ -59,12 +57,10 @@
 
 .title {
     font-family: Archivo;
-    /* Heading */
     font-size: 32px;
     line-height: 48px;
     font-weight: 700;
     color: black;
-    /* primary-500 */
 }
 
 .content {
@@ -101,7 +97,6 @@
     flex-grow: 1;
     height: 1px;
     background-color: #E0E0E0;
-    /* neutral-300 */
 }
 
 .labelWrapper {
@@ -126,9 +121,7 @@
     line-height: 28px;
     font-weight: 400;
     background: #F3F4F6FF;
-    /* neutral-200 */
     border-radius: 6px;
-    /* border-m */
     border-width: 0px;
     outline: none;
 }
@@ -137,7 +130,6 @@
     display: flex;
     flex-direction: column;
     gap: 28px;
-    /* padding: ; */
 }
 
 .row {
@@ -151,9 +143,7 @@
 
 .input:hover {
     color: #BCC1CAFF;
-    /* neutral-400 */
     background: #F3F4F6FF;
-    /* neutral-200 */
 }
 
 /* focused */

@@ -8,3 +8,14 @@
   display: flex;
   justify-content: center;
 }
+
+
+* {
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none; 
+}
+
