@@ -19,7 +19,7 @@ const ProductionSection = ({ dropNumber }: ProductionSectionProps) => (
           }
         />
         <ShoppingItem
-          imageUrl="/test/manHandUp.avif"
+          imageUrl="/shopfinalbss-removebg-preview.png"
           name={"VANTA Coat"}
           price={320}
           description={
@@ -27,7 +27,7 @@ const ProductionSection = ({ dropNumber }: ProductionSectionProps) => (
           }
         />
         <ShoppingItem
-          imageUrl="/test/manHandUp.avif"
+          imageUrl="/tralaleoShirt.png"
           name={"VANTA Coat"}
           price={320}
           description={

@@ -6,7 +6,14 @@
   flex-direction: column;
   justify-content: flex-end;
   padding-bottom: 50px;
-  background-size: cover;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 45%,
+      #ffffff 100%
+    ),
+    url("/manShooting-Photoroom.png");
+  // background-size: contain;
+  background-size: 70%;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -24,7 +31,7 @@
   margin: 0;
   font-family: "Host Grotesk", sans-serif;
   font-weight: 400;
-    color: #252525;;
+  color: #252525;
 }
 
 .heroText {
@@ -33,25 +40,25 @@
   text-align: left;
 }
 
-.subTitleWrapper{
-    display: flex;
-    flex-direction: column;
+.subTitleWrapper {
+  display: flex;
+  flex-direction: column;
 }
 
-.subTitle{
-    font-size: 18px;
-    line-height: 1.4;
-    letter-spacing: 0;
-    margin: 0;
-    font-family: "Manrope", sans-serif;
-    font-weight: 500;
-    color: #545454;
+.subTitle {
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  color: #545454;
 }
 
 .homeSectionContent {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: transform 0.2s ease-out; 
-  will-change: transform; 
+  transition: transform 0.2s ease-out;
+  will-change: transform;
 }
