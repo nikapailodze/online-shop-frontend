@@ -56,6 +56,9 @@ export default function Home() {
               <ColorSelector colors={product.colors} />
             </div>
           </div>
+          <div className={styles.buttonWrapper}>
+            <button className={styles.addToCartButton}>ADD TO CART</button>
+          </div>
         </div>
       </section>
     </div>
