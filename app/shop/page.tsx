@@ -23,7 +23,7 @@ export default function Home() {
           }
         />
         <ShoppingItem
-          imageUrl="/shopfinalbss-removebg-preview.png"
+          imageUrl="/shopfinalbss.jpeg"
           name={"VANTA Coat"}
           price={320}
           description={
@@ -47,7 +47,7 @@ export default function Home() {
           }
         />
         <ShoppingItem
-          imageUrl="/shopfinalbss-removebg-preview.png"
+          imageUrl="/shopfinalbss.jpeg"
           name={"VANTA Coat"}
           price={320}
           description={

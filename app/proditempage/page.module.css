@@ -1,0 +1,7 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    width: 100%;
+}
