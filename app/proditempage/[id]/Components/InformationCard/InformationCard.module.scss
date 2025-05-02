@@ -1,0 +1,63 @@
+.informationCard {
+  width: 100%;
+  max-width: 535px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 10px;
+  border-bottom: #d1d1d1 1px solid;
+}
+
+.informationCardTitleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.heading3 {
+  font-size: 22px;
+  letter-spacing: 0em;
+  line-height: 1.4em;
+  text-align: left;
+  font-weight: 300;
+  font-family: "Host Grotesk", sans-serif;
+}
+
+.bodyheading {
+  font-size: 18px;
+  letter-spacing: 0em;
+  line-height: 1.4em;
+  text-align: left;
+  font-weight: 200;
+  font-family: "Host Grotesk", sans-serif;
+}
+
+.informationCardButton {
+  width: 24px;
+  height: 24px;
+  background-color: #252525;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.informationCardIcon {
+  transition: transform 0.3s ease;
+}
+
+.active {
+  transform: rotate(45deg);
+}
+
+.descriptionWrapper {
+  overflow: hidden;
+  transition: height 0.4s ease, opacity 0.3s ease;
+  opacity: 0;
+  height: 0;
+}
+
+.descriptionWrapperVisible {
+  opacity: 1;
+}
