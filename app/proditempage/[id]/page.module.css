@@ -5,6 +5,7 @@
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
     width: 100%;
+    
 }
 
 .mainImageWrapper {
@@ -18,16 +19,20 @@
     align-items: center;
     gap: 50px;
     padding: 64px 0;
-    /* background-color: cadetblue; */
 }
+
 
 .mainInfoContent {
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    /* background-color: aquamarine; */
+    gap: 75px;
+    max-width: 535px;
 }
-
+.mainInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
 .titlesWrapper {
     display: flex;
     flex-direction: column;
@@ -35,9 +40,9 @@
 }
 
 .heading2 {
-    font-size: 28px;
+    font-size: 38px;
     letter-spacing: -0.03em;
-    line-height: 1.2;
+    line-height: 1.4;
     margin: 0;
     font-family: "Host Grotesk", sans-serif;
     font-weight: 300;
@@ -78,9 +83,12 @@
 .buttonWrapper {
     width: 100%;
     height: auto;
+    max-width: 535px;
+
 }
 
 .addToCartButton {
+    width: 100%;
     overflow: hidden; 
     position: relative;
     font: inherit;
@@ -126,4 +134,10 @@
         background-color: transparent;
         transition: height 0.25s ease;
     }
+}
+
+.informationWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
