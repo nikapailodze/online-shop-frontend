@@ -21,7 +21,7 @@ const product: Product = {
   price: 99.99,
   name: "VANTA Suite",
   description:
-    "Fluid structure meets bold tailoring. A statement in modern minimalism. Fluid structure meets bold tailoring. A statement in modern minimalism.",
+    "tralaleo tralala tishirt Fluid structure meets bold tailoring. A statement in modern minimalism. Fluid structure meets bold tailoring. A statement in modern minimalism.",
   sizes: ["S", "M", "L", "XL"],
   colors: ["black", "blue", "gray", "brown"],
 };
