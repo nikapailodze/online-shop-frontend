@@ -1,11 +1,13 @@
-.navWrapper{
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 100;
-    width: 100%;
+.navWrapper {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  width: 100%;
+  padding: 0 40px;
+
 }
 .nav {
   display: flex;

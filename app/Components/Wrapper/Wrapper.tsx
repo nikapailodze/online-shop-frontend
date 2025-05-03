@@ -8,9 +8,9 @@ interface WrapperProps {
 
 const Wrapper: React.FC<WrapperProps> = ({ children }) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.container}>
       <Navigaton />
-      {children}
+      <div className={styles.wrapper}>{children}</div>
     </div>
   );
 };
