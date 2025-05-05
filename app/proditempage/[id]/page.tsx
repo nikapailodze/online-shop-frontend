@@ -98,6 +98,7 @@ export default function Home() {
             width={535}
             height={800}
             alt={product.name}
+            className={styles.mainImage}
           />
         </div>
 

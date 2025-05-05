@@ -1,5 +1,4 @@
 .page {
-    margin-top: -40px;
     display: flex;
     flex-direction: column;
     scroll-snap-type: y mandatory;
@@ -140,4 +139,35 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+
+@media (max-width: 1024px) {
+    .mainInfoWrapper {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .addToCartButton {
+        font-size: 2rem;
+    }
+}
+@media (max-width: 1024px) {
+    .mainImageWrapper {
+        max-width: 80%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        
+    }
+}
+
+@media (max-width: 768px) {
+    .mainImageWrapper {
+        max-width: 100%;
+        height: auto;
+        justify-content: center;
+
+    }
 }
