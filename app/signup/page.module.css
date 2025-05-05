@@ -1,6 +1,6 @@
 .page {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     position: relative;
     overflow-y: auto;
@@ -38,7 +38,6 @@
     justify-content: center;
     align-items: center;
     padding: 207px 90px;
-    overflow-y: auto;
 }
 
 .signUpIndicatorAnch {

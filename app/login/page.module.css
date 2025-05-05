@@ -1,10 +1,11 @@
 .page {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     overflow-y: auto;
-
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .leftPart {
@@ -26,7 +27,6 @@
     color: #171A1FFF;
 
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
     /* direction: rtl; */
 
@@ -46,7 +46,6 @@
     justify-content: center;
     align-items: center;
     padding: 207px 90px;
-    overflow-y: auto;
 }
 
 .signUpIndicatorAnch {
