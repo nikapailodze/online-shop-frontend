@@ -7,13 +7,14 @@ import { useState } from "react";
 import Clock from "./Components/Clock/Clock";
 import AsideCart from "../AsideCart/AsideCart";
 import { useRouter } from "next/navigation";
+import { useCartRef } from "@/app/Context/CartRefContext";
 
 const Navigaton = () => {
   const [showNavItems, setShowNavItems] = useState(false);
   const [showCart, setShowCart] = useState(false);
 
   const router = useRouter();
-
+  const cartRef = useCartRef(); 
   return (
     <div className={styles.navWrapper}>
       <div className={styles.navContent}>
@@ -36,6 +37,7 @@ const Navigaton = () => {
             <div
               className={styles.cartIcon}
               onClick={() => setShowCart((prev) => !prev)}
+              ref={cartRef}
             >
               <BsCart4 />
             </div>

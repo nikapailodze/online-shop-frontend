@@ -1,9 +1,13 @@
 "use client";
+
 import Image from "next/image";
 import styles from "./page.module.css";
 import SizeSelector from "./Components/SizeSelector/SizeSelector";
 import ColorSelector from "./Components/ColorsSelector/ColorsSelector";
 import InformationCard from "./Components/InformationCard/InformationCard";
+import { useRef, useState } from "react";
+import { gsap } from "gsap";
+import { useCartRef } from "@/app/Context/CartRefContext";
 
 export type ColorOption = "black" | "blue" | "white" | "gray" | "brown";
 
@@ -13,7 +17,7 @@ interface Product {
   name: string;
   description: string;
   sizes: ("XS" | "S" | "M" | "L" | "XL" | "XXL")[];
-  colors: ("black" | "blue" | "white" | "gray" | "brown")[];
+  colors: ColorOption[];
 }
 
 const product: Product = {
@@ -21,16 +25,74 @@ const product: Product = {
   price: 99.99,
   name: "VANTA Suite",
   description:
-    "tralaleo tralala tishirt Fluid structure meets bold tailoring. A statement in modern minimalism. Fluid structure meets bold tailoring. A statement in modern minimalism.",
+    "tralaleo tralala tishirt Fluid structure meets bold tailoring. A statement in modern minimalism.",
   sizes: ["S", "M", "L", "XL"],
   colors: ["black", "blue", "gray", "brown"],
 };
 
 export default function Home() {
+  const cartRef = useCartRef();
+  const imageRef = useRef<HTMLDivElement>(null);
+  const mainImageRef = useRef<HTMLDivElement>(null);
+  const [showFlyingImage, setShowFlyingImage] = useState(false);
+
+  const handleAddToCart = () => {
+    if (!mainImageRef.current || !cartRef?.current || !imageRef.current) return;
+
+    const imgRect = mainImageRef.current.getBoundingClientRect();
+    const cartRect = cartRef.current.getBoundingClientRect();
+
+    const flyImage = imageRef.current;
+    flyImage.style.left = `${imgRect.left}px`;
+    flyImage.style.top = `${imgRect.top}px`;
+    flyImage.style.opacity = "1";
+    flyImage.style.width = "200px";
+
+    setShowFlyingImage(true);
+
+    gsap.to(flyImage, {
+      duration: 0.8,
+      left: cartRect.left,
+      top: cartRect.top,
+      width: 20,
+      onComplete: () => setShowFlyingImage(false),
+    });
+
+    gsap.to(flyImage, {
+      duration: 0.3,
+      opacity: 0,
+      delay: 0.5,
+    });
+  };
+
   return (
     <div className={styles.page}>
+      {/* Flying Image */}
+      <div
+        ref={imageRef}
+        style={{
+          position: "fixed",
+          zIndex: 1000,
+          width: 200,
+          height: "auto",
+          pointerEvents: "none",
+          opacity: 0,
+        }}
+      >
+        {showFlyingImage && (
+          <Image
+            src={product.image}
+            width={535}
+            height={800}
+            alt={product.name}
+            style={{ width: "100%", height: "auto" }}
+          />
+        )}
+      </div>
+
+      {/* Main Page Content */}
       <section className={styles.mainInfoWrapper}>
-        <div className={styles.mainImageWrapper}>
+        <div className={styles.mainImageWrapper} ref={mainImageRef}>
           <Image
             src={product.image}
             width={535}
@@ -58,10 +120,17 @@ export default function Home() {
                 <ColorSelector colors={product.colors} />
               </div>
             </div>
+
             <div className={styles.buttonWrapper}>
-              <button className={styles.addToCartButton}>ADD TO CART</button>
+              <button
+                className={styles.addToCartButton}
+                onClick={handleAddToCart}
+              >
+                ADD TO CART
+              </button>
             </div>
           </div>
+
           <div className={styles.informationWrapper}>
             <InformationCard
               title="What's your return policy?"
@@ -69,11 +138,11 @@ export default function Home() {
             />
             <InformationCard
               title="How long does shipping take?"
-              description="Shipping is immediate or within 4 days if in stock. Out-of-stock items may require a few extra days."
+              description="Shipping is immediate or within 4 days if in stock."
             />
             <InformationCard
               title="How is the product delivered?"
-              description="We deliver items via courier directly to your home. Shipping costs are not included in the product price and will vary depending on your location."
+              description="We deliver via courier. Shipping cost varies by location."
             />
           </div>
         </div>
