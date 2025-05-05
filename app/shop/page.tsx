@@ -23,6 +23,14 @@ export default function Home() {
           }
         />
         <ShoppingItem
+          imageUrl="/test/manHandUp.avif"
+          name={"VANTA Coat"}
+          price={320}
+          description={
+            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
+          }
+        />
+        <ShoppingItem
           imageUrl="/shopfinalbss.jpeg"
           name={"VANTA Coat"}
           price={320}
