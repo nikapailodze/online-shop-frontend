@@ -25,16 +25,18 @@ export default function Home() {
     <div className={styles.page}>
       <div className={styles.leftPart}></div>
 
-      <span className={styles.signUpIndicator}>
-        Already have an account?{" "}
-        <a className={styles.signUpIndicatorAnch} href="">
-          Log in
-        </a>
-      </span>
       <div className={styles.rightPart}>
         <div className={styles.content}>
           <div className={styles.conntentUpper}>
-            <h1 className={styles.title}>Sign In</h1>
+            <div className={styles.titleWrapper}>
+              <span className={styles.signUpIndicator}>
+                Don&apos;t have an account?{" "}
+                <a className={styles.signUpIndicatorAnch} href="signup">
+                  Sign Up
+                </a>
+              </span>
+              <h1 className={styles.title}>Sign In</h1>
+            </div>
 
             <div className={styles.btnsWrapper}>
               <SignupWithButton type="google" />

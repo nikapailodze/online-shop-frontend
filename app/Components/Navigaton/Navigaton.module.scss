@@ -1,5 +1,4 @@
 .navWrapper {
-  
   position: sticky;
   top: 0;
   background-color: white;
@@ -12,12 +11,11 @@
   justify-content: center;
   align-items: center;
 }
-.navContent{
+.navContent {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 1380px;
-
 }
 .nav {
   display: flex;
@@ -25,7 +23,6 @@
   align-items: center;
   padding: 25px 0;
   width: 100%;
-
 }
 
 .logoText {

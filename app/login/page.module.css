@@ -1,45 +1,52 @@
 .page {
     width: 100%;
-    height: 100vh;
-    background-color: cadetblue;
+    min-height: 100vh;
     display: flex;
-    position: relative;
+    overflow-y: auto;
+
 
 }
 
 .leftPart {
-    max-width: 540px;
     width: 100%;
     height: 100%;
-    background-color: white;
-    background-image: url('/compincart.jpeg');
+    background-image: url('/compincart.png');
     background-repeat: no-repeat;
     background-position: 70% center;
     background-size: cover;
 }
 
 .signUpIndicator {
-    position: absolute;
-    top: 64px;
-    right: 113px;
+    display: flex;
+    justify-content: flex-end;
     font-family: Archivo;
-    /* Heading */
     font-size: 14px;
     line-height: 22px;
     font-weight: 400;
     color: #171A1FFF;
-    /* neutral-900 */
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* direction: rtl; */
 
 }
+.titleWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 
 .rightPart {
     width: 100%;
     height: 100%;
-    background-color: #F5F5F5;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 207px 90px;
+    overflow-y: auto;
 }
 
 .signUpIndicatorAnch {
@@ -69,6 +76,12 @@
     gap: 43px;
     width: 100%;
     max-width: 486px;;
+    position: relative;
+}
+@media (max-width: 768px) {
+    .content {
+        gap: 20px;
+    }
 }
 
 .conntentUpper {
@@ -146,24 +159,17 @@
     background: #F3F4F6FF;
 }
 
-/* focused */
 .input:focus {
     color: #BCC1CAFF;
-    /* neutral-400 */
     background: #FFFFFFFF;
-    /* white */
 }
 
-/* disabled */
 .input:disabled {
     color: #BCC1CAFF;
-    /* neutral-400 */
     background: #F3F4F6FF;
-    /* neutral-200 */
 }
 
 
-/* Button 1 */
 .submitButton {
     display: flex;
     align-items: center;
@@ -173,34 +179,24 @@
     line-height: 28px;
     font-weight: 400;
     color: #FFFFFFFF;
-    /* white */
     background: #636AE8FF;
-    /* primary-500 */
     opacity: 1;
     border: none;
     border-radius: 6px;
-    /* border-m */
     height: 52px;
     max-width: 486px;
 }
 
-/* Hover */
 .submitButton:hover {
     color: #FFFFFFFF;
-    /* white */
     background: #4850E4FF;
-    /* primary-550 */
 }
 
-/* Pressed */
 .submitButton:hover:active {
     color: #FFFFFFFF;
-    /* white */
     background: #2C35E0FF;
-    /* primary-600 */
 }
 
-/* Disabled */
 .submitButton:disabled {
     opacity: 0.4;
 }
@@ -224,3 +220,17 @@
     gap: 20px;
     width: 100%;
 }
+
+@media (max-width: 1170px) {
+    .leftPart {
+        display: none;
+    }
+
+    .rightPart {
+        margin: 0 auto;
+        padding: 0 20px;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
