@@ -48,9 +48,18 @@ const AsideCart: React.FC<AsideCartProps> = ({ isOpen, onClose, items }) => {
             />
 
             <div className={styles.cartItemDetails}>
-              <div className={styles.cartItemMainInfo}>
-                <h3>{item.name}</h3>
-                <p>{item.price.toFixed(2)}USD</p>
+              <div className={styles.cartItemHeader}>
+                <div className={styles.cartItemMainInfo}>
+                  <h3 className={styles.itemTitle}>{item.name}</h3>
+                  <p className={styles.itemTitle}>{item.price.toFixed(2)}USD</p>
+                </div>
+
+                {item.color && (
+                  <div className={styles.cartItemColor}>
+                    <span className={styles.itemTitle} >Color:</span>
+                    <span className={styles.itemColortext}>{item.color}</span>
+                  </div>
+                )}
               </div>
 
               <div className={styles.cartItemFooter}>
