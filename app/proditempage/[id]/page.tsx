@@ -90,7 +90,6 @@ export default function Home() {
         )}
       </div>
 
-      {/* Main Page Content */}
       <section className={styles.mainInfoWrapper}>
         <div className={styles.mainImageWrapper} ref={mainImageRef}>
           <Image
