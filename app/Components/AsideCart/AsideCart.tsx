@@ -83,7 +83,7 @@ const AsideCart: React.FC<AsideCartProps> = ({ isOpen, onClose, items }) => {
                 <div className={styles.cartItemMainInfo}>
                   <h3 className={styles.itemTitle}>{item.name}</h3>
                   <p className={styles.itemTitle}>
-                    {item.price.toFixed(2)} USD
+                    {item.price.toFixed(2)} GEL
                   </p>
                 </div>
 
@@ -128,7 +128,7 @@ const AsideCart: React.FC<AsideCartProps> = ({ isOpen, onClose, items }) => {
         <div className={styles.totalPriceWrapper}>
           <h3 className={styles.bodyheading}>Subtotal</h3>
           <span className={styles.bodyheading}>
-            {totalPrice.toFixed(2)} USD
+            {totalPrice.toFixed(2)} GEL
           </span>
         </div>
         <div className={styles.btns}>

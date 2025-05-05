@@ -108,7 +108,7 @@ export default function Home() {
               <p className={styles.description}>{product.description}</p>
             </div>
 
-            <p className={styles.heading3}>{product.price} USD</p>
+            <p className={styles.heading3}>{product.price} GEL</p>
 
             <div className={styles.slectionWrapper}>
               <div className={styles.sizesWrapper}>
