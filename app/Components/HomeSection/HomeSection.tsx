@@ -8,7 +8,7 @@ const HomeSection = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const maxScroll = window.innerHeight; 
+      const maxScroll = window.innerHeight;
       const newScale = Math.max(0.8, 1 - (scrollTop / maxScroll) * 0.2);
       setScale(newScale);
     };
@@ -24,15 +24,16 @@ const HomeSection = () => {
         style={{ transform: `scale(${scale})` }}
       >
         <div className={styles.heroText}>
-          <h1 className={styles.title}>Welcome to Our Online Shop.</h1>
-          <p className={styles.title}>Innovating, Disrupting, Redefining.</p>
+          <h1 className={styles.title}>Welcome to EndoPie</h1>
+          <p className={styles.title}>Smart Calculators for Smarter Care</p>
         </div>
         <div className={styles.subTitleWrapper}>
           <p className={styles.subTitle}>
-            Challenging conventions, breaking limits, and setting new
+            Built by a passionate endocrine specialist,
           </p>
           <p className={styles.subTitle}>
-            standards through bold ideas and visionary design.
+            this site is designed to empower the endocrine community with
+            practical tools and relatable flair.{" "}
           </p>
         </div>
       </div>

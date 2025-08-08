@@ -1,17 +1,15 @@
 import ShoppingItem from "../ShoppingItem/ShoppingItem";
 import styles from "./ProductionSection.module.scss";
 
-interface ProductionSectionProps {
-  dropNumber: string;
-}
-const ProductionSection = ({ dropNumber }: ProductionSectionProps) => (
+
+const ProductionSection = () => (
   <section className={styles.productionSection}>
     <div className={styles.content}>
-      <h2 className={styles.productionTitle}>DROP // {dropNumber}</h2>
+      <h2 className={styles.productionTitle}>Wear Your Hormones Proudly</h2>
 
       <div className={styles.productionItemsWrapper}>
         <ShoppingItem
-          imageUrl="/test/manHandUp.avif"
+          imageUrl="/merch2.png"
           name={"VANTA Coat"}
           price={320}
           description={
@@ -19,7 +17,7 @@ const ProductionSection = ({ dropNumber }: ProductionSectionProps) => (
           }
         />
         <ShoppingItem
-          imageUrl="/shopfinalbss.jpeg"
+          imageUrl="/merch1.png"
           name={"VANTA Coat"}
           price={320}
           description={
@@ -27,7 +25,7 @@ const ProductionSection = ({ dropNumber }: ProductionSectionProps) => (
           }
         />
         <ShoppingItem
-          imageUrl="/tralaleoShirt.png"
+          imageUrl="/merch3.png"
           name={"VANTA Coat"}
           price={320}
           description={

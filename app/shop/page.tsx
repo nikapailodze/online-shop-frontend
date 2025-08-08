@@ -7,10 +7,11 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <div className={styles.pageTitleWrapper}>
-        <h1 className={styles.title}>Future Brain-Rot Design</h1>
+        <h1 className={styles.title}>Your wardrobe called — it’s low on hormones. BUY NOW</h1>
         <p className={styles.subTitle}>
-          A selection of statement pieces that redefine style, precision, and
-          innovation.
+          Help us grow by purchasing our exclusive endocrine-themed merch. Every
+          t-shirt you buy supports the development of more free medical tools
+          and calculators for the endocrine community.
         </p>
       </div>
       <div className={styles.productionItemsWrapper}>

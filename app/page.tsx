@@ -10,14 +10,14 @@ export default function Home() {
         <HomeSection/>
       </div>
 
-      <div className={styles.productionSection}>
-        <ProductionSection dropNumber="001"/>
-      </div>
+      {/* <div className={styles.productionSection}>
+        <ProductionSection />
+      </div> */}
 
       <div className={styles.contactSection}>{/* Contact content */}</div>
 
       <div className={styles.productionSection}>
-        <ProductionSection dropNumber="002"/>
+        <ProductionSection />
       </div>
     </div>
   );
