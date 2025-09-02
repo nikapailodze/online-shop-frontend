@@ -1,0 +1,31 @@
+.calculatorSectionWrapper{
+  // background-color: cadetblue;
+  width: 100%;
+}
+.calculatorsSection {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.title {
+  font-size: 2.25rem; // text-4xl (~36px)
+  font-weight: 600; // font-semibold
+  color: #1e293b; // text-slate-800
+}
+
+.subTitle {
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  color: #545454;// max-w-2xl (~672px)
+}
+.divider{
+  display: flex;
+  flex-direction: column;
+}
