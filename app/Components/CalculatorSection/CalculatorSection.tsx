@@ -1,5 +1,7 @@
 import styles from "./CalculatorSection.module.scss";
 import { FaBone } from "react-icons/fa6";
+import { PiBoneFill } from "react-icons/pi";
+import { FaCalculator } from "react-icons/fa6";
 
 import CardComponent from "./CardComponent/CardComponent";
 const calculators = [
@@ -7,7 +9,28 @@ const calculators = [
     id: 1,
     name: "Diabetes Risk Score",
     description: "Assess patient risk for developing diabetes",
+    icon: <PiBoneFill />,
+    color: "text-blue-600",
+  },
+  {
+    id: 2,
+    name: "BMI & Obesity Risk",
+    description: "Calculate body mass index and obesity classification",
     icon: <FaBone />,
+    color: "text-teal-600",
+  },
+  {
+    id: 3,
+    name: "Thyroid Function Index",
+    description: "Evaluate thyroid hormone levels and function",
+    icon: <FaBone />,
+    color: "text-cyan-600",
+  },
+  {
+    id: 1,
+    name: "Diabetes Risk Score",
+    description: "Assess patient risk for developing diabetes",
+    icon: <PiBoneFill />,
     color: "text-blue-600",
   },
   {
@@ -41,6 +64,7 @@ const CalculatorSection = () => {
           </p>
         </div>
       </div>
+      
       <div className={styles.cardsContainer}>
         {calculators.map((calculator) => (
           <CardComponent
@@ -50,6 +74,16 @@ const CalculatorSection = () => {
             subTitle={calculator.description}
           />
         ))}
+      </div>
+
+      <div className={styles.buttonWrapper}>
+        <button className={styles.exploreAllButton}>
+          <FaCalculator color="white" />
+          <p>Explore All Calculators</p>
+        </button>
+        <p className={styles.buttonSubtitle}>
+          Access our complete suite of endocrinology calculation tools
+        </p>
       </div>
     </div>
   );
