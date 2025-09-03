@@ -4,6 +4,7 @@ import { PiBoneFill } from "react-icons/pi";
 import { FaCalculator } from "react-icons/fa6";
 
 import CardComponent from "./CardComponent/CardComponent";
+import CalcFooter from "./CalcFooter/CalcFooter";
 const calculators = [
   {
     id: 1,
@@ -64,7 +65,7 @@ const CalculatorSection = () => {
           </p>
         </div>
       </div>
-      
+
       <div className={styles.cardsContainer}>
         {calculators.map((calculator) => (
           <CardComponent
@@ -85,6 +86,8 @@ const CalculatorSection = () => {
           Access our complete suite of endocrinology calculation tools
         </p>
       </div>
+
+        <CalcFooter />
     </div>
   );
 };

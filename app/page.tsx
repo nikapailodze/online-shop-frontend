@@ -15,7 +15,6 @@ export default function Home() {
         <CalculatorSection />
       </div>
 
-      <div className={styles.contactSection}>{/* Contact content */}</div>
 
       <div className={styles.productionSection}>
         <ProductionSection />
