@@ -1,0 +1,86 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0; // light gray border
+  border-radius: 12px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+    .calculatorLink {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+}
+.container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.iconContainer {
+  flex-shrink: 0;
+  padding: 12px;
+  background-color: #f8fafc; // light gray background
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+    color: oklch(0.5 0.118 184.704); // default blue, override per icon if needed
+  }
+}
+
+.title {
+  display: block;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #0f172a; // slate-900
+  margin-bottom: 4px;
+}
+
+.subTitle {
+  font-size: 0.875rem;
+  color: #475569; // slate-600
+  line-height: 1.4;
+}
+
+.calculatorLink {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  color: oklch(0.5 0.118 184.704);
+  text-decoration: underline;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  text-decoration: none;
+
+  &:hover {
+    color: #0369a1; // darker blue on hover
+  }
+  div {
+    display: flex;      // ensures the icon itself is centered
+    align-items: center;
+  }
+}
+
+
+.card:hover {
+    box-shadow: 0 8px 20px oklch(0.5 0.118 184.704 / 0.25);
+}
