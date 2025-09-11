@@ -1,0 +1,25 @@
+@use "../../../Global/Styles/variables.scss" as v;
+
+.wrap { border: 1px solid v.$border; border-radius: 12px; }
+
+.trigger {
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px;
+  background: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.chev { transition: transform .15s ease; }
+.rotate { transform: rotate(180deg); }
+
+.content {
+  padding: 12px 14px;
+  border-top: 1px solid v.$border;
+  background: #fbfbff;
+  border-radius: 0 0 12px 12px;
+  color: v.$muted;
+  font-size: 14px;
+}

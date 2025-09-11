@@ -5,6 +5,7 @@ import { FaCalculator } from "react-icons/fa6";
 
 import CardComponent from "./CardComponent/CardComponent";
 import CalcFooter from "./CalcFooter/CalcFooter";
+import { useRouter } from "next/navigation";
 const calculators = [
   {
     id: 1,
@@ -51,6 +52,7 @@ const calculators = [
 ];
 
 const CalculatorSection = () => {
+  const router = useRouter();
   return (
     <div className={styles.calculatorSectionWrapper}>
       <div className={styles.calculatorsSection}>
@@ -78,7 +80,10 @@ const CalculatorSection = () => {
       </div>
 
       <div className={styles.buttonWrapper}>
-        <button className={styles.exploreAllButton}>
+        <button
+          className={styles.exploreAllButton}
+          onClick={() => router.push("/Calculators")}
+        >
           <FaCalculator color="white" />
           <p>Explore All Calculators</p>
         </button>
@@ -87,7 +92,7 @@ const CalculatorSection = () => {
         </p>
       </div>
 
-        <CalcFooter />
+      <CalcFooter />
     </div>
   );
 };

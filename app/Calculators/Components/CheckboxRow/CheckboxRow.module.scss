@@ -1,0 +1,45 @@
+@use "../../../Global/Styles/variables.scss" as v;
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid v.$border;
+  border-radius: 12px;
+  transition: background-color .15s ease;
+  cursor: pointer;
+}
+
+.row:hover {
+  background: #f7f7fb;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+}
+
+.text {
+  flex: 1;
+}
+
+.badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.green {
+  background: v.$green-50;
+  color: v.$green-600;
+  border-color: rgba(5,150,105,.25);
+}
+
+.orange {
+  background: v.$yellow-50;
+  color: v.$yellow-600;
+  border-color: rgba(217,119,6,.25);
+}

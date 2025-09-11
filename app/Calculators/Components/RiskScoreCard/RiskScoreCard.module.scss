@@ -1,0 +1,34 @@
+@use "../../../Global/Styles/variables.scss" as v;
+
+.card {
+  padding: 16px;
+  border: 2px solid v.$border;
+  border-radius: 12px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title { font-weight: 600; }
+.valueBlock { text-align: right; }
+.value { font-size: 24px; font-weight: 700; }
+.sub { font-size: 13px; font-weight: 600; }
+
+.low {
+  background: v.$green-50;
+  border-color: rgba(5,150,105,.3);
+  color: v.$green-600;
+}
+.moderate {
+  background: v.$yellow-50;
+  border-color: rgba(217,119,6,.3);
+  color: v.$yellow-600;
+}
+.high {
+  background: v.$red-50;
+  border-color: rgba(220,38,38,.3);
+  color: v.$red-600;
+}

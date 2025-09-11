@@ -1,0 +1,26 @@
+@use "../../../Global/Styles/variables.scss" as v;
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid v.$border;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.option:hover {
+  background: #f7f7fb;
+}
+
+.input {
+  width: 18px;
+  height: 18px;
+}
+
+.label {
+  flex: 1;
+  color: v.$text;
+}
