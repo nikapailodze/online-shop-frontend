@@ -40,9 +40,7 @@
     width: 24px;
     height: 24px;
     stroke-width: 2;
-    color: oklch(
-      0.5 0.118 184.704
-    ); // default blue, override per icon if needed
+    color: #475569;
   }
 }
 
@@ -66,7 +64,7 @@
   font-size: 16px;
   font-weight: 400;
 
-  color: oklch(0.5 0.118 184.704);
+  color: #475569;
   text-decoration: underline;
   opacity: 0;
   visibility: hidden;
@@ -84,5 +82,5 @@
 }
 
 .card:hover {
-  box-shadow: 0 8px 20px oklch(0.5 0.118 184.704 / 0.25);
+  box-shadow: 0 8px 20px #475569;
 }

@@ -1,12 +1,13 @@
 import { ReactNode } from "react";
 import styles from "./CardComponent.module.scss";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-
+import Link from "next/link";
 
 interface CardComponentProps {
-  iconSrc: ReactNode;
+  iconSrc?: ReactNode;
   title: string;
   subTitle: string;
+  slug?: string;
 }
 const CardComponent = (props: CardComponentProps) => {
   return (
@@ -18,10 +19,15 @@ const CardComponent = (props: CardComponentProps) => {
           <p className={styles.subTitle}>{props.subTitle}</p>
         </div>
       </div>
-      <a className={styles.calculatorLink} href="#" tabIndex={0}>
-        
-        <p>Open calculator </p> <div><MdOutlineKeyboardArrowRight /></div>
-      </a>
+      <Link
+        href={`/calculators/${props.slug}`}
+        className={styles.calculatorLink}
+      >
+        <p>Open calculator </p>{" "}
+        <div>
+          <MdOutlineKeyboardArrowRight />
+        </div>
+      </Link>
     </div>
   );
 };

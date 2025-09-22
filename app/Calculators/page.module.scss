@@ -1,9 +1,16 @@
 @use "../Global/Styles/variables.scss" as v;
 
+.main{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100% ;
+}
+
 .page {
   // min-height: 100vh;
   background: v.$bg;
-  padding: 24px;
+  padding-top: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,4 +84,13 @@
   font-size: 14px;
   color: #666;
   margin-top: 4px;
+}
+
+
+
+.cardsWrapper{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
 }

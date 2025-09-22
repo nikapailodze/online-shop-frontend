@@ -28,7 +28,7 @@ export default async function CalculatorPage({
 
   const View = entry.view;
   return (
-    <main style={{ padding: 20 }}>
+    <main>
       {/* <h1>{entry.meta.title}</h1> */}
       {/* <p style={{ color: "#666" }}>{entry.meta.short}</p> */}
       <View />
