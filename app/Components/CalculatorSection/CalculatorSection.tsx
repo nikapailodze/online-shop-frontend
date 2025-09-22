@@ -82,7 +82,7 @@ const CalculatorSection = () => {
       <div className={styles.buttonWrapper}>
         <button
           className={styles.exploreAllButton}
-          onClick={() => router.push("/Calculators")}
+          onClick={() => router.push("/calculators")}
         >
           <FaCalculator color="white" />
           <p>Explore All Calculators</p>

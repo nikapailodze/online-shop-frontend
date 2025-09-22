@@ -26,21 +26,21 @@ const Navigaton = () => {
 
         <div className={styles.navItemsRight}>
           <div className={styles.timeWrapper}>
-            <Clock />
+        <Clock />
           </div>
           <div onClick={() => setShowNavItems((prev) => !prev)}>
-            <div className={styles.burgerMenu}>
-              <RxHamburgerMenu />
-            </div>
+        <div className={styles.burgerMenu}>
+          <RxHamburgerMenu />
+        </div>
           </div>
           <div>
-            <div
-              className={styles.cartIcon}
-              onClick={() => setShowCart((prev) => !prev)}
-              ref={cartRef}
-            >
-              <BsCart4 />
-            </div>
+        <div
+          className={styles.cartIcon}
+          onClick={() => setShowCart((prev) => !prev)}
+          ref={cartRef}
+        >
+          <BsCart4 />
+        </div>
           </div>
         </div>
       </nav>
@@ -49,12 +49,12 @@ const Navigaton = () => {
         isOpen={showCart}
         onClose={() => setShowCart(false)}
         items={[
-          { id: 1, name: "Product 1", price: 10.99, quantity: 1, image: "/tralaleoShirt.png", color: "red", size: "M" },
-          { id: 2, name: "Product 2", price: 15.49, quantity: 2, image: "/tralaleoShirt.png", color: "blue", size: "L" },
-          { id: 3, name: "Product 3", price: 7.99, quantity: 1, image: "/tralaleoShirt.png", color: "green", size: "S" },
-          { id: 4, name: "Product 3", price: 7.99, quantity: 1, image: "/tralaleoShirt.png", color: "green", size: "S" },
-          { id: 5, name: "Product 3", price: 7.99, quantity: 1, image: "/tralaleoShirt.png", color: "green", size: "S" },
-          { id: 6, name: "Product 2", price: 15.49, quantity: 2, image: "/tralaleoShirt.png", color: "blue", size: "L" },
+          { id: 1, name: "Product 1", price: 10.99, quantity: 1, image: "/merch1.png", color: "red", size: "M" },
+          { id: 2, name: "Product 2", price: 15.49, quantity: 2, image: "/merch2.png", color: "blue", size: "L" },
+          { id: 3, name: "Product 3", price: 7.99, quantity: 1, image: "/merch3.png", color: "green", size: "S" },
+          { id: 4, name: "Product 3", price: 7.99, quantity: 1, image: "/merch3.png", color: "green", size: "S" },
+          { id: 5, name: "Product 3", price: 7.99, quantity: 1, image: "/merch3.png", color: "green", size: "S" },
+          { id: 6, name: "Product 2", price: 15.49, quantity: 2, image: "/merch2.png", color: "blue", size: "L" },
 
         ]}
       />

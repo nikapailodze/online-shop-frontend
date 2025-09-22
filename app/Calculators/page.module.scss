@@ -1,7 +1,7 @@
 @use "../Global/Styles/variables.scss" as v;
 
 .page {
-  min-height: 100vh;
+  // min-height: 100vh;
   background: v.$bg;
   padding: 24px;
   display: flex;
@@ -45,3 +45,36 @@
   border-top: 1px solid v.$border;
 }
 .small { font-size: 14px; color: v.$muted; }
+
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  margin-bottom: 12px;
+}
+
+.link {
+  text-decoration: underline;
+  font-weight: 500;
+  color: #1a73e8; /* blue link */
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.short {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}

@@ -7,7 +7,7 @@ export default function UnitNumberInput(props: {
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
-  unit?: string; // "kg" / "cm"
+  unit?: string; 
 }) {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     props.onChange(e.target.value);

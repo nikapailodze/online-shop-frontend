@@ -16,75 +16,75 @@ export default function Home() {
       </div>
       <div className={styles.productionItemsWrapper}>
         <ShoppingItem
-          imageUrl="/test/manHandUp.avif"
+          imageUrl="/merch1.png"
           name={"VANTA Coat"}
           price={320}
           description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
+        "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
           }
         />
         <ShoppingItem
-          imageUrl="/test/manHandUp.avif"
+          imageUrl="/merch2.png"
           name={"VANTA Coat"}
           price={320}
           description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
+        "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
           }
         />
         <ShoppingItem
-          imageUrl="/shopfinalbss.jpeg"
+          imageUrl="/merch3.png"
           name={"VANTA Coat"}
           price={320}
           description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
+        "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
           }
         />
         <ShoppingItem
-          imageUrl="/tralaleoShirt.png"
+          imageUrl="/merch1.png"
           name={"VANTA Coat"}
           price={320}
           description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
+        "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
           }
         />
         <ShoppingItem
-          imageUrl="/shopfinalbss-removebg-preview.png"
+          imageUrl="/merch2.png"
           name={"VANTA Coat"}
           price={320}
           description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
+        "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
           }
         />
         <ShoppingItem
-          imageUrl="/shopfinalbss.jpeg"
+          imageUrl="/merch3.png"
           name={"VANTA Coat"}
           price={320}
           description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
+        "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
           }
         />
         <ShoppingItem
-          imageUrl="/tralaleoShirt.png"
+          imageUrl="/merch1.png"
           name={"VANTA Coat"}
           price={320}
           description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
+        "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
           }
         />
         <ShoppingItem
-          imageUrl="/tralaleoShirt.png"
+          imageUrl="/merch2.png"
           name={"VANTA Coat"}
           price={320}
           description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
+        "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
           }
         />
         <ShoppingItem
-          imageUrl="/tralaleoShirt.png"
+          imageUrl="/merch3.png"
           name={"VANTA Coat"}
           price={320}
           description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
+        "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
           }
         />
       </div>

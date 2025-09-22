@@ -21,7 +21,7 @@ interface Product {
 }
 
 const product: Product = {
-  image: "/tralaleoShirt.png",
+  image: "/merch1.png",
   price: 99.99,
   name: "VANTA Suite",
   description:
