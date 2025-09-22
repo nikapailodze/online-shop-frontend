@@ -7,8 +7,6 @@ import CardComponent from "../Components/CalculatorSection/CardComponent/CardCom
 const calculators = [
   diabetesRiskMeta,
   drsGriffinMeta,
-  drsGriffinMeta,
-  diabetesRiskMeta,
 ];
 
 export default function CalculatorsIndex() {
@@ -28,6 +26,7 @@ export default function CalculatorsIndex() {
             title={c.title}
             subTitle={c.short}
             slug={c.slug}
+            icon={c.icon}
           />
         ))}
       </div>

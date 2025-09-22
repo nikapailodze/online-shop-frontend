@@ -11,42 +11,42 @@ const calculators = [
     id: 1,
     name: "Diabetes Risk Score",
     description: "Assess patient risk for developing diabetes",
-    icon: <PiBoneFill />,
+    icon: PiBoneFill ,
     color: "text-blue-600",
   },
   {
     id: 2,
     name: "BMI & Obesity Risk",
     description: "Calculate body mass index and obesity classification",
-    icon: <FaBone />,
+    icon: FaBone,
     color: "text-teal-600",
   },
   {
     id: 3,
     name: "Thyroid Function Index",
     description: "Evaluate thyroid hormone levels and function",
-    icon: <FaBone />,
+    icon: FaBone,
     color: "text-cyan-600",
   },
   {
     id: 4,
     name: "Diabetes Risk Score",
     description: "Assess patient risk for developing diabetes",
-    icon: <PiBoneFill />,
+    icon: PiBoneFill,
     color: "text-blue-600",
   },
   {
     id: 5,
     name: "BMI & Obesity Risk",
     description: "Calculate body mass index and obesity classification",
-    icon: <FaBone />,
+    icon: FaBone,
     color: "text-teal-600",
   },
   {
     id: 6,
     name: "Thyroid Function Index",
     description: "Evaluate thyroid hormone levels and function",
-    icon: <FaBone />,
+    icon: FaBone,
     color: "text-cyan-600",
   },
 ];
@@ -72,7 +72,7 @@ const CalculatorSection = () => {
         {calculators.map((calculator) => (
           <CardComponent
             key={calculator.id}
-            iconSrc={calculator.icon}
+            icon={calculator.icon}
             title={calculator.name}
             subTitle={calculator.description}
           />
