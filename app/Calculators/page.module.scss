@@ -1,10 +1,10 @@
 @use "../Global/Styles/variables.scss" as v;
 
-.main{
+.main {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 100% ;
+  width: 100%;
 }
 
 .page {
@@ -25,8 +25,29 @@
   text-align: center;
   margin-bottom: 24px;
 }
-.title { font-size: 28px; font-weight: 600; margin-bottom: 6px; }
-.subtitle { color: v.$muted; }
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.subtitle {
+  color: v.$muted;
+}
+.subTitle {
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  margin: 0;
+  font-family: "Host Grotesk", sans-serif;
+  font-weight: 500;
+  color: #545454;
+}
+.titlesWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
 
 .grid {
   display: grid;
@@ -39,7 +60,10 @@
   }
 }
 
-.stack { display: grid; gap: 16px; }
+.stack {
+  display: grid;
+  gap: 16px;
+}
 .inline2 {
   display: grid;
   gap: 16px;
@@ -51,13 +75,29 @@
   padding-top: 12px;
   border-top: 1px solid v.$border;
 }
-.small { font-size: 14px; color: v.$muted; }
+.small {
+  font-size: 14px;
+  color: v.$muted;
+}
 
-
+.heading {
+  font-size: 64px;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  font-family: "Host Grotesk", sans-serif;
+  font-weight: 400;
+  color: #252525;
+}
 .title {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 16px;
+
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  font-family: "Host Grotesk", sans-serif;
+  font-weight: 400;
+  color: #252525;
 }
 
 .list {
@@ -86,9 +126,7 @@
   margin-top: 4px;
 }
 
-
-
-.cardsWrapper{
+.cardsWrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
