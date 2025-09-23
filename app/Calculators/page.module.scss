@@ -8,7 +8,6 @@
 }
 
 .page {
-  // min-height: 100vh;
   background: v.$bg;
   padding-top: 24px;
   display: flex;
@@ -113,7 +112,7 @@
 .link {
   text-decoration: underline;
   font-weight: 500;
-  color: #1a73e8; /* blue link */
+  color: #1a73e8; 
 }
 
 .link:hover {
