@@ -5,12 +5,18 @@ import { drsGriffinMeta } from "./diabetes-risk-griffin-2000/meta";
 import CardComponent from "../Components/CalculatorSection/CardComponent/CardComponent";
 import { screeningTreeMeta } from "./diabetes-screening-treecalc/meta";
 import { typePredictorMeta } from "./diabetes-type-predictor-treecalc/meta";
+import { a1cAvgGluMeta } from "./a1c-to-average-glucose/meta";
+import { homaIrMeta } from "./homa-ir/meta";
+import { lpirMeta } from "./lpir-index/meta";
 
 const calculators = [
   diabetesRiskMeta,
   drsGriffinMeta,
   screeningTreeMeta,
   typePredictorMeta,
+  a1cAvgGluMeta,
+  homaIrMeta,
+  lpirMeta,
 ];
 
 export default function CalculatorsIndex() {

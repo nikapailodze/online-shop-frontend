@@ -7,6 +7,12 @@ import DiabetesScreeningTreeView from "../diabetes-screening-treecalc/view";
 import { screeningTreeMeta } from "../diabetes-screening-treecalc/meta";
 import DiabetesTypePredictorTreeView from "../diabetes-type-predictor-treecalc/view";
 import { typePredictorMeta } from "../diabetes-type-predictor-treecalc/meta";
+import { a1cAvgGluMeta } from "../a1c-to-average-glucose/meta";
+import A1cToAverageGlucoseView from "../a1c-to-average-glucose/view";
+import HomaIrView from "../homa-ir/view";
+import { homaIrMeta } from "../homa-ir/meta";
+import { lpirMeta } from "../lpir-index/meta";
+import LpirIndexView from "../lpir-index/view";
 
 type RegistryEntry = {
   view: React.FC;
@@ -27,6 +33,12 @@ const registry: Record<string, RegistryEntry> = {
     view: DiabetesTypePredictorTreeView,
     meta: typePredictorMeta,
   },
+  "a1c-to-average-glucose": {
+    view: A1cToAverageGlucoseView,
+    meta: a1cAvgGluMeta,
+  },
+  "homa-ir": { view: HomaIrView, meta: homaIrMeta },
+  "lpir-index": { view: LpirIndexView, meta: lpirMeta },
 };
 
 export default async function CalculatorPage({

@@ -30,7 +30,6 @@ export default function DiabetesTypePredictorTreeView() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUTS */}
           <SectionCard title="Input">
             <div className={styles.stack}>
               <div className={styles.inline2}>
@@ -87,7 +86,6 @@ export default function DiabetesTypePredictorTreeView() {
             </div>
           </SectionCard>
 
-          {/* RESULTS */}
           <SectionCard title="Results">
             <div className={styles.stack}>
               {!result.complete && (
@@ -96,7 +94,6 @@ export default function DiabetesTypePredictorTreeView() {
                 </div>
               )}
 
-              {/* Endpoint banner */}
               <div
                 style={{
                   padding: "12px 16px",
@@ -109,7 +106,6 @@ export default function DiabetesTypePredictorTreeView() {
                 End Point: {result.endpoint}
               </div>
 
-              {/* Predicted type + rationale */}
               {result.complete && (
                 <>
                   <div
@@ -141,7 +137,6 @@ export default function DiabetesTypePredictorTreeView() {
                 </>
               )}
 
-              {/* Decision Points summary */}
               <div className={styles.inline2}>
                 <div
                   style={{
