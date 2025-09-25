@@ -3,6 +3,8 @@ import DiabetesRiskView from "../diabetes-risk/view";
 
 import { drsGriffinMeta } from "../diabetes-risk-griffin-2000/meta";
 import DiabetesRiskGriffinView from "../diabetes-risk-griffin-2000/view";
+import DiabetesScreeningTreeView from "../diabetes-screening-treecalc/view";
+import { screeningTreeMeta } from "../diabetes-screening-treecalc/meta";
 
 type RegistryEntry = {
   view: React.FC;
@@ -11,7 +13,14 @@ type RegistryEntry = {
 
 const registry: Record<string, RegistryEntry> = {
   "diabetes-risk": { view: DiabetesRiskView, meta: diabetesRiskMeta },
-  "diabetes-risk-griffin-2000": { view: DiabetesRiskGriffinView, meta: drsGriffinMeta },
+  "diabetes-risk-griffin-2000": {
+    view: DiabetesRiskGriffinView,
+    meta: drsGriffinMeta,
+  },
+  "diabetes-screening-treecalc": {
+    view: DiabetesScreeningTreeView,
+    meta: screeningTreeMeta,
+  },
 };
 
 export default async function CalculatorPage({
@@ -28,9 +37,7 @@ export default async function CalculatorPage({
 
   const View = entry.view;
   return (
-    <main>
-      {/* <h1>{entry.meta.title}</h1> */}
-      {/* <p style={{ color: "#666" }}>{entry.meta.short}</p> */}
+    <main style={{ width: "100%" }}>
       <View />
     </main>
   );
