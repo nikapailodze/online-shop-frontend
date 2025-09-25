@@ -26,35 +26,31 @@
 }
 .subtitle { color: v.$muted; font-size: 14px; }
 
-/* ---- FLEX LAYOUT ---- */
 .grid {
   display: flex;
   flex-wrap: wrap;
-  align-items: stretch;   /* make all items same height per row */
+  align-items: stretch;   
   gap: 24px;
   width: 100%;
 }
 
-/* Wrapper around each card to FORCE it to fill */
 .gridItem {
   flex: 1 1 100%;
   min-width: 0;
-  display: flex;          /* so inner card can expand */
+  display: flex;         
 }
 @media (min-width: 1024px) {
   .gridItem {
-    flex: 1 1 calc(50% - 12px);  /* two columns */
+    flex: 1 1 calc(50% - 12px); 
   }
 }
 
-/* Make the SectionCard inside the wrapper actually stretch */
 .gridItem > * {
   flex: 1 1 auto;
   min-width: 0;
   width: 100%;
 }
 
-/* Vertical stacks inside a card */
 .stack {
   display: flex;
   flex-direction: column;
@@ -62,10 +58,8 @@
   width: 100%;
 }
 
-/* Ensure all direct children in stacks are allowed to stretch */
 .stack > * {
   min-width: 0;
 }
 
-/* Small helper text */
 .small { font-size: 14px; color: v.$muted; }

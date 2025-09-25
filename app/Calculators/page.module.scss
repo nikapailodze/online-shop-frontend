@@ -11,15 +11,11 @@
   background: v.$bg;
   padding-top: 24px;
   display: flex;
- 
   width: 100%;
-  background-color: cadetblue;
-
 }
 
 .container {
   width: 100%;
-  // max-width: 1120px;
 }
 
 .header {
@@ -51,7 +47,7 @@
 }
 
 .grid {
-  width: 100% ;
+  width: 100%;
   display: grid;
   gap: 24px;
   grid-template-columns: 1fr;
@@ -65,7 +61,7 @@
 
 .stretch {
   width: 100%;
-  min-width: 0;   /* prevents overflow in grid/flex */
+  min-width: 0;
 }
 .stack {
   display: grid;
@@ -120,7 +116,7 @@
 .link {
   text-decoration: underline;
   font-weight: 500;
-  color: #1a73e8; 
+  color: #1a73e8;
 }
 
 .link:hover {

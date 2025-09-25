@@ -1,6 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
-import styles from "../page.module.scss"; // << same stylesheet as Griffin view
+import styles from "../page.module.scss"; 
 
 import SectionCard from "../components/SectionCard/SectionCard";
 import RadioGroup from "../components/RadioGroup/RadioGroup";
@@ -19,7 +19,6 @@ export default function DiabetesScreeningTreeView() {
     [sedentary, age, obese]
   );
 
-  // Simple “Decision Points” booleans to mirror your spec
   const age45 = Number(age) >= 45;
   const age65 = Number(age) >= 65;
 
@@ -34,7 +33,6 @@ export default function DiabetesScreeningTreeView() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUTS */}
           <SectionCard title="Input">
             <div className={styles.stack}>
               <div className={styles.inline2}>
@@ -109,7 +107,6 @@ export default function DiabetesScreeningTreeView() {
                 </div>
               )}
 
-              {/* Decision Points summary (matches your spec block) */}
               <div className={styles.inline2}>
                 <div
                   style={{
@@ -134,7 +131,6 @@ export default function DiabetesScreeningTreeView() {
                   </div>
                 </div>
 
-                {/* Spacer / or future extra panel */}
                 <div />
               </div>
 
