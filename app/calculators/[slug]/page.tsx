@@ -5,6 +5,8 @@ import { drsGriffinMeta } from "../diabetes-risk-griffin-2000/meta";
 import DiabetesRiskGriffinView from "../diabetes-risk-griffin-2000/view";
 import DiabetesScreeningTreeView from "../diabetes-screening-treecalc/view";
 import { screeningTreeMeta } from "../diabetes-screening-treecalc/meta";
+import DiabetesTypePredictorTreeView from "../diabetes-type-predictor-treecalc/view";
+import { typePredictorMeta } from "../diabetes-type-predictor-treecalc/meta";
 
 type RegistryEntry = {
   view: React.FC;
@@ -20,6 +22,10 @@ const registry: Record<string, RegistryEntry> = {
   "diabetes-screening-treecalc": {
     view: DiabetesScreeningTreeView,
     meta: screeningTreeMeta,
+  },
+  "diabetes-type-predictor-treecalc": {
+    view: DiabetesTypePredictorTreeView,
+    meta: typePredictorMeta,
   },
 };
 

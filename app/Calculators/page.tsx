@@ -4,11 +4,13 @@ import { diabetesRiskMeta } from "./diabetes-risk/meta";
 import { drsGriffinMeta } from "./diabetes-risk-griffin-2000/meta";
 import CardComponent from "../Components/CalculatorSection/CardComponent/CardComponent";
 import { screeningTreeMeta } from "./diabetes-screening-treecalc/meta";
+import { typePredictorMeta } from "./diabetes-type-predictor-treecalc/meta";
 
 const calculators = [
   diabetesRiskMeta,
   drsGriffinMeta,
-  screeningTreeMeta
+  screeningTreeMeta,
+  typePredictorMeta,
 ];
 
 export default function CalculatorsIndex() {
