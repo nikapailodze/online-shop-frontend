@@ -3,10 +3,12 @@ import styles from "./page.module.scss";
 import { diabetesRiskMeta } from "./diabetes-risk/meta";
 import { drsGriffinMeta } from "./diabetes-risk-griffin-2000/meta";
 import CardComponent from "../Components/CalculatorSection/CardComponent/CardComponent";
+import { screeningTreeMeta } from "./diabetes-screening-treecalc/meta";
 
 const calculators = [
   diabetesRiskMeta,
   drsGriffinMeta,
+  screeningTreeMeta
 ];
 
 export default function CalculatorsIndex() {

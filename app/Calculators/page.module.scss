@@ -11,13 +11,15 @@
   background: v.$bg;
   padding-top: 24px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+ 
+  width: 100%;
+  background-color: cadetblue;
+
 }
 
 .container {
   width: 100%;
-  max-width: 1120px;
+  // max-width: 1120px;
 }
 
 .header {
@@ -49,8 +51,10 @@
 }
 
 .grid {
+  width: 100% ;
   display: grid;
   gap: 24px;
+  grid-template-columns: 1fr;
 }
 
 @media (min-width: 1024px) {
@@ -59,6 +63,10 @@
   }
 }
 
+.stretch {
+  width: 100%;
+  min-width: 0;   /* prevents overflow in grid/flex */
+}
 .stack {
   display: grid;
   gap: 16px;

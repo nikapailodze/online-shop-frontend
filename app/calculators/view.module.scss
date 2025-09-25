@@ -1,0 +1,71 @@
+@use "../Global/Styles/variables.scss" as v;
+
+.page {
+  background: v.$bg;
+  width: 100%;
+  padding: 24px 0;
+}
+
+.container {
+  width: 100%;
+  padding: 0 24px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.title {
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  font-family: "Host Grotesk", sans-serif;
+  font-weight: 500;
+  color: #252525;
+  margin: 0 0 6px;
+}
+.subtitle { color: v.$muted; font-size: 14px; }
+
+/* ---- FLEX LAYOUT ---- */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;   /* make all items same height per row */
+  gap: 24px;
+  width: 100%;
+}
+
+/* Wrapper around each card to FORCE it to fill */
+.gridItem {
+  flex: 1 1 100%;
+  min-width: 0;
+  display: flex;          /* so inner card can expand */
+}
+@media (min-width: 1024px) {
+  .gridItem {
+    flex: 1 1 calc(50% - 12px);  /* two columns */
+  }
+}
+
+/* Make the SectionCard inside the wrapper actually stretch */
+.gridItem > * {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+}
+
+/* Vertical stacks inside a card */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Ensure all direct children in stacks are allowed to stretch */
+.stack > * {
+  min-width: 0;
+}
+
+/* Small helper text */
+.small { font-size: 14px; color: v.$muted; }
