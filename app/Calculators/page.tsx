@@ -34,22 +34,29 @@ export default function CalculatorsIndex() {
   return (
     <main className={styles.main}>
       <div className={styles.titlesWrapper}>
-        <h1 className={styles.heading}>Endocrinology Calculators</h1>
+        <h1 className={styles.heading}>All Endocrinology Calculators</h1>
         <p className={styles.subTitle}>
           Tools for assessing hormone levels, medication dosages, and other
           endocrine parameters.
         </p>
       </div>
-      <div className={styles.cardsWrapper}>
-        {calculators.map((c) => (
-          <CardComponent
-            key={c.slug}
-            title={c.title}
-            subTitle={c.short}
-            slug={c.slug}
-            icon={c.icon}
-          />
-        ))}
+      <div className={styles.cardsMain}>
+        <div className={styles.cardsWrapper}>
+          <h3 className={styles.categoryTitle}>Diabetes</h3>
+          <div className={styles.cardsContainer}>
+            {calculators
+              .filter((c) => c.category === "Diabetes")
+              .map((c) => (
+                <CardComponent
+                  key={c.slug}
+                  title={c.title}
+                  subTitle={c.short}
+                  slug={c.slug}
+                  icon={c.icon}
+                />
+              ))}
+          </div>
+        </div>
       </div>
     </main>
   );
