@@ -5,7 +5,6 @@
   width: 100%;
   max-width: 400px;
   height: 200px;
-  //   padding: 20px 20px 60px 20px;
   padding: 20px;
   background-color: #ffffff;
   border: 1px solid #e2e8f0; 
@@ -24,7 +23,7 @@
 }
 .container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
 }
 .iconContainer {
@@ -48,13 +47,13 @@
   display: block;
   font-weight: 200;
   font-size: 24px;
-  color: #0f172a; // slate-900
+  color: #0f172a; 
   margin-bottom: 4px;
 }
 
 .subTitle {
   font-size: 0.875rem;
-  color: #475569; // slate-600
+  color: #475569; 
   line-height: 1.4;
 }
 
@@ -73,10 +72,10 @@
   text-decoration: none;
 
   &:hover {
-    color: #0369a1; // darker blue on hover
+    color: #0369a1; 
   }
   div {
-    display: flex; // ensures the icon itself is centered
+    display: flex; 
     align-items: center;
   }
 }
