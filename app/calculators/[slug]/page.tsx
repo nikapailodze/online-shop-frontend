@@ -1,18 +1,16 @@
-import { diabetesRiskMeta } from "../diabetes-risk/meta";
 import DiabetesRiskView from "../diabetes-risk/view";
-
-import { drsGriffinMeta } from "../diabetes-risk-griffin-2000/meta";
 import DiabetesRiskGriffinView from "../diabetes-risk-griffin-2000/view";
 import DiabetesScreeningTreeView from "../diabetes-screening-treecalc/view";
-import { screeningTreeMeta } from "../diabetes-screening-treecalc/meta";
 import DiabetesTypePredictorTreeView from "../diabetes-type-predictor-treecalc/view";
-import { typePredictorMeta } from "../diabetes-type-predictor-treecalc/meta";
-import { a1cAvgGluMeta } from "../a1c-to-average-glucose/meta";
 import A1cToAverageGlucoseView from "../a1c-to-average-glucose/view";
 import HomaIrView from "../homa-ir/view";
-import { homaIrMeta } from "../homa-ir/meta";
-import { lpirMeta } from "../lpir-index/meta";
 import LpirIndexView from "../lpir-index/view";
+import QuickiView from "../quicki/view";
+import Risk7p5yView from "../risk-7p5y/view";
+import SodiumCorrectionEmmettView from "../sodium-correction-emmett/view";
+import SodiumCorrectionHillierView from "../sodium-correction-hillier/view";
+import SodiumCorrectionKatzView from "../sodium-correction-katz/view";
+import { a1cAvgGluMeta, diabetesRiskMeta, drsGriffinMeta, homaIrMeta, lpirMeta, quickiMeta, risk7p5Meta, screeningTreeMeta, sodiumEmmettMeta, sodiumHillierMeta, sodiumKatzMeta, typePredictorMeta } from "../meta";
 
 type RegistryEntry = {
   view: React.FC;
@@ -39,6 +37,11 @@ const registry: Record<string, RegistryEntry> = {
   },
   "homa-ir": { view: HomaIrView, meta: homaIrMeta },
   "lpir-index": { view: LpirIndexView, meta: lpirMeta },
+  "quicki": { view: QuickiView, meta: quickiMeta },
+  "risk-7p5y": { view: Risk7p5yView, meta: risk7p5Meta },
+  "sodium-correction-emmett": { view: SodiumCorrectionEmmettView, meta: sodiumEmmettMeta },
+  "sodium-correction-hillier": { view: SodiumCorrectionHillierView, meta: sodiumHillierMeta },
+  "sodium-correction-katz": { view: SodiumCorrectionKatzView, meta: sodiumKatzMeta },
 };
 
 export default async function CalculatorPage({
