@@ -10,7 +10,24 @@ import Risk7p5yView from "../risk-7p5y/view";
 import SodiumCorrectionEmmettView from "../sodium-correction-emmett/view";
 import SodiumCorrectionHillierView from "../sodium-correction-hillier/view";
 import SodiumCorrectionKatzView from "../sodium-correction-katz/view";
-import { a1cAvgGluMeta, diabetesRiskMeta, drsGriffinMeta, homaIrMeta, lpirMeta, quickiMeta, risk7p5Meta, screeningTreeMeta, sodiumEmmettMeta, sodiumHillierMeta, sodiumKatzMeta, typePredictorMeta } from "../meta";
+import {
+  a1cAvgGluMeta,
+  diabetesRiskMeta,
+  drsGriffinMeta,
+  fractureWithBmdMeta,
+  fractureWithoutBmdMeta,
+  homaIrMeta,
+  lpirMeta,
+  quickiMeta,
+  risk7p5Meta,
+  screeningTreeMeta,
+  sodiumEmmettMeta,
+  sodiumHillierMeta,
+  sodiumKatzMeta,
+  typePredictorMeta,
+} from "../meta";
+import FractureIndexWithBmdView from "../fracture-index-with-bmd/view";
+import FractureIndexWithoutBmdView from "../fracture-index-without-bmd/view";
 
 type RegistryEntry = {
   view: React.FC;
@@ -39,9 +56,26 @@ const registry: Record<string, RegistryEntry> = {
   "lpir-index": { view: LpirIndexView, meta: lpirMeta },
   "quicki": { view: QuickiView, meta: quickiMeta },
   "risk-7p5y": { view: Risk7p5yView, meta: risk7p5Meta },
-  "sodium-correction-emmett": { view: SodiumCorrectionEmmettView, meta: sodiumEmmettMeta },
-  "sodium-correction-hillier": { view: SodiumCorrectionHillierView, meta: sodiumHillierMeta },
-  "sodium-correction-katz": { view: SodiumCorrectionKatzView, meta: sodiumKatzMeta },
+  "sodium-correction-emmett": {
+    view: SodiumCorrectionEmmettView,
+    meta: sodiumEmmettMeta,
+  },
+  "sodium-correction-hillier": {
+    view: SodiumCorrectionHillierView,
+    meta: sodiumHillierMeta,
+  },
+  "sodium-correction-katz": {
+    view: SodiumCorrectionKatzView,
+    meta: sodiumKatzMeta,
+  },
+  "fracture-index-with-bmd": {
+    view: FractureIndexWithBmdView,
+    meta: fractureWithBmdMeta,
+  },
+  "fracture-index-without-bmd": {
+    view: FractureIndexWithoutBmdView,
+    meta: fractureWithoutBmdMeta,
+  },
 };
 
 export default async function CalculatorPage({

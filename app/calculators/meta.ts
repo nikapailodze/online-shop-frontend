@@ -5,6 +5,7 @@ import {
   FaChartLine,
   FaVials,
   FaBalanceScale,
+  FaBone,
 } from "react-icons/fa";
 import { MdTimeline, MdDeviceHub } from "react-icons/md";
 import { AiOutlineCalculator, AiOutlineFieldNumber } from "react-icons/ai";
@@ -122,4 +123,22 @@ export const a1cAvgGluMeta = {
     "Convert between A1C (DCCT/IFCC) and estimated average glucose (mg/dL / mmol/L). Type any one value; the rest auto-calc.",
   category: "Diabetes",
   icon: MdTimeline,
+};
+
+export const fractureWithBmdMeta = {
+  slug: "fracture-index-with-bmd",
+  title: "Fracture Index WITH known Bone Mineral Density (BMD)",
+  short:
+    "Estimate 5-year fracture risks using clinical factors plus BMD T-score.",
+  category: "Fracture Risk",
+  icon: FaBone,
+};
+
+export const fractureWithoutBmdMeta = {
+  slug: "fracture-index-without-bmd",
+  title: "Fracture Index WITHOUT known Bone Mineral Density (BMD)",
+  short:
+    "Estimate 5-year fracture risks using clinical factors and age (no BMD T-score).",
+  category: "Fracture Risk",
+  icon: FaBone,
 };
