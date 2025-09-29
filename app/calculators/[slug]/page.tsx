@@ -18,6 +18,12 @@ import {
   fractureWithoutBmdMeta,
   homaIrMeta,
   lpirMeta,
+  metAACE2003Meta,
+  metAHA2005Meta,
+  metAtpIIIMeta,
+  metEGIRMeta,
+  metIDF2005Meta,
+  metWHO1998Meta,
   quickiMeta,
   risk7p5Meta,
   screeningTreeMeta,
@@ -28,6 +34,12 @@ import {
 } from "../meta";
 import FractureIndexWithBmdView from "../fracture-index-with-bmd/view";
 import FractureIndexWithoutBmdView from "../fracture-index-without-bmd/view";
+import MetSyndromeAACE2003View from "../met-syndrome-aace-2003/view";
+import MetSyndromeAHA2005View from "../met-syndrome-aha-2005/view";
+import MetSyndromeAtpIIIView from "../met-syndrome-atp-iii/view";
+import MetSyndromeEGIRView from "../met-syndrome-egir/view";
+import MetSyndromeIDF2005View from "../met-syndrome-idf-2005/view";
+import MetSyndromeWHO1998View from "../met-syndrome-who-1998/view";
 
 type RegistryEntry = {
   view: React.FC;
@@ -76,6 +88,25 @@ const registry: Record<string, RegistryEntry> = {
     view: FractureIndexWithoutBmdView,
     meta: fractureWithoutBmdMeta,
   },
+  "metabolic-syndrome-aace-2003": {
+    view: MetSyndromeAACE2003View,
+    meta: metAACE2003Meta,
+  },
+  "metabolic-syndrome-aha-2005": {
+    view: MetSyndromeAHA2005View,
+    meta: metAHA2005Meta,
+  },
+  "metabolic-syndrome-atp-iii": {
+    view: MetSyndromeAtpIIIView,
+    meta: metAtpIIIMeta,
+  },
+  "metabolic-syndrome-egir": { view: MetSyndromeEGIRView, meta: metEGIRMeta },
+  "metabolic-syndrome-idf-2005": {
+    view: MetSyndromeIDF2005View,
+    meta: metIDF2005Meta,
+  },
+    "metabolic-syndrome-who-1998": { view: MetSyndromeWHO1998View, meta: metWHO1998Meta },
+
 };
 
 export default async function CalculatorPage({

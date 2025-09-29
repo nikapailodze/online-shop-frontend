@@ -15,6 +15,12 @@ import {
   sodiumKatzMeta,
   fractureWithBmdMeta,
   fractureWithoutBmdMeta,
+  metAACE2003Meta,
+  metAHA2005Meta,
+  metAtpIIIMeta,
+  metEGIRMeta,
+  metIDF2005Meta,
+  metWHO1998Meta
 } from "./meta";
 
 const calculators = [
@@ -31,7 +37,14 @@ const calculators = [
   sodiumHillierMeta,
   sodiumKatzMeta,
   fractureWithBmdMeta,
-  fractureWithoutBmdMeta
+  fractureWithoutBmdMeta,
+  metAACE2003Meta,
+  metAHA2005Meta,
+  metAtpIIIMeta,
+  metEGIRMeta,
+  metIDF2005Meta,
+  metWHO1998Meta,
+
 ];
 
 export default function CalculatorsIndex() {
@@ -66,6 +79,22 @@ export default function CalculatorsIndex() {
           <div className={styles.cardsContainer}>
             {calculators
               .filter((c) => c.category === "Fracture Risk")
+              .map((c) => (
+                <CardComponent
+                  key={c.slug}
+                  title={c.title}
+                  subTitle={c.short}
+                  slug={c.slug}
+                  icon={c.icon}
+                />
+              ))}
+          </div>
+        </div>
+        <div className={styles.cardsWrapper}>
+          <h3 className={styles.categoryTitle}>Metabolic Syndrome</h3>
+          <div className={styles.cardsContainer}>
+            {calculators
+              .filter((c) => c.category === "Metabolic Syndrome")
               .map((c) => (
                 <CardComponent
                   key={c.slug}

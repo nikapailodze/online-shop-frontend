@@ -1,0 +1,113 @@
+export type Sex = "female" | "male" | "";
+export type Ethnicity =
+  | ""
+  | "europid"
+  | "south_asian_chinese_japanese"
+  | "south_central_american"
+  | "sub_saharan_african"
+  | "eastern_med_middle_east";
+
+function num(s: string) {
+  const n = Number((s ?? "").toString().replace(",", ".").trim());
+  return Number.isFinite(n) ? n : NaN;
+}
+
+// Return waist threshold by sex & ethnicity (IDF 2005)
+function idfWaistThresholdCm(sex: Sex, eth: Ethnicity) {
+  // IDF 2005 cut-offs:
+  // Europid: M ≥94, F ≥80
+  // South Asian/Chinese/Japanese: M ≥90, F ≥80
+  // South & Central American: use South Asian cut-offs
+  // Sub-Saharan African: use Europid
+  // Eastern Mediterranean & Middle East: use Europid
+  if (sex === "male") {
+    if (eth === "south_asian_chinese_japanese" || eth === "south_central_american") {
+      return 90;
+    }
+    return 94;
+  }
+  if (sex === "female") {
+    return 80;
+  }
+  return NaN;
+}
+
+export function computeMetIDF2005({
+  sex,
+  ethnicity,
+  waistCm,
+  tgMgdl,
+  onTgRx,
+  hdlMgdl,
+  onHdlRx,
+  sbp,
+  dbp,
+  onBpRx,
+  fpgMgdl,
+  hasDiabetes,
+}: {
+  sex: Sex;
+  ethnicity: Ethnicity;
+  waistCm: string;   // cm
+  tgMgdl: string;    // mg/dL
+  onTgRx: boolean;
+  hdlMgdl: string;   // mg/dL
+  onHdlRx: boolean;
+  sbp: string;       // mmHg
+  dbp: string;       // mmHg
+  onBpRx: boolean;
+  fpgMgdl: string;   // mg/dL
+  hasDiabetes: boolean;
+}) {
+  const waist = num(waistCm);
+  const tg = num(tgMgdl);
+  const hdl = num(hdlMgdl);
+  const s = num(sbp);
+  const d = num(dbp);
+  const fpg = num(fpgMgdl);
+
+  const complete =
+    sex !== "" &&
+    ethnicity !== "" &&
+    [waist, tg, hdl, s, d, fpg].every((v) => Number.isFinite(v));
+
+  if (!complete) {
+    return {
+      complete: false as const,
+      requiredMet: null,
+      otherCount: null,
+      diagnosis: null,
+      details: null,
+    };
+  }
+
+  // Required
+  const waistThreshold = idfWaistThresholdCm(sex, ethnicity);
+  const c_abdominal = waist >= waistThreshold;
+
+  // Other
+  const c_tg = tg >= 150 || onTgRx;
+  const c_hdl =
+    (sex === "male" ? hdl < 40 : hdl < 50) || onHdlRx;
+  const c_bp = s >= 130 || d >= 85 || onBpRx;
+  const c_glucose = fpg >= 100 || hasDiabetes;
+
+  const otherCount =
+    (c_tg ? 1 : 0) + (c_hdl ? 1 : 0) + (c_bp ? 1 : 0) + (c_glucose ? 1 : 0);
+
+  const diagnosis = c_abdominal && otherCount >= 2;
+
+  return {
+    complete: true as const,
+    requiredMet: c_abdominal,
+    otherCount,
+    diagnosis,
+    details: {
+      abdominalObesity: c_abdominal,
+      tg: c_tg,
+      hdl: c_hdl,
+      bp: c_bp,
+      glucose: c_glucose,
+    },
+  };
+}

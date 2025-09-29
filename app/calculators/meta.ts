@@ -6,10 +6,15 @@ import {
   FaVials,
   FaBalanceScale,
   FaBone,
+  FaListOl,
 } from "react-icons/fa";
 import { MdTimeline, MdDeviceHub } from "react-icons/md";
 import { AiOutlineCalculator, AiOutlineFieldNumber } from "react-icons/ai";
-import { RiTestTubeLine } from "react-icons/ri";
+import {
+  RiHeartPulseLine,
+  RiStethoscopeLine,
+  RiTestTubeLine,
+} from "react-icons/ri";
 import { BiCalculator } from "react-icons/bi";
 
 // Sodium Corrections
@@ -141,4 +146,56 @@ export const fractureWithoutBmdMeta = {
     "Estimate 5-year fracture risks using clinical factors and age (no BMD T-score).",
   category: "Fracture Risk",
   icon: FaBone,
+};
+export const metAACE2003Meta = {
+  slug: "metabolic-syndrome-aace-2003",
+  title: "Metabolic Syndrome Criteria (AACE 2003)",
+  short:
+    "Dx requires insulin resistance (IGT or IFG) + at least one other: BMI ≥25, TG/HDL, BP ≥130/85, glucose IGT/IFG (not DM), or other IR features.",
+  category: "Metabolic Syndrome",
+  icon: RiHeartPulseLine,
+};
+
+export const metAHA2005Meta = {
+  slug: "metabolic-syndrome-aha-2005",
+  title: "Metabolic Syndrome Criteria (AHA/NHLBI 2005)",
+  short:
+    "1 point each: abdominal obesity, TG, HDL, BP, fasting glucose (or on Rx). Metabolic syndrome present if total ≥3.",
+  category: "Metabolic Syndrome",
+  icon: FaHeartbeat,
+};
+
+export const metAtpIIIMeta = {
+  slug: "metabolic-syndrome-atp-iii",
+  title: "Metabolic Syndrome Criteria (ATP III)",
+  short:
+    "1 point each: abdominal obesity, TG ≥150, low HDL, BP ≥130/85, fasting glucose ≥110. Metabolic syndrome present if total ≥3.",
+  category: "Metabolic Syndrome",
+  icon: FaListOl,
+};
+
+export const metEGIRMeta = {
+  slug: "metabolic-syndrome-egir",
+  title: "Metabolic Syndrome Criteria (EGIR)",
+  short:
+    "Dx requires plasma insulin >75th percentile + ≥2 of: abdominal obesity, TG/HDL abnormal, BP ≥140/90 or on Rx, glucose IGT/IFG (not DM).",
+  category: "Metabolic Syndrome",
+  icon: RiTestTubeLine,
+};
+
+export const metIDF2005Meta = {
+  slug: "metabolic-syndrome-idf-2005",
+  title: "Metabolic Syndrome Criteria (IDF 2005)",
+  short:
+    "Required: abdominal obesity (population-specific waist) + ≥2 of: TG ≥150 or Rx, low HDL (sex-specific) or Rx, BP ≥130/85 or Rx, glucose ≥100 or DM.",
+  category: "Metabolic Syndrome",
+  icon: RiHeartPulseLine,
+};
+export const metWHO1998Meta = {
+  slug: "metabolic-syndrome-who-1998",
+  title: "Metabolic Syndrome Criteria (WHO 1998)",
+  short:
+    "Required: insulin resistance (IGT, IFG, T2DM, or reduced sensitivity) + ≥2 of: abdominal obesity, dyslipidemia, high BP, microalbuminuria.",
+  category: "Metabolic Syndrome",
+  icon: RiStethoscopeLine,
 };
