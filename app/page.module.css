@@ -32,11 +32,7 @@
     align-items: center;
 }
 
-.homeSection,
-.aboutSection,
-.contactSection {
-  scroll-snap-align: start;
-}
+
 
 @media (max-width: 768px) {
     
