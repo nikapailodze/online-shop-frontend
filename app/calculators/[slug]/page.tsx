@@ -41,9 +41,17 @@ import MetSyndromeEGIRView from "../met-syndrome-egir/view";
 import MetSyndromeIDF2005View from "../met-syndrome-idf-2005/view";
 import MetSyndromeWHO1998View from "../met-syndrome-who-1998/view";
 
+import type { IconType } from "react-icons";
+
 type RegistryEntry = {
   view: React.FC;
-  meta: { slug: string; title: string; short: string; category: string };
+  meta: {
+    slug: string;
+    title: string;
+    short: string;
+    category: string;
+    icon: IconType; 
+  };
 };
 
 const registry: Record<string, RegistryEntry> = {
@@ -109,6 +117,7 @@ const registry: Record<string, RegistryEntry> = {
 
 };
 export const dynamicParams = false; 
+export const dynamic = "error";  
 
 export function generateStaticParams() {
   return Object.keys(registry).map((slug) => ({ slug }));
@@ -118,9 +127,9 @@ export function generateStaticParams() {
 export default async function CalculatorPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
   const entry = registry[slug];
 
   if (!entry) {
