@@ -1,4 +1,3 @@
-// UnitNumberInput.tsx
 import React from "react";
 import styles from "./UnitNumberInput.module.scss";
 
@@ -26,7 +25,7 @@ export default function UnitNumberInput(props: {
           type="number"
           value={props.value}
           onChange={handleChange}
-          onFocus={props.onFocus}   // 👈 wire it up
+          onFocus={props.onFocus}  
           placeholder={props.placeholder}
           className={styles.input}
         />

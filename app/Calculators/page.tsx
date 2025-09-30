@@ -20,7 +20,14 @@ import {
   metAtpIIIMeta,
   metEGIRMeta,
   metIDF2005Meta,
-  metWHO1998Meta
+  metWHO1998Meta,
+  fractureWithKnownBmdMeta,
+  fractureWithoutKnownBmdMeta,
+  oracleOsteoporosisMeta,
+  oraiMeta,
+  osteoporosisScoreMeta,
+  ostMaleMeta,
+  ostFemaleMeta
 } from "./meta";
 
 const calculators = [
@@ -44,6 +51,13 @@ const calculators = [
   metEGIRMeta,
   metIDF2005Meta,
   metWHO1998Meta,
+  fractureWithKnownBmdMeta,
+  fractureWithoutKnownBmdMeta,
+  oracleOsteoporosisMeta,
+  oraiMeta,
+  osteoporosisScoreMeta,
+  ostMaleMeta,
+  ostFemaleMeta,
 
 ];
 
@@ -95,6 +109,22 @@ export default function CalculatorsIndex() {
           <div className={styles.cardsContainer}>
             {calculators
               .filter((c) => c.category === "Metabolic Syndrome")
+              .map((c) => (
+                <CardComponent
+                  key={c.slug}
+                  title={c.title}
+                  subTitle={c.short}
+                  slug={c.slug}
+                  icon={c.icon}
+                />
+              ))}
+          </div>
+        </div>
+        <div className={styles.cardsWrapper}>
+          <h3 className={styles.categoryTitle}>Osteoporosis</h3>
+          <div className={styles.cardsContainer}>
+            {calculators
+              .filter((c) => c.category === "Osteoporosis")
               .map((c) => (
                 <CardComponent
                   key={c.slug}

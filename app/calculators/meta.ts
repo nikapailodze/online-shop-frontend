@@ -13,8 +13,10 @@ import { MdTimeline, MdDeviceHub } from "react-icons/md";
 import { AiOutlineCalculator, AiOutlineFieldNumber } from "react-icons/ai";
 import {
   RiHeartPulseLine,
+  RiMenLine,
   RiStethoscopeLine,
   RiTestTubeLine,
+  RiWomenLine,
 } from "react-icons/ri";
 import { BiCalculator } from "react-icons/bi";
 
@@ -215,4 +217,57 @@ export const fractureWithKnownBmdMeta = {
     "Fracture Index is a measure of fracture risk that incorporates Bone Mineral Density (BMD)—a known indicator of bone strength—together with risk factors, age band, and BMD T-score to estimate 5-year nonvertebral, hip, and vertebral fracture risks.",
   category: "Osteoporosis",
   icon: FaBone,
+};
+export const fractureWithoutKnownBmdMeta = {
+  slug: "fracture-index-without-bmd",
+  title: "Fracture Index WITHOUT Known Bone Mineral Density (BMD)",
+  short:
+    "Fracture Index estimates fracture risk using clinical risk factors and age, without requiring Bone Mineral Density (BMD).",
+  category: "Osteoporosis",
+  icon: FaBone,
+};
+import { RiCalculatorLine } from "react-icons/ri";
+
+export const oracleOsteoporosisMeta = {
+  slug: "oracle-osteoporosis",
+  title: "Osteoporosis Risk Assessment by Composite Linear Estimate",
+  short:
+    "ORACLE combines Age, BMI, HRTx, prior fracture, and UBPI into a single risk estimate; thresholds: ≤0.26 lower risk, 0.26–0.32 high risk (50% spec), >0.32 high risk (sens 76%).",
+  category: "Osteoporosis",
+  icon: RiCalculatorLine,
+};
+
+export const oraiMeta = {
+  slug: "osteoporosis-orai",
+  title: "Osteoporosis Risk Assessment Instrument (ORAI)",
+  short:
+    "ORAI uses Age, Weight, and Estrogen use to select women for bone densitometry. Score ≥9 → higher risk.",
+  category: "Osteoporosis",
+  icon: FaBalanceScale,
+};
+import { RiNumbersLine } from "react-icons/ri";
+
+export const osteoporosisScoreMeta = {
+  slug: "osteoporosis-score",
+  title: "Osteoporosis Risk SCORE (Osteoporosis Risk Estimation)",
+  short:
+    "SCORE = Race + Rheumatoid Arthritis + Fracture history + Estrogen + (3×Age/10) − (Weight/10). Bands: 0–6 Low, 7–15 Moderate, ≥16 High risk.",
+  category: "Osteoporosis",
+  icon: RiNumbersLine,
+};
+export const ostMaleMeta = {
+  slug: "ost-male",
+  title: "Osteoporosis Self Assessment Tool for Adult Males (OST)",
+  short:
+    "OST = 0.2 × (Weight − Age). Bands: −20 to −1 High risk; −1 to 3 Moderate; 4 to 20 Low.",
+  category: "Osteoporosis",
+  icon: RiMenLine,
+};
+export const ostFemaleMeta = {
+  slug: "ost-female",
+  title: "Osteoporosis Self Assessment Tool for Adult Females (OST)",
+  short:
+    "OST = 0.2 × (Weight − Age). Bands: −20 to −4 High, −3 to 1 Moderate, >1 to 20 Low.",
+  category: "Osteoporosis",
+  icon: RiWomenLine,
 };

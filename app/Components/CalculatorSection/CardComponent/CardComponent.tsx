@@ -14,7 +14,7 @@ const CardComponent = ({ icon: Icon, title, subTitle, slug }: CardComponentProps
     <div className={styles.card}>
       <div className={styles.container}>
         <div className={styles.iconContainer}>{Icon ? <Icon size={32} /> : null}</div>
-        <div>
+        <div className={styles.textContainer}>
           <span className={styles.title}>{title}</span>
           <p className={styles.subTitle}>{subTitle}</p>
         </div>

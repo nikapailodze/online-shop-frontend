@@ -15,7 +15,9 @@ import {
   diabetesRiskMeta,
   drsGriffinMeta,
   fractureWithBmdMeta,
+  fractureWithKnownBmdMeta,
   fractureWithoutBmdMeta,
+  fractureWithoutKnownBmdMeta,
   homaIrMeta,
   lpirMeta,
   metAACE2003Meta,
@@ -24,6 +26,11 @@ import {
   metEGIRMeta,
   metIDF2005Meta,
   metWHO1998Meta,
+  oracleOsteoporosisMeta,
+  oraiMeta,
+  osteoporosisScoreMeta,
+  ostFemaleMeta,
+  ostMaleMeta,
   quickiMeta,
   risk7p5Meta,
   screeningTreeMeta,
@@ -42,6 +49,11 @@ import MetSyndromeIDF2005View from "../met-syndrome-idf-2005/view";
 import MetSyndromeWHO1998View from "../met-syndrome-who-1998/view";
 
 import type { IconType } from "react-icons";
+import OracleOsteoporosisView from "../oracle-osteoporosis/view";
+import OraiView from "../orai/view";
+import OsteoporosisScoreView from "../osteoporosis-score/veiw";
+import OstMaleView from "../ost-male/view";
+import OstFemaleView from "../ost-female/view";
 
 type RegistryEntry = {
   view: React.FC;
@@ -50,7 +62,7 @@ type RegistryEntry = {
     title: string;
     short: string;
     category: string;
-    icon: IconType; 
+    icon: IconType;
   };
 };
 
@@ -113,23 +125,43 @@ const registry: Record<string, RegistryEntry> = {
     view: MetSyndromeIDF2005View,
     meta: metIDF2005Meta,
   },
-    "metabolic-syndrome-who-1998": { view: MetSyndromeWHO1998View, meta: metWHO1998Meta },
-
+  "metabolic-syndrome-who-1998": {
+    view: MetSyndromeWHO1998View,
+    meta: metWHO1998Meta,
+  },
+  "fracture-index-with-known-bmd": {
+    view: FractureIndexWithBmdView,
+    meta: fractureWithKnownBmdMeta,
+  },
+  "fracture-index-without-known-bmd": {
+    view: FractureIndexWithoutBmdView,
+    meta: fractureWithoutKnownBmdMeta,
+  },
+  "oracle-osteoporosis": {
+    view: OracleOsteoporosisView,
+    meta: oracleOsteoporosisMeta,
+  },
+  "osteoporosis-orai": { view: OraiView, meta: oraiMeta },
+  "osteoporosis-score": {
+    view: OsteoporosisScoreView,
+    meta: osteoporosisScoreMeta,
+  },
+  "ost-male": { view: OstMaleView, meta: ostMaleMeta },
+  "ost-female": { view: OstFemaleView, meta: ostFemaleMeta },
 };
-export const dynamicParams = false; 
-export const dynamic = "error";  
+export const dynamicParams = false;
+export const dynamic = "error";
 
 export function generateStaticParams() {
   return Object.keys(registry).map((slug) => ({ slug }));
 }
 
-
 export default async function CalculatorPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
+  const { slug } = await params;
   const entry = registry[slug];
 
   if (!entry) {
