@@ -108,6 +108,12 @@ const registry: Record<string, RegistryEntry> = {
     "metabolic-syndrome-who-1998": { view: MetSyndromeWHO1998View, meta: metWHO1998Meta },
 
 };
+export const dynamicParams = false; 
+
+export function generateStaticParams() {
+  return Object.keys(registry).map((slug) => ({ slug }));
+}
+
 
 export default async function CalculatorPage({
   params,
