@@ -42,19 +42,30 @@
     color: #475569;
   }
 }
+.textContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
 
 .title {
   display: block;
   font-weight: 200;
   font-size: 24px;
   color: #0f172a; 
-  margin-bottom: 4px;
 }
 
 .subTitle {
   font-size: 0.875rem;
   color: #475569; 
   line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+   -webkit-line-clamp: 3; /* Safari, Chrome, Edge */
+  line-clamp: 3;    /* Standard property (new, Firefox support rolling out) */
 }
 
 .calculatorLink {

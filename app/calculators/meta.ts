@@ -1,4 +1,5 @@
 import { GiFamilyTree } from "react-icons/gi";
+
 import {
   FaHeartbeat,
   FaClipboardCheck,
@@ -198,4 +199,20 @@ export const metWHO1998Meta = {
     "Required: insulin resistance (IGT, IFG, T2DM, or reduced sensitivity) + ≥2 of: abdominal obesity, dyslipidemia, high BP, microalbuminuria.",
   category: "Metabolic Syndrome",
   icon: RiStethoscopeLine,
+};
+export const fractureWithBmdCalcMeta = {
+  slug: "fracture-index-with-bmd",
+  title: "Osteoporosis Fracture Index (WITH BMD)",
+  short:
+    "Points from risk factors + age band + BMD T-score map to 5-year fracture risks.",
+  category: "Osteoporosis",
+  icon: FaBone,
+};
+export const fractureWithKnownBmdMeta = {
+  slug: "fracture-index-with-bmd",
+  title: "Fracture Index WITH Known Bone Mineral Density (BMD)",
+  short:
+    "Fracture Index is a measure of fracture risk that incorporates Bone Mineral Density (BMD)—a known indicator of bone strength—together with risk factors, age band, and BMD T-score to estimate 5-year nonvertebral, hip, and vertebral fracture risks.",
+  category: "Osteoporosis",
+  icon: FaBone,
 };
