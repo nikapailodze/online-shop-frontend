@@ -1,7 +1,7 @@
 .asideCart {
   position: fixed;
   top: 0;
-  right: -390px; // hidden by default
+  right: -390px;
   max-width: 390px;
   width: 100%;
   height: 100vh;
@@ -16,7 +16,7 @@
 }
 
 .open {
-  right: 0; // visible when open
+  right: 0;
 }
 
 .bodyheadingTitle{

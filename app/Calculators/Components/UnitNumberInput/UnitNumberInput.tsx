@@ -6,8 +6,9 @@ export default function UnitNumberInput(props: {
   label: string;
   value: string;
   onChange: (v: string) => void;
+  onFocus?: () => void;
   placeholder?: string;
-  unit?: string; 
+  unit?: string;
 }) {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     props.onChange(e.target.value);
@@ -15,13 +16,16 @@ export default function UnitNumberInput(props: {
 
   return (
     <div className={styles.wrap}>
-      <label htmlFor={props.id} className={styles.label}>{props.label}</label>
+      <label htmlFor={props.id} className={styles.label}>
+        {props.label}
+      </label>
       <div className={styles.field}>
         <input
           id={props.id}
           type="number"
           value={props.value}
           onChange={handleChange}
+          onFocus={props.onFocus}
           placeholder={props.placeholder}
           className={styles.input}
         />

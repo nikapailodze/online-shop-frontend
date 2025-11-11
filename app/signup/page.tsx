@@ -1,24 +1,68 @@
 "use client";
 import styles from "./page.module.css";
-import SignupWithButton from "./Components/SignupWithButton/SignupWithButton";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-interface FormData {
+interface SignupFormData {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   terms: boolean;
 }
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5001";
+
 export default function Home() {
+  const router = useRouter();
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [statusType, setStatusType] = useState<"error" | "success" | null>(
+    null
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<SignupFormData>();
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: SignupFormData) => {
+    setStatusMessage(null);
+    setStatusType(null);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/Auth/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: data.firstName,
+          surname: data.lastName,
+          email: data.email,
+          password: data.password,
+        }),
+      });
+
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(body?.message ?? "Failed to create account");
+      }
+
+      setStatusMessage("Account created! Redirecting to login...");
+      setStatusType("success");
+      router.push("/login");
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Unable to create account.";
+      setStatusMessage(message);
+      setStatusType("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return (
     <div className={styles.page}>
@@ -37,18 +81,8 @@ export default function Home() {
               <h1 className={styles.title}>Sign Up</h1>
             </div>
 
-            <div className={styles.btnsWrapper}>
-              <SignupWithButton type="google" />
-              <SignupWithButton type="facebook" />
-              <SignupWithButton type="apple" />
-            </div>
           </div>
 
-          <div className={styles.orWrapper}>
-            <div className={styles.orLine}></div>
-            <span className={styles.orText}>OR</span>
-            <div className={styles.orLine}></div>
-          </div>
 
           <div className={styles.contentLower}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -149,8 +183,23 @@ export default function Home() {
                     </span>
                   )}
                 </div>
-                <button type="submit" className={styles.submitButton}>
-                  Create an Account
+                {statusMessage && (
+                  <p
+                    className={`${styles.statusMessage} ${
+                      statusType === "error"
+                        ? styles.statusError
+                        : styles.statusSuccess
+                    }`}
+                  >
+                    {statusMessage}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  className={styles.submitButton}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Creating Account..." : "Create an Account"}
                 </button>
               </div>
             </form>

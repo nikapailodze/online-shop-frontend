@@ -28,7 +28,7 @@
 
     white-space: nowrap;
     text-overflow: ellipsis;
-    /* direction: rtl; */
+
 
 }
 .titleWrapper{
@@ -209,7 +209,22 @@
     color: red;
     font-size: 14px;
     line-height: 22px;
-    font-weight: 400; 
+    font-weight: 400;
+}
+
+.statusMessage{
+    font-family: Inter;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0;
+}
+
+.statusError{
+    color: #C62828;
+}
+
+.statusSuccess{
+    color: #1B5E20;
 }
 
 
@@ -232,4 +247,3 @@
         align-items: center;
     }
 }
-

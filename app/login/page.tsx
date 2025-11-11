@@ -1,25 +1,73 @@
-// import Image from "next/image";
 "use client";
 import styles from "./page.module.css";
-import SignupWithButton from "./Components/SignupWithButton/SignupWithButton";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-interface FormData {
-  firstName: string;
-  lastName: string;
+interface LoginFormData {
   email: string;
   password: string;
-  terms: boolean;
 }
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5001";
+
 export default function Home() {
+  const router = useRouter();
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [statusType, setStatusType] = useState<"error" | "success" | null>(
+    null
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<LoginFormData>();
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: LoginFormData) => {
+    setStatusMessage(null);
+    setStatusType(null);
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/Auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+      });
+
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(body?.message ?? "Failed to sign in");
+      }
+
+      if (!body?.token) {
+        throw new Error("Authentication token is missing in the response.");
+      }
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem("authToken", body.token);
+        if (body?.user) {
+          localStorage.setItem("user", JSON.stringify(body.user));
+        }
+      }
+
+      setStatusMessage("Signed in successfully. Redirecting...");
+      setStatusType("success");
+      router.push("/shop");
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Unable to sign in.";
+      setStatusMessage(message);
+      setStatusType("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return (
     <div className={styles.page}>
@@ -38,61 +86,13 @@ export default function Home() {
               <h1 className={styles.title}>Sign In</h1>
             </div>
 
-            <div className={styles.btnsWrapper}>
-              <SignupWithButton type="google" />
-              <SignupWithButton type="facebook" />
-              <SignupWithButton type="apple" />
-            </div>
           </div>
 
-          <div className={styles.orWrapper}>
-            <div className={styles.orLine}></div>
-            <span className={styles.orText}>OR</span>
-            <div className={styles.orLine}></div>
-          </div>
+
 
           <div className={styles.contentLower}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
               <div className={styles.maininputWrapper}>
-                <div className={styles.row}>
-                  {/* <div className={styles.labelWrapper}>
-                    <label className={styles.label} htmlFor="firstName">
-                      First Name
-                    </label>
-                    <input
-                      id="firstName"
-                      {...register("firstName", {
-                        required: "First name is required",
-                      })}
-                      placeholder="First Name"
-                      className={styles.input}
-                    />
-                    {errors.firstName && (
-                      <span className={styles.error}>
-                        {errors.firstName.message as string}
-                      </span>
-                    )}
-                  </div> */}
-
-                  {/* <div className={styles.labelWrapper}>
-                    <label className={styles.label} htmlFor="lastName">
-                      Last Name
-                    </label>
-                    <input
-                      id="lastName"
-                      {...register("lastName", {
-                        required: "Last name is required",
-                      })}
-                      placeholder="Last Name"
-                      className={styles.input}
-                    />
-                    {errors.lastName && (
-                      <span className={styles.error}>
-                        {errors.lastName.message as string}
-                      </span>
-                    )}
-                  </div> */}
-                </div>
 
                 <div className={styles.labelWrapper}>
                   <label className={styles.label} htmlFor="email">
@@ -132,8 +132,23 @@ export default function Home() {
                 </div>
               </div>
               <div className={styles.lowerInputWrapper}>
-                <button type="submit" className={styles.submitButton}>
-                  Sign In
+                {statusMessage && (
+                  <p
+                    className={`${styles.statusMessage} ${
+                      statusType === "error"
+                        ? styles.statusError
+                        : styles.statusSuccess
+                    }`}
+                  >
+                    {statusMessage}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  className={styles.submitButton}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Signing In..." : "Sign In"}
                 </button>
               </div>
             </form>

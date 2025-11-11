@@ -1,25 +1,142 @@
-// app/calculators/page.tsx
-import Link from "next/link";
+import CardComponent from "../Components/CalculatorSection/CardComponent/CardComponent";
 import styles from "./page.module.scss";
-import { diabetesRiskMeta } from "./diabetes-risk/meta";
-import { drsGriffinMeta } from "./diabetes-risk-griffin-2000/meta";
+import {
+  diabetesRiskMeta,
+  drsGriffinMeta,
+  screeningTreeMeta,
+  typePredictorMeta,
+  a1cAvgGluMeta,
+  homaIrMeta,
+  lpirMeta,
+  quickiMeta,
+  risk7p5Meta,
+  sodiumEmmettMeta,
+  sodiumHillierMeta,
+  sodiumKatzMeta,
+  fractureWithBmdMeta,
+  fractureWithoutBmdMeta,
+  metAACE2003Meta,
+  metAHA2005Meta,
+  metAtpIIIMeta,
+  metEGIRMeta,
+  metIDF2005Meta,
+  metWHO1998Meta,
+  fractureWithKnownBmdMeta,
+  fractureWithoutKnownBmdMeta,
+  oracleOsteoporosisMeta,
+  oraiMeta,
+  osteoporosisScoreMeta,
+  ostMaleMeta,
+  ostFemaleMeta
+} from "./meta";
 
-const calculators = [diabetesRiskMeta,drsGriffinMeta];
+const calculators = [
+  diabetesRiskMeta,
+  drsGriffinMeta,
+  screeningTreeMeta,
+  typePredictorMeta,
+  a1cAvgGluMeta,
+  homaIrMeta,
+  lpirMeta,
+  quickiMeta,
+  risk7p5Meta,
+  sodiumEmmettMeta,
+  sodiumHillierMeta,
+  sodiumKatzMeta,
+  fractureWithBmdMeta,
+  fractureWithoutBmdMeta,
+  metAACE2003Meta,
+  metAHA2005Meta,
+  metAtpIIIMeta,
+  metEGIRMeta,
+  metIDF2005Meta,
+  metWHO1998Meta,
+  fractureWithKnownBmdMeta,
+  fractureWithoutKnownBmdMeta,
+  oracleOsteoporosisMeta,
+  oraiMeta,
+  osteoporosisScoreMeta,
+  ostMaleMeta,
+  ostFemaleMeta,
+
+];
 
 export default function CalculatorsIndex() {
   return (
     <main className={styles.main}>
-      <h1 className={styles.title}>Endocrinology Calculators</h1>
-      <ul className={styles.list}>
-        {calculators.map((c) => (
-          <li key={c.slug} className={styles.item}>
-            <Link href={`/calculators/${c.slug}`} className={styles.link}>
-              {c.title}
-            </Link>
-            <div className={styles.short}>{c.short}</div>
-          </li>
-        ))}
-      </ul>
+      <div className={styles.titlesWrapper}>
+        <h1 className={styles.heading}>All Endocrinology Calculators</h1>
+        <p className={styles.subTitle}>
+          Tools for assessing hormone levels, medication dosages, and other
+          endocrine parameters.
+        </p>
+      </div>
+      <div className={styles.cardsMain}>
+        <div className={styles.cardsWrapper}>
+          <h3 className={styles.categoryTitle}>Diabetes</h3>
+          <div className={styles.cardsContainer}>
+            {calculators
+              .filter((c) => c.category === "Diabetes")
+              .map((c) => (
+                <CardComponent
+                  key={c.slug}
+                  title={c.title}
+                  subTitle={c.short}
+                  slug={c.slug}
+                  icon={c.icon}
+                />
+              ))}
+          </div>
+        </div>
+        <div className={styles.cardsWrapper}>
+          <h3 className={styles.categoryTitle}>Fracture Risk</h3>
+          <div className={styles.cardsContainer}>
+            {calculators
+              .filter((c) => c.category === "Fracture Risk")
+              .map((c) => (
+                <CardComponent
+                  key={c.slug}
+                  title={c.title}
+                  subTitle={c.short}
+                  slug={c.slug}
+                  icon={c.icon}
+                />
+              ))}
+          </div>
+        </div>
+        <div className={styles.cardsWrapper}>
+          <h3 className={styles.categoryTitle}>Metabolic Syndrome</h3>
+          <div className={styles.cardsContainer}>
+            {calculators
+              .filter((c) => c.category === "Metabolic Syndrome")
+              .map((c) => (
+                <CardComponent
+                  key={c.slug}
+                  title={c.title}
+                  subTitle={c.short}
+                  slug={c.slug}
+                  icon={c.icon}
+                />
+              ))}
+          </div>
+        </div>
+        <div className={styles.cardsWrapper}>
+          <h3 className={styles.categoryTitle}>Osteoporosis</h3>
+          <div className={styles.cardsContainer}>
+            {calculators
+              .filter((c) => c.category === "Osteoporosis")
+              .map((c) => (
+                <CardComponent
+                  key={c.slug}
+                  title={c.title}
+                  subTitle={c.short}
+                  slug={c.slug}
+                  icon={c.icon}
+                />
+              ))}
+          </div>
+        </div>
+      </div>
     </main>
   );
 }

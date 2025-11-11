@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "../SizeSelector/SizesSelector.module.scss"; // reuse same styles
+import styles from "../SizeSelector/SizesSelector.module.scss";
 
 type ColorOption = "black" | "blue" | "white" | "gray" | "brown";
 

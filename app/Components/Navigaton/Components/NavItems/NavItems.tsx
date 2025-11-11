@@ -1,18 +1,30 @@
 import Link from 'next/link';
 import styles from './NavItems.module.scss';
 
-const NavItems = ({ isOpen }: { isOpen: boolean }) => {
+interface NavItemsProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const NavItems = ({ isOpen, onClose }: NavItemsProps) => {
+  const onNavItemClick = () => {
+    onClose();
+  };
+
   return (
     <div className={`${styles.navItems} ${isOpen ? styles.open : styles.closed}`}>
       <ul className={styles.list}>
-        <li className={styles.listItem} >
-            <Link href="/" className={styles.listItem} >Home</Link>
+        <li onClick={onNavItemClick} className={styles.listItem}>
+          <Link href="/" className={styles.listItem}>Home</Link>
         </li>
-        <li className={styles.listItem} style={{ listStyleType: 'none' }}>
-          <Link className={styles.listItem} href="/shop">Shop</Link>
+        <li onClick={onNavItemClick} className={styles.listItem}>
+          <Link href="/shop" className={styles.listItem}>Shop</Link>
         </li>
-        <li className={styles.listItem} style={{ listStyleType: 'none' }}>
-          <Link className={styles.listItem} href="/about-vaer">About VAER</Link>
+        <li onClick={onNavItemClick} className={styles.listItem}>
+          <Link href="/calculators" className={styles.listItem}>Calculators</Link>
+        </li>
+        <li onClick={onNavItemClick} className={styles.listItem}>
+          <Link href="/about-vaer" className={styles.listItem}>About ENDOPIE</Link>
         </li>
       </ul>
     </div>

@@ -36,3 +36,35 @@
     font-weight: 300;
     color: #252525;
 }
+
+.spinContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+.spinWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.spinText {
+    font-size: 64px;
+    text-transform: uppercase;
+    color: #252525;
+    transform: rotateY(0deg);
+    transform-style: preserve-3d;
+    animation: spin-3d 7s infinite linear;
+}
+
+@keyframes spin-3d {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}

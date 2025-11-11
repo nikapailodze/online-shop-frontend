@@ -5,10 +5,9 @@
   width: 100%;
   max-width: 400px;
   height: 200px;
-  //   padding: 20px 20px 60px 20px;
   padding: 20px;
   background-color: #ffffff;
-  border: 1px solid #e2e8f0; 
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 
@@ -24,13 +23,13 @@
 }
 .container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
 }
 .iconContainer {
   flex-shrink: 0;
   padding: 12px;
-  background-color: #f8fafc; 
+  background-color: #f8fafc;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -40,24 +39,33 @@
     width: 24px;
     height: 24px;
     stroke-width: 2;
-    color: oklch(
-      0.5 0.118 184.704
-    ); // default blue, override per icon if needed
+    color: #475569;
   }
+}
+.textContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
 }
 
 .title {
   display: block;
   font-weight: 200;
   font-size: 24px;
-  color: #0f172a; // slate-900
-  margin-bottom: 4px;
+  color: #0f172a;
 }
 
 .subTitle {
   font-size: 0.875rem;
-  color: #475569; // slate-600
+  color: #475569;
   line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+   -webkit-line-clamp: 3;
+  line-clamp: 3;
 }
 
 .calculatorLink {
@@ -66,7 +74,7 @@
   font-size: 16px;
   font-weight: 400;
 
-  color: oklch(0.5 0.118 184.704);
+  color: #475569;
   text-decoration: underline;
   opacity: 0;
   visibility: hidden;
@@ -75,14 +83,14 @@
   text-decoration: none;
 
   &:hover {
-    color: #0369a1; // darker blue on hover
+    color: #0369a1;
   }
   div {
-    display: flex; // ensures the icon itself is centered
+    display: flex;
     align-items: center;
   }
 }
 
 .card:hover {
-  box-shadow: 0 8px 20px oklch(0.5 0.118 184.704 / 0.25);
+  box-shadow: 0 8px 20px #475569;
 }

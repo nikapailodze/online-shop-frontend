@@ -1,0 +1,65 @@
+@use "../Global/Styles/variables.scss" as v;
+
+.page {
+  background: v.$bg;
+  width: 100%;
+  padding: 24px 0;
+}
+
+.container {
+  width: 100%;
+  padding: 0 24px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.title {
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  font-family: "Host Grotesk", sans-serif;
+  font-weight: 500;
+  color: #252525;
+  margin: 0 0 6px;
+}
+.subtitle { color: v.$muted; font-size: 14px; }
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+}
+
+.gridItem {
+  flex: 1 1 100%;
+  min-width: 0;
+  display: flex;
+}
+@media (min-width: 1024px) {
+  .gridItem {
+    flex: 1 1 calc(50% - 12px);
+  }
+}
+
+.gridItem > * {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.stack > * {
+  min-width: 0;
+}
+
+.small { font-size: 14px; color: v.$muted; }

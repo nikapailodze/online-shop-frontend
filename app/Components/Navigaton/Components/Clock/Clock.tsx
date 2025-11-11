@@ -5,18 +5,17 @@ const Clock = () => {
   const [time, setTime] = useState<Date | null>(null);
 
   useEffect(() => {
-    // This only runs on client side
     const updateTime = () => {
       setTime(new Date());
     };
 
-    updateTime(); // set immediately
+    updateTime();
     const interval = setInterval(updateTime, 1000);
 
-    return () => clearInterval(interval); // cleanup
+    return () => clearInterval(interval);
   }, []);
 
-  if (!time) return null; // Don't render anything until client loaded
+  if (!time) return null;
 
   const formatTime = (date: Date) => {
     const hours = date.getHours().toString().padStart(2, '0');

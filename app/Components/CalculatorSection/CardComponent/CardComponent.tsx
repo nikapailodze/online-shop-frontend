@@ -1,27 +1,33 @@
-import { ReactNode } from "react";
 import styles from "./CardComponent.module.scss";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-
+import Link from "next/link";
+import { IconType } from "react-icons/lib";
 
 interface CardComponentProps {
-  iconSrc: ReactNode;
+  icon?: IconType;
   title: string;
   subTitle: string;
+  slug?: string;
 }
-const CardComponent = (props: CardComponentProps) => {
+const CardComponent = ({ icon: Icon, title, subTitle, slug }: CardComponentProps)=> {
   return (
     <div className={styles.card}>
       <div className={styles.container}>
-        <div className={styles.iconContainer}>{props.iconSrc}</div>
-        <div>
-          <span className={styles.title}>{props.title}</span>
-          <p className={styles.subTitle}>{props.subTitle}</p>
+        <div className={styles.iconContainer}>{Icon ? <Icon size={32} /> : null}</div>
+        <div className={styles.textContainer}>
+          <span className={styles.title}>{title}</span>
+          <p className={styles.subTitle}>{subTitle}</p>
         </div>
       </div>
-      <a className={styles.calculatorLink} href="#" tabIndex={0}>
-        
-        <p>Open calculator </p> <div><MdOutlineKeyboardArrowRight /></div>
-      </a>
+      <Link
+        href={`/calculators/${slug}`}
+        className={styles.calculatorLink}
+      >
+        <p>Open calculator </p>{" "}
+        <div>
+          <MdOutlineKeyboardArrowRight />
+        </div>
+      </Link>
     </div>
   );
 };
