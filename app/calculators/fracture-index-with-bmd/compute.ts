@@ -1,18 +1,18 @@
 export type Inputs = {
-  fxAfter50: boolean;          // 1 pt
-  maternalHipFxOver50: boolean;// 1 pt
-  wtLt125: boolean;            // 1 pt
-  smoker: boolean;             // 1 pt
-  armAssistStand: boolean;     // 2 pt
-  ageBand: "lt65"|"65_69"|"70_74"|"75_79"|"80_85"|"ge85"|""; // 0..5 pt
-  bmdBand: "ge_-1"|"m1_to_m2"|"m2_to_m2_5"|"lt_m2_5"|"";     // 0/2/3/4 pt
+  fxAfter50: boolean;
+  maternalHipFxOver50: boolean;
+  wtLt125: boolean;
+  smoker: boolean;
+  armAssistStand: boolean;
+  ageBand: "lt65"|"65_69"|"70_74"|"75_79"|"80_85"|"ge85"|"";
+  bmdBand: "ge_-1"|"m1_to_m2"|"m2_to_m2_5"|"lt_m2_5"|"";
 };
 
 export type Result = {
   complete: boolean;
   totalPoints: number | null;
   risks: {
-    nonvertebral: string | null; // percent string like "13.1%"
+    nonvertebral: string | null;
     hip: string | null;
     vertebral: string | null;
   };
@@ -32,24 +32,21 @@ function agePoints(a: Inputs["ageBand"]) {
 
 function bmdPoints(b: Inputs["bmdBand"]) {
   switch (b) {
-    case "ge_-1":        return 0; // -1 or greater
-    case "m1_to_m2":     return 2; // between -1 and -2
-    case "m2_to_m2_5":   return 3; // between -2 and -2.5
-    case "lt_m2_5":      return 4; // less than -2.5
+    case "ge_-1":        return 0;
+    case "m1_to_m2":     return 2;
+    case "m2_to_m2_5":   return 3;
+    case "lt_m2_5":      return 4;
     default:             return NaN;
   }
 }
 
 function riskBands(total: number) {
-  // Table bands:
-  // 1–2, 3–4, 5, 6–7, 8–15
-  // Return nulls for totals <1 (below validated table).
   if (total < 1) return { nonvertebral: null, hip: null, vertebral: null };
   if (total <= 2)  return { nonvertebral: "8.6%",  hip: "0.4%", vertebral: "1.2%" };
   if (total <= 4)  return { nonvertebral: "13.1%", hip: "0.9%", vertebral: "2.5%" };
   if (total === 5) return { nonvertebral: "16.5%", hip: "1.9%", vertebral: "5.3%" };
   if (total <= 7)  return { nonvertebral: "19.8%", hip: "3.9%", vertebral: "7.1%" };
-  return               { nonvertebral: "27.5%", hip: "8.7%", vertebral: "11.2%" }; // 8–15
+  return               { nonvertebral: "27.5%", hip: "8.7%", vertebral: "11.2%" };
 }
 
 export function computeFractureWithBmd(i: Inputs): Result {

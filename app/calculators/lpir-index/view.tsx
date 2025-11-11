@@ -9,12 +9,12 @@ import Collapsible from "../components/Collapsible/Collapsible";
 import { computeLpir } from "./compute";
 
 export default function LpirIndexView() {
-  const [vldlSize, setVldlSize] = useState(""); // nm
-  const [largeVldlP, setLargeVldlP] = useState(""); // nmol/L
-  const [ldlSize, setLdlSize] = useState(""); // nm
-  const [smallLdlP, setSmallLdlP] = useState(""); // nmol/L
-  const [hdlSize, setHdlSize] = useState(""); // nm
-  const [largeHdlP, setLargeHdlP] = useState(""); // mcmol/L
+  const [vldlSize, setVldlSize] = useState("");
+  const [largeVldlP, setLargeVldlP] = useState("");
+  const [ldlSize, setLdlSize] = useState("");
+  const [smallLdlP, setSmallLdlP] = useState("");
+  const [hdlSize, setHdlSize] = useState("");
+  const [largeHdlP, setLargeHdlP] = useState("");
 
   const result = useMemo(
     () =>

@@ -9,8 +9,8 @@ import Collapsible from "../components/Collapsible/Collapsible";
 import { computeHomaIr } from "./compute";
 
 export default function HomaIrView() {
-  const [insulin, setInsulin] = useState(""); // mIU/L
-  const [glucose, setGlucose] = useState(""); // mmol/L
+  const [insulin, setInsulin] = useState("");
+  const [glucose, setGlucose] = useState("");
   const [precision, setPrecision] = useState<0 | 1 | 2 | 3>(2);
 
   const result = useMemo(
@@ -34,7 +34,7 @@ export default function HomaIrView() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUT */}
+          {}
           <SectionCard title="Input">
             <div className={styles.stack}>
               <div className={styles.inline2}>
@@ -58,7 +58,7 @@ export default function HomaIrView() {
             </div>
           </SectionCard>
 
-          {/* RESULT */}
+          {}
           <SectionCard title="Result">
             <div className={styles.stack}>
               {!result.complete && (

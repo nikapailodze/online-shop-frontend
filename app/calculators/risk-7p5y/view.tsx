@@ -61,7 +61,7 @@ export default function Risk7p5yView() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUTS */}
+          {}
           <SectionCard title="Input">
             <div className={styles.stack}>
               <div className={styles.inline2}>
@@ -172,7 +172,7 @@ export default function Risk7p5yView() {
             </div>
           </SectionCard>
 
-          {/* RESULTS */}
+          {}
           <SectionCard title="Results">
             <div className={styles.stack}>
               {!result.complete && (

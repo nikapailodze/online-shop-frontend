@@ -1,4 +1,3 @@
-// app/calculators/diabetes-risk/view.tsx
 "use client";
 import React, { useState, useMemo } from "react";
 import styles from "../page.module.scss";
@@ -45,7 +44,7 @@ export default function DiabetesRiskView() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUTS */}
+          {}
           <SectionCard title="Input">
             <div className={styles.stack}>
               <div>
@@ -131,7 +130,7 @@ export default function DiabetesRiskView() {
             </div>
           </SectionCard>
 
-          {/* RESULTS */}
+          {}
           <SectionCard title="Results">
             <div className={styles.stack}>
               <div className={styles.stack}>

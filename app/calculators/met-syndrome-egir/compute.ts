@@ -1,5 +1,5 @@
 export type Sex = "female" | "male" | "";
-export type RequiredIns = "" | "gt75pct";     // plasma insulin >75th percentile
+export type RequiredIns = "" | "gt75pct";
 export type GlucoseCat = "" | "normal" | "IGT" | "IFG" | "DM";
 
 function num(s: string) {
@@ -8,9 +8,7 @@ function num(s: string) {
 }
 
 export function computeMetEGIR({
-  // Required
   requiredIns,
-  // Other
   sex,
   waistCm,
   tgMgdl,
@@ -22,13 +20,13 @@ export function computeMetEGIR({
 }: {
   requiredIns: RequiredIns;
   sex: Sex;
-  waistCm: string;      // cm
-  tgMgdl: string;       // mg/dL
-  hdlMgdl: string;      // mg/dL (EGIR HDL threshold <39, sex-independent)
-  sbp: string;          // mmHg
-  dbp: string;          // mmHg
+  waistCm: string;
+  tgMgdl: string;
+  hdlMgdl: string;
+  sbp: string;
+  dbp: string;
   onBpRx: boolean;
-  glucoseCat: GlucoseCat; // IGT/IFG but not DM
+  glucoseCat: GlucoseCat;
 }) {
   const waist = num(waistCm);
   const tg = num(tgMgdl);
@@ -59,14 +57,12 @@ export function computeMetEGIR({
     };
   }
 
-  // Required criterion
   const requiredMet = requiredIns === "gt75pct";
 
-  // Other criteria
-  const c_waist = sex === "male" ? waist >= 94 : waist >= 80; // cm
+  const c_waist = sex === "male" ? waist >= 94 : waist >= 80;
   const c_tg_hdl = tg >= 150 || hdl < 39;
   const c_bp = s >= 140 || d >= 90 || onBpRx;
-  const c_glu_not_dm = glucoseCat === "IGT" || glucoseCat === "IFG"; // NOT DM
+  const c_glu_not_dm = glucoseCat === "IGT" || glucoseCat === "IFG";
 
   const otherCount =
     (c_waist ? 1 : 0) +

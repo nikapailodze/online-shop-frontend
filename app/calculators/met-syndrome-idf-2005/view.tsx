@@ -58,7 +58,7 @@ export default function MetSyndromeIDF2005View() {
         </div>
 
         <div className={styles.grid}>
-          {/* REQUIRED */}
+          {}
           <SectionCard title="Required Criterion">
             <div className={styles.stack}>
               <RadioGroup
@@ -97,7 +97,7 @@ export default function MetSyndromeIDF2005View() {
             </div>
           </SectionCard>
 
-          {/* OTHER */}
+          {}
           <SectionCard title="Other Criteria">
             <div className={styles.stack}>
               <div className={styles.inline2}>
@@ -179,7 +179,7 @@ export default function MetSyndromeIDF2005View() {
             </div>
           </SectionCard>
 
-          {/* RESULT */}
+          {}
           <SectionCard title="Result">
             <div className={styles.stack}>
               {!result.complete && (
@@ -225,7 +225,7 @@ export default function MetSyndromeIDF2005View() {
 
               <Collapsible title="References">
                 <div className={styles.small}>
-                  International Diabetes Federation (IDF 2005). Grundy SM et al, Circulation 2005;112:2735–52.  
+                  International Diabetes Federation (IDF 2005). Grundy SM et al, Circulation 2005;112:2735–52.
                   See also AHA/NHLBI 2005, ATP III 2001, WHO 1998, EGIR, AACE 2003.
                 </div>
               </Collapsible>

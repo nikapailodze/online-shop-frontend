@@ -9,7 +9,7 @@ export default function RadioGroup(props: {
   value: string;
   options: Option[];
   onChange: (v: string) => void;
-  columns?: number; // 1 or 2
+  columns?: number;
 }) {
   const cols = props.columns && props.columns > 1 ? styles.two : styles.one;
 

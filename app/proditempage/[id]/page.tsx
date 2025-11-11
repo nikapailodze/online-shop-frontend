@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      {/* Flying Image */}
+      {}
       <div
         ref={imageRef}
         style={{

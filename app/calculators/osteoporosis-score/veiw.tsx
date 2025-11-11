@@ -20,7 +20,7 @@ export default function OsteoporosisScoreView() {
   const [fxHistory, setFxHistory] = useState<FractureHistory>("");
 
   const [ageYears, setAgeYears] = useState("");
-  const [estrogenPriorUse, setEstrogenPriorUse] = useState<YesNo>(""); // yes = prior use (0), no = no prior (1)
+  const [estrogenPriorUse, setEstrogenPriorUse] = useState<YesNo>("");
   const [weightLb, setWeightLb] = useState("");
 
   const [precision, setPrecision] = useState("0");
@@ -62,7 +62,7 @@ export default function OsteoporosisScoreView() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUTS */}
+          {}
           <SectionCard title="Inputs">
             <div className={styles.stack}>
               <RadioGroup
@@ -147,7 +147,7 @@ export default function OsteoporosisScoreView() {
             </div>
           </SectionCard>
 
-          {/* RESULT */}
+          {}
           <SectionCard title="Result">
             <div className={styles.stack}>
               {!result.complete && (

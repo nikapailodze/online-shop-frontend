@@ -13,8 +13,8 @@ function clampPrecision(p: number) {
 export function computeOracle({
   ageYears,
   bmi,
-  hrTx,     // HRTx: "yes" => 1, "no" => 0
-  hxFx,     // History of fracture after age 45: "yes" => 1, "no" => 0
+  hrTx,
+  hxFx,
   ubpi,
   precision,
 }: {
@@ -23,7 +23,7 @@ export function computeOracle({
   hrTx: YesNo;
   hxFx: YesNo;
   ubpi: string;
-  precision: string; // decimal places to display, e.g. "2"
+  precision: string;
 }) {
   const age = num(ageYears);
   const bmiNum = num(bmi);
@@ -50,7 +50,6 @@ export function computeOracle({
     };
   }
 
-  // ORACLE = -1 / ( (0.02 * Age) - (0.13 * BMI) - (0.39 * HRTx) + (0.74 * HxFx) - (3 * UBPI) )
   const denom = (0.02 * age) - (0.13 * bmiNum) - (0.39 * hr) + (0.74 * fx) - (3 * ubpiNum);
 
   let score = Number.NaN;
@@ -58,11 +57,9 @@ export function computeOracle({
     score = -1 / denom;
   }
 
-  // Round for display only
   const scoreRounded =
     Number.isFinite(score) ? Number(score.toFixed(prec)) : Number.NaN;
 
-  // Buckets
   let category = "Lower Risk";
   if (Number.isFinite(score)) {
     if (score > 0.32) category = "High Risk (Sens 76%)";

@@ -16,9 +16,7 @@ import {
 } from "./compute";
 
 export default function MetSyndromeAACE2003View() {
-  // Required
-  const [requiredIR, setRequiredIR] = useState<RequiredIR>(""); // IGT/IFG
-  // Other
+  const [requiredIR, setRequiredIR] = useState<RequiredIR>("");
   const [bmi, setBmi] = useState("");
   const [sex, setSex] = useState<Sex>("");
   const [tg, setTg] = useState("");
@@ -58,7 +56,7 @@ export default function MetSyndromeAACE2003View() {
         </div>
 
         <div className={styles.grid}>
-          {/* REQUIRED */}
+          {}
           <SectionCard title="Required Criteria">
             <div className={styles.stack}>
               <RadioGroup
@@ -75,7 +73,7 @@ export default function MetSyndromeAACE2003View() {
             </div>
           </SectionCard>
 
-          {/* OTHER */}
+          {}
           <SectionCard title="Other Criteria">
             <div className={styles.stack}>
               <div className={styles.inline2}>
@@ -159,7 +157,7 @@ export default function MetSyndromeAACE2003View() {
             </div>
           </SectionCard>
 
-          {/* RESULT */}
+          {}
           <SectionCard title="Result">
             <div className={styles.stack}>
               {!result.complete && (
@@ -220,7 +218,7 @@ export default function MetSyndromeAACE2003View() {
                     </span>
                   </div>
 
-                  {/* Optional: show which were positive */}
+                  {}
                   <div
                     style={{
                       padding: "12px 16px",

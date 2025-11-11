@@ -7,7 +7,7 @@
   height: 200px;
   padding: 20px;
   background-color: #ffffff;
-  border: 1px solid #e2e8f0; 
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 
@@ -29,7 +29,7 @@
 .iconContainer {
   flex-shrink: 0;
   padding: 12px;
-  background-color: #f8fafc; 
+  background-color: #f8fafc;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -53,19 +53,19 @@
   display: block;
   font-weight: 200;
   font-size: 24px;
-  color: #0f172a; 
+  color: #0f172a;
 }
 
 .subTitle {
   font-size: 0.875rem;
-  color: #475569; 
+  color: #475569;
   line-height: 1.4;
   display: -webkit-box;
-  -webkit-line-clamp: 3; 
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-   -webkit-line-clamp: 3; /* Safari, Chrome, Edge */
-  line-clamp: 3;    /* Standard property (new, Firefox support rolling out) */
+   -webkit-line-clamp: 3;
+  line-clamp: 3;
 }
 
 .calculatorLink {
@@ -83,10 +83,10 @@
   text-decoration: none;
 
   &:hover {
-    color: #0369a1; 
+    color: #0369a1;
   }
   div {
-    display: flex; 
+    display: flex;
     align-items: center;
   }
 }

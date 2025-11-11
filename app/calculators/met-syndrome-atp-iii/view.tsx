@@ -44,7 +44,7 @@ export default function MetSyndromeAtpIIIView() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUTS */}
+          {}
           <SectionCard title="Input">
             <div className={styles.stack}>
               <RadioGroup

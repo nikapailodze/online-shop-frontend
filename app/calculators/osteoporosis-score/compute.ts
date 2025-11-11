@@ -1,18 +1,18 @@
 export type YesNo = "" | "yes" | "no";
 export type RaceVal =
   | ""
-  | "american_indian_alaska_native" // 5
-  | "asian"                         // 5
-  | "black"                         // 0
-  | "native_hawaiian_pacific"       // 5
-  | "white";                        // 5
+  | "american_indian_alaska_native"
+  | "asian"
+  | "black"
+  | "native_hawaiian_pacific"
+  | "white";
 
 export type FractureHistory =
   | ""
-  | "none"   // 0
-  | "one"    // 4
-  | "two"    // 8
-  | "three_plus"; // 12
+  | "none"
+  | "one"
+  | "two"
+  | "three_plus";
 
 function num(s: string) {
   const n = Number((s ?? "").toString().replace(",", ".").trim());
@@ -27,7 +27,7 @@ function clampPrecision(p: number) {
 function racePoints(r: RaceVal) {
   if (!r) return NaN;
   if (r === "black") return 0;
-  return 5; // all others (AI/AN, Asian, NH/PI, White) = 5
+  return 5;
 }
 
 function raPoints(ra: YesNo) {
@@ -47,7 +47,6 @@ function fxPoints(h: FractureHistory) {
 }
 
 function estrogenPoints(est: YesNo) {
-  // Estrogen: prior use = 0; NO prior use = 1
   if (est === "yes") return 0;
   if (est === "no") return 1;
   return NaN;
@@ -66,9 +65,9 @@ export function computeOsteoporosisScore({
   raPresent: YesNo;
   fxHistory: FractureHistory;
   ageYears: string;
-  estrogenPriorUse: YesNo; // "yes" = prior use; "no" = no prior use
+  estrogenPriorUse: YesNo;
   weightLb: string;
-  precision: string; // integer string, e.g. "0"
+  precision: string;
 }) {
   const age = num(ageYears);
   const wtLb = num(weightLb);

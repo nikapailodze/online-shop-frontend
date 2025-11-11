@@ -1,6 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
-import styles from "../page.module.scss"; 
+import styles from "../page.module.scss";
 
 import SectionCard from "../components/SectionCard/SectionCard";
 import RadioGroup from "../components/RadioGroup/RadioGroup";
@@ -80,7 +80,7 @@ export default function DiabetesScreeningTreeView() {
             </div>
           </SectionCard>
 
-          {/* RESULTS */}
+          {}
           <SectionCard title="Results">
             <div className={styles.stack}>
               {!result.complete && (

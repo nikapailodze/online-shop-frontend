@@ -13,7 +13,6 @@ import { computeMetAHA2005, type Sex } from "./compute";
 export default function MetSyndromeAHA2005View() {
   const [sex, setSex] = useState<Sex>("");
 
-  // Inputs
   const [waistIn, setWaistIn] = useState("");
   const [tg, setTg] = useState("");
   const [onTgRx, setOnTgRx] = useState(false);
@@ -54,7 +53,7 @@ export default function MetSyndromeAHA2005View() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUTS */}
+          {}
           <SectionCard title="Input">
             <div className={styles.stack}>
               <RadioGroup
@@ -155,7 +154,7 @@ export default function MetSyndromeAHA2005View() {
             </div>
           </SectionCard>
 
-          {/* RESULTS */}
+          {}
           <SectionCard title="Results">
             <div className={styles.stack}>
               {!result.complete && (
@@ -198,7 +197,7 @@ export default function MetSyndromeAHA2005View() {
                     <span>{result.met ? "Present (≥3)" : "Absent (0–2)"}</span>
                   </div>
 
-                  {/* Optional: show which criteria hit */}
+                  {}
                   <div
                     style={{
                       padding: "12px 16px",

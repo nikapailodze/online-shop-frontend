@@ -19,7 +19,7 @@ export function computeMetWHO1998({
   microalbuminuria,
 }: {
   sex: Sex;
-  bmi: string; // kg/m²
+  bmi: string;
   waistCm: string;
   hipCm: string;
   tgMgdl: string;
@@ -54,14 +54,12 @@ export function computeMetWHO1998({
     };
   }
 
-  // Required: insulin resistance
   const requiredMet =
     glucoseCat === "IGT" ||
     glucoseCat === "IFG" ||
     glucoseCat === "DM" ||
     glucoseCat === "reducedSensitivity";
 
-  // Other criteria
   const c_obesity =
     bmiNum > 30 ||
     (sex === "male" ? whr > 0.9 : whr > 0.85);

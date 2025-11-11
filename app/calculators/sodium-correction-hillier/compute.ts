@@ -3,14 +3,12 @@ function num(s: string) {
   return Number.isFinite(n) ? n : NaN;
 }
 
-// Hillier (1999): corrected Na = measured Na + 0.024 * (glucose - 100)
-// (glucose in mg/dL)
 export function computeSodiumCorrectionHillier({
   measuredNa,
   glucoseMgdl,
 }: {
-  measuredNa: string;    // mEq/L
-  glucoseMgdl: string;   // mg/dL
+  measuredNa: string;
+  glucoseMgdl: string;
 }) {
   const na = num(measuredNa);
   const glu = num(glucoseMgdl);

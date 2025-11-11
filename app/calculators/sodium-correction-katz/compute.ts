@@ -3,14 +3,12 @@ function num(s: string) {
   return Number.isFinite(n) ? n : NaN;
 }
 
-// Katz (1973): corrected Na = measured Na + 0.016 * (glucose - 100)
-// (glucose in mg/dL)
 export function computeSodiumCorrectionKatz({
   measuredNa,
   glucoseMgdl,
 }: {
-  measuredNa: string; // mEq/L
-  glucoseMgdl: string; // mg/dL
+  measuredNa: string;
+  glucoseMgdl: string;
 }) {
   const na = num(measuredNa);
   const glu = num(glucoseMgdl);

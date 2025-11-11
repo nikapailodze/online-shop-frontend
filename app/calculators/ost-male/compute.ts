@@ -13,9 +13,9 @@ export function computeOstMale({
   ageYears,
   precision,
 }: {
-  weightKg: string;   // kg
-  ageYears: string;   // years
-  precision: string;  // integer string, e.g. "2"
+  weightKg: string;
+  ageYears: string;
+  precision: string;
 }) {
   const w = num(weightKg);
   const a = num(ageYears);
@@ -31,12 +31,10 @@ export function computeOstMale({
     };
   }
 
-  // OST = 0.2 * (Weight − Age)
   const raw = 0.2 * (w - a);
   const score = Number(raw.toFixed(prec));
   const scoreText = score.toFixed(prec);
 
-  // Interpretation bands (handle boundary at −1 by prioritizing High first)
   let band: string;
   if (score <= -1) band = "High Risk";
   else if (score <= 3) band = "Moderate Risk";

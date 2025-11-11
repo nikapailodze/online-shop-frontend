@@ -2,8 +2,8 @@ export function computeHomaIr({
   insulin,
   glucose,
 }: {
-  insulin: string;   // mIU/L
-  glucose: string;   // mmol/L
+  insulin: string;
+  glucose: string;
 }) {
   const ins = Number((insulin || "").toString().replace(",", ".").trim());
   const glu = Number((glucose || "").toString().replace(",", ".").trim());

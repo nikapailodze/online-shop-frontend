@@ -9,8 +9,8 @@ import Collapsible from "../components/Collapsible/Collapsible";
 import { computeSodiumCorrectionHillier } from "./compute";
 
 export default function SodiumCorrectionHillierView() {
-  const [measuredNa, setMeasuredNa] = useState(""); // mEq/L
-  const [glucoseMgdl, setGlucoseMgdl] = useState(""); // mg/dL
+  const [measuredNa, setMeasuredNa] = useState("");
+  const [glucoseMgdl, setGlucoseMgdl] = useState("");
   const [precision, setPrecision] = useState<0 | 1 | 2 | 3>(1);
 
   const result = useMemo(
@@ -36,7 +36,7 @@ export default function SodiumCorrectionHillierView() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUT */}
+          {}
           <SectionCard title="Input">
             <div className={styles.stack}>
               <div className={styles.inline2}>
@@ -60,7 +60,7 @@ export default function SodiumCorrectionHillierView() {
             </div>
           </SectionCard>
 
-          {/* RESULT */}
+          {}
           <SectionCard title="Result">
             <div className={styles.stack}>
               {!result.complete && (

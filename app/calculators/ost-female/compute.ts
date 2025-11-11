@@ -13,9 +13,9 @@ export function computeOstFemale({
   ageYears,
   precision,
 }: {
-  weightKg: string;   // kg
-  ageYears: string;   // years
-  precision: string;  // integer string, e.g. "2"
+  weightKg: string;
+  ageYears: string;
+  precision: string;
 }) {
   const w = num(weightKg);
   const a = num(ageYears);
@@ -31,17 +31,14 @@ export function computeOstFemale({
     };
   }
 
-  // OST = 0.2 * (Weight − Age)
   const raw = 0.2 * (w - a);
   const score = Number(raw.toFixed(prec));
   const scoreText = score.toFixed(prec);
 
-  // Female cutoffs:
-  // −20 to −4 → High; −3 to 1 → Moderate; >1 to 20 → Low
   let band: string;
   if (score <= -4) band = "High Risk";
-  else if (score <= 1) band = "Moderate Risk";   // handles −3..1
-  else if (score <= 20) band = "Low Risk";       // >1..20
+  else if (score <= 1) band = "Moderate Risk";
+  else if (score <= 20) band = "Low Risk";
   else band = "Out of validated range";
 
   return {

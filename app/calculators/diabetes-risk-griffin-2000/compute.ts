@@ -2,7 +2,7 @@ export type Inputs = {
   sex: "female" | "male" | "";
   rxHtn: "yes" | "no" | "";
   rxSteroids: "yes" | "no" | "";
-  age: string; 
+  age: string;
   bmiBand: "lt25" | "25to27_49" | "27_5to29_99" | "ge30" | "";
   fmh: "none" | "parent_or_sibling" | "parent_and_sibling" | "";
   smoker: "non" | "former" | "current" | "";
@@ -30,8 +30,6 @@ const C = {
   },
 } as const;
 
-// Terms = 6.322 - Sex - RxHTN - RxSteroids - (0.063 * Age) - BMI - FMH - Smoker
-// Risk  = 100 / (1 + e^(Terms))
 export function computeGriffin(i: Inputs) {
   const ageNum = Number((i.age || "").toString().trim());
   const complete =

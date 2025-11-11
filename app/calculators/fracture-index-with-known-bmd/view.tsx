@@ -54,7 +54,7 @@ export default function FractureIndexWithBmdView() {
         </div>
 
         <div className={styles.grid}>
-          {/* REQUIRED INPUTS */}
+          {}
           <SectionCard title="Age">
             <RadioGroup
               name="ageBand"
@@ -130,7 +130,7 @@ export default function FractureIndexWithBmdView() {
             </div>
           </SectionCard>
 
-          {/* RESULT */}
+          {}
           <SectionCard title="Result">
             <div className={styles.stack}>
               {!result.complete && (
@@ -166,7 +166,7 @@ export default function FractureIndexWithBmdView() {
                     )}
                   </div>
 
-                  {/* Optional breakdown */}
+                  {}
                   <div
                     style={{
                       padding: 12,
@@ -191,7 +191,7 @@ export default function FractureIndexWithBmdView() {
 
               <Collapsible title="References">
                 <div className={styles.small}>
-                  Black DM, Steinbuch M, Palermo L, et&nbsp;al. An assessment tool for predicting fracture risk in postmenopausal women. <em>Osteoporos Int.</em> 2001;12(7):519-28.  
+                  Black DM, Steinbuch M, Palermo L, et&nbsp;al. An assessment tool for predicting fracture risk in postmenopausal women. <em>Osteoporos Int.</em> 2001;12(7):519-28.
                   CrossRef: Fracture Index WITHOUT BMD.
                 </div>
               </Collapsible>

@@ -6,9 +6,9 @@ export default function UnitNumberInput(props: {
   label: string;
   value: string;
   onChange: (v: string) => void;
-  onFocus?: () => void;     
+  onFocus?: () => void;
   placeholder?: string;
-  unit?: string; 
+  unit?: string;
 }) {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     props.onChange(e.target.value);
@@ -25,7 +25,7 @@ export default function UnitNumberInput(props: {
           type="number"
           value={props.value}
           onChange={handleChange}
-          onFocus={props.onFocus}  
+          onFocus={props.onFocus}
           placeholder={props.placeholder}
           className={styles.input}
         />

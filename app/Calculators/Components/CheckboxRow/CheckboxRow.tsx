@@ -6,7 +6,7 @@ export default function CheckboxRow(props: {
   label: string;
   checked: boolean;
   onChange: (v: boolean) => void;
-  badge?: string; // e.g., "+1" or "-1"
+  badge?: string;
   badgeTone?: "green" | "orange";
 }) {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

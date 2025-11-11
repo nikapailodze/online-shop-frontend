@@ -43,7 +43,7 @@ export default function OracleOsteoporosisView() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUTS */}
+          {}
           <SectionCard title="Inputs">
             <div className={styles.stack}>
               <div className={styles.inline2}>
@@ -109,7 +109,7 @@ export default function OracleOsteoporosisView() {
             </div>
           </SectionCard>
 
-          {/* RESULT */}
+          {}
           <SectionCard title="Result">
             <div className={styles.stack}>
               {!result.complete && (

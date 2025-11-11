@@ -19,7 +19,7 @@ export default function FractureIndexWithBmdView() {
   const [ageBand, setAgeBand] = useState<Inputs["ageBand"]>("");
   const [bmdBand, setBmdBand] = useState<Inputs["bmdBand"]>("");
 
-  const [precision, setPrecision] = useState<0 | 1>(0); // points are integers; risks are fixed %
+  const [precision, setPrecision] = useState<0 | 1>(0);
 
   const result = useMemo(
     () =>
@@ -61,7 +61,7 @@ export default function FractureIndexWithBmdView() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUTS */}
+          {}
           <SectionCard title="Clinical Criteria">
             <div className={styles.stack}>
               <CheckboxRow
@@ -145,7 +145,7 @@ export default function FractureIndexWithBmdView() {
             </div>
           </SectionCard>
 
-          {/* RESULTS */}
+          {}
           <SectionCard title="Results">
             <div className={styles.stack}>
               {(!result.complete || result.totalPoints == null) && (
@@ -170,7 +170,7 @@ export default function FractureIndexWithBmdView() {
                 <span>{totalStr}</span>
               </div>
 
-              {/* Risk cards */}
+              {}
               <div
                 style={{
                   padding: "16px",
@@ -225,9 +225,6 @@ export default function FractureIndexWithBmdView() {
                   value={precision}
                   onChange={(e) => {
                     const p = Number(e.target.value) as 0 | 1;
-                    // points are integers, but keeping selector for parity with other calcs
-                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                    p; 
                     setPrecision(p);
                   }}
                   style={{ padding: 8, borderRadius: 8, border: "1px solid #e5e7eb" }}

@@ -7,11 +7,11 @@ function num(s: string) {
 
 export function computeMetAtpIII({
   sex,
-  waistIn,          // inches
-  tgMgdl,           // mg/dL
-  hdlMgdl,          // mg/dL
-  sbp, dbp,         // mmHg
-  fpgMgdl,          // mg/dL
+  waistIn,
+  tgMgdl,
+  hdlMgdl,
+  sbp, dbp,
+  fpgMgdl,
 }: {
   sex: Sex;
   waistIn: string;
@@ -43,8 +43,7 @@ export function computeMetAtpIII({
     };
   }
 
-  // ATP III thresholds
-  const c_waist = sex === "male" ? waist > 40 : waist > 35; // strictly ">" per spec
+  const c_waist = sex === "male" ? waist > 40 : waist > 35;
   const c_tg = tg >= 150;
   const c_hdl = sex === "male" ? hdl < 40 : hdl < 50;
   const c_bp = s >= 130 || d >= 85;

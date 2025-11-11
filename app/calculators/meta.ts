@@ -20,7 +20,6 @@ import {
 } from "react-icons/ri";
 import { BiCalculator } from "react-icons/bi";
 
-// Sodium Corrections
 export const sodiumKatzMeta = {
   slug: "sodium-correction-katz",
   title: "Sodium Correction in Hyperglycemia (Katz 1973)",
@@ -48,7 +47,6 @@ export const sodiumEmmettMeta = {
   icon: BiCalculator,
 };
 
-// Risk
 export const risk7p5Meta = {
   slug: "risk-7p5y",
   title: "Risk of Acquiring Diabetes Mellitus (7.5-year)",
@@ -58,7 +56,6 @@ export const risk7p5Meta = {
   icon: FaChartLine,
 };
 
-// Formulas
 export const quickiMeta = {
   slug: "quicki",
   title: "QUICKI Formula for Insulin Resistance",
@@ -86,7 +83,6 @@ export const homaIrMeta = {
   icon: AiOutlineCalculator,
 };
 
-// Decision trees
 export const typePredictorMeta = {
   slug: "diabetes-type-predictor-treecalc",
   title: "Diabetes Type Predictor TreeCalc",
@@ -105,7 +101,6 @@ export const screeningTreeMeta = {
   icon: MdDeviceHub,
 };
 
-// Risk Scores
 export const drsGriffinMeta = {
   slug: "diabetes-risk-griffin-2000",
   title: "Diabetes Risk Score (Type 2)",
@@ -123,7 +118,6 @@ export const diabetesRiskMeta = {
   icon: FaClipboardCheck,
 };
 
-// A1C
 export const a1cAvgGluMeta = {
   slug: "a1c-to-average-glucose",
   title: "Glycemic Assessment: A1C to Average Glucose Conversions",

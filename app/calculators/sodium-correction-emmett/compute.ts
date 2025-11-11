@@ -5,19 +5,17 @@ function num(s: string) {
   return Number.isFinite(n) ? n : NaN;
 }
 
-// Convert mmol/L → mg/dL using 18.015 (consistent with your other calcs)
 function toMgdl(glu: number, unit: GlucoseUnit) {
   return unit === "mgdl" ? glu : glu * 18.015;
 }
 
-// Emmett (2013): corrected Na = measured Na + 2 * ( (glucose - 100) / 100 )
 export function computeSodiumCorrection({
   measuredNa,
   glucose,
   glucoseUnit,
 }: {
-  measuredNa: string;   // mEq/L (≈ mmol/L)
-  glucose: string;      // mg/dL or mmol/L (toggle)
+  measuredNa: string;
+  glucose: string;
   glucoseUnit: GlucoseUnit;
 }) {
   const na = num(measuredNa);

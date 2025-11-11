@@ -9,8 +9,8 @@ import Collapsible from "../components/Collapsible/Collapsible";
 import { computeQUICKI } from "./compute";
 
 export default function QuickiView() {
-  const [insulin, setInsulin] = useState(""); // μIU/mL
-  const [glucose, setGlucose] = useState(""); // mg/dL
+  const [insulin, setInsulin] = useState("");
+  const [glucose, setGlucose] = useState("");
   const [precision, setPrecision] = useState<0 | 1 | 2 | 3 | 4>(2);
 
   const result = useMemo(
@@ -34,7 +34,7 @@ export default function QuickiView() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUT */}
+          {}
           <SectionCard title="Input">
             <div className={styles.stack}>
               <div className={styles.inline2}>
@@ -58,7 +58,7 @@ export default function QuickiView() {
             </div>
           </SectionCard>
 
-          {/* RESULT */}
+          {}
           <SectionCard title="Result">
             <div className={styles.stack}>
               {!result.complete && (

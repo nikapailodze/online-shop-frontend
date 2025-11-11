@@ -11,10 +11,8 @@ import Collapsible from "../components/Collapsible/Collapsible";
 import { computeMetEGIR, type Sex, type RequiredIns, type GlucoseCat } from "./compute";
 
 export default function MetSyndromeEGIRView() {
-  // Required
-  const [requiredIns, setRequiredIns] = useState<RequiredIns>(""); // plasma insulin >75th percentile?
+  const [requiredIns, setRequiredIns] = useState<RequiredIns>("");
 
-  // Other
   const [sex, setSex] = useState<Sex>("");
   const [waistCm, setWaistCm] = useState("");
   const [tg, setTg] = useState("");
@@ -51,7 +49,7 @@ export default function MetSyndromeEGIRView() {
         </div>
 
         <div className={styles.grid}>
-          {/* REQUIRED */}
+          {}
           <SectionCard title="Required Criterion">
             <div className={styles.stack}>
               <RadioGroup
@@ -67,7 +65,7 @@ export default function MetSyndromeEGIRView() {
             </div>
           </SectionCard>
 
-          {/* OTHER */}
+          {}
           <SectionCard title="Other Criteria">
             <div className={styles.stack}>
               <RadioGroup
@@ -151,7 +149,7 @@ export default function MetSyndromeEGIRView() {
             </div>
           </SectionCard>
 
-          {/* RESULT */}
+          {}
           <SectionCard title="Result">
             <div className={styles.stack}>
               {!result.complete && (
@@ -210,7 +208,7 @@ export default function MetSyndromeEGIRView() {
                     <span>{result.diagnosis ? "Meets criteria" : "Does not meet"}</span>
                   </div>
 
-                  {/* Optional breakdown */}
+                  {}
                   <div
                     style={{
                       padding: "12px 16px",

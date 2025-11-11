@@ -29,7 +29,7 @@
 .grid {
   display: flex;
   flex-wrap: wrap;
-  align-items: stretch;   
+  align-items: stretch;
   gap: 24px;
   width: 100%;
 }
@@ -37,11 +37,11 @@
 .gridItem {
   flex: 1 1 100%;
   min-width: 0;
-  display: flex;         
+  display: flex;
 }
 @media (min-width: 1024px) {
   .gridItem {
-    flex: 1 1 calc(50% - 12px); 
+    flex: 1 1 calc(50% - 12px);
   }
 }
 

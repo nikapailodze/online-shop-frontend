@@ -139,7 +139,7 @@ export default function FractureIndexWithoutBmdView() {
 
               <Collapsible title="References">
                 <div className={styles.small}>
-                  Black DM, Steinbuch M, Palermo L, et&nbsp;al. An assessment tool for predicting fracture risk in postmenopausal women. <em>Osteoporos Int.</em> 2001;12(7):519-28.  
+                  Black DM, Steinbuch M, Palermo L, et&nbsp;al. An assessment tool for predicting fracture risk in postmenopausal women. <em>Osteoporos Int.</em> 2001;12(7):519-28.
                   CrossRef: Fracture Index WITH BMD.
                 </div>
               </Collapsible>

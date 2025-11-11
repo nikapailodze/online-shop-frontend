@@ -3,7 +3,6 @@ function n(x: string) {
   return Number.isFinite(v) ? v : NaN;
 }
 
-// ----- Factor tables (ordered logic) -----
 function vldlSizeFactor(sizeNm: number) {
   if (sizeNm < 39.2) return 0;
   if (sizeNm <= 41.1) return 1;
@@ -85,12 +84,12 @@ export function computeLpir({
   hdlSize,
   largeHdlP,
 }: {
-  vldlSize: string; // nm
-  largeVldlP: string; // nmol/L
-  ldlSize: string; // nm
-  smallLdlP: string; // nmol/L
-  hdlSize: string; // nm
-  largeHdlP: string; // mcmol/L
+  vldlSize: string;
+  largeVldlP: string;
+  ldlSize: string;
+  smallLdlP: string;
+  hdlSize: string;
+  largeHdlP: string;
 }) {
   const vldlSizeN = n(vldlSize);
   const largeVldlPN = n(largeVldlP);

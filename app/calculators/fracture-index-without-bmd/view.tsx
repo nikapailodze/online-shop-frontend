@@ -48,7 +48,7 @@ export default function FractureIndexWithoutBmdView() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUTS */}
+          {}
           <SectionCard title="Criteria">
             <div className={styles.stack}>
               <CheckboxRow
@@ -113,7 +113,7 @@ export default function FractureIndexWithoutBmdView() {
             </div>
           </SectionCard>
 
-          {/* RESULTS */}
+          {}
           <SectionCard title="Results">
             <div className={styles.stack}>
               {!result.complete && (

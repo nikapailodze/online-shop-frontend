@@ -8,7 +8,7 @@ export type Output = {
   complete: boolean;
   predicted: "Likely Type 1" | "Likely Type 2" | "Indeterminate";
   rationale: string;
-  endpoint: string; // banner text
+  endpoint: string;
 };
 
 export function computeTypePredictor(i: Inputs): Output {
@@ -24,10 +24,6 @@ export function computeTypePredictor(i: Inputs): Output {
     };
   }
 
-  // Very conservative, simple decision hints based on classic patterns:
-  // - Ketosis present → suggest Type 1
-  // - Obese + no ketosis + non-insulin initial tx → suggest Type 2
-  // - Everything else → Indeterminate (needs clinical review)
 
   if (i.ketosis === "yes") {
     return {
@@ -49,7 +45,6 @@ export function computeTypePredictor(i: Inputs): Output {
     };
   }
 
-  // Edge cases (e.g., obese but started on insulin, or non-obese without ketosis but insulin started)
   return {
     complete: true,
     predicted: "Indeterminate",

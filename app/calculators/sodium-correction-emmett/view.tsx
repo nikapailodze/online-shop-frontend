@@ -9,8 +9,8 @@ import Collapsible from "../components/Collapsible/Collapsible";
 import { computeSodiumCorrection, type GlucoseUnit } from "./compute";
 
 export default function SodiumCorrectionEmmettView() {
-  const [measuredNa, setMeasuredNa] = useState("");   // mEq/L
-  const [glucose, setGlucose] = useState("");         // mg/dL or mmol/L
+  const [measuredNa, setMeasuredNa] = useState("");
+  const [glucose, setGlucose] = useState("");
   const [gluUnit, setGluUnit] = useState<GlucoseUnit>("mgdl");
   const [precision, setPrecision] = useState<0 | 1 | 2 | 3>(1);
 
@@ -37,7 +37,7 @@ export default function SodiumCorrectionEmmettView() {
         </div>
 
         <div className={styles.grid}>
-          {/* INPUT */}
+          {}
           <SectionCard title="Input">
             <div className={styles.stack}>
               <div className={styles.inline2}>
@@ -59,7 +59,7 @@ export default function SodiumCorrectionEmmettView() {
                     placeholder={gluUnit === "mgdl" ? "e.g. 350" : "e.g. 19.4"}
                     unit={gluUnit === "mgdl" ? "mg/dL" : "mmol/L"}
                   />
-                  {/* tiny unit toggle */}
+                  {}
                   <div style={{ marginTop: 8 }}>
                     <select
                       value={gluUnit}
@@ -75,7 +75,7 @@ export default function SodiumCorrectionEmmettView() {
             </div>
           </SectionCard>
 
-          {/* RESULT */}
+          {}
           <SectionCard title="Result">
             <div className={styles.stack}>
               {!result.complete && (

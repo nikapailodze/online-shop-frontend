@@ -15,19 +15,17 @@ function agePoints(band: Inputs["ageBand"]) {
     case "75-79": return 3;
     case "80-85": return 4;
     case "ge85": return 5;
-    default: return NaN; // incomplete (no age picked)
+    default: return NaN;
   }
 }
 
-// Returns fixed risks by total point range.
-// Ranges: 1, 2, 3, 4, 5–9
 function fixedRiskByPoints(total: number) {
   if (total === 1) return { nonvertebral: 10.5, hip: 0.6, vertebral: 1.4 };
   if (total === 2) return { nonvertebral: 12.5, hip: 1.4, vertebral: 2.9 };
   if (total === 3) return { nonvertebral: 16.4, hip: 2.1, vertebral: 5.1 };
   if (total === 4) return { nonvertebral: 18.7, hip: 3.2, vertebral: 7.0 };
   if (total >= 5) return { nonvertebral: 26.1, hip: 8.2, vertebral: 9.9 };
-  return null; // 0 points → treat as incomplete
+  return null;
 }
 
 export function computeFractureIndexWithoutBmd(i: Inputs) {
@@ -53,7 +51,6 @@ export function computeFractureIndexWithoutBmd(i: Inputs) {
   const risks = fixedRiskByPoints(totalPoints);
 
   if (!risks) {
-    // totalPoints = 0 → out of table; require at least 1 point
     return { complete: false as const, totalPoints, risks: null };
   }
 

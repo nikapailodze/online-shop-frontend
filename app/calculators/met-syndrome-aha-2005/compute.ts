@@ -7,11 +7,11 @@ function num(s: string) {
 
 export function computeMetAHA2005({
   sex,
-  waistIn,              // inches
+  waistIn,
   tgMgdl, onTgRx,
   hdlMgdl, onHdlRx,
-  sbp, dbp, onBpRx,     // mmHg
-  fpgMgdl, onGluRx,     // fasting plasma glucose mg/dL
+  sbp, dbp, onBpRx,
+  fpgMgdl, onGluRx,
 }: {
   sex: Sex;
   waistIn: string;
@@ -42,7 +42,6 @@ export function computeMetAHA2005({
     };
   }
 
-  // Criteria
   const c_waist = sex === "male" ? waist >= 40 : waist >= 35;
   const c_tg = tg >= 150 || onTgRx;
   const c_hdl = (sex === "male" ? hdl < 40 : hdl < 50) || onHdlRx;

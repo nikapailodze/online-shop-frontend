@@ -7,7 +7,6 @@ interface ShoppingItemProps {
   description: string;
   price: number;
   imageUrl: string;
-  //   onAddToCart: () => void;
 }
 
 const ShoppingItem: React.FC<ShoppingItemProps> = ({

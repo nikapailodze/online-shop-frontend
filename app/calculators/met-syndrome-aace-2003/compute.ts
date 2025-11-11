@@ -18,24 +18,22 @@ export function computeMetAACE2003({
   glucoseCatOther,
   otherIR,
 }: {
-  requiredIR: RequiredIR; // IGT or IFG required
-  bmi: string; // kg/m^2
-  sex: Sex; // affects HDL cutoff
-  tg: string; // mg/dL
-  hdl: string; // mg/dL
-  sbp: string; // mmHg
-  dbp: string; // mmHg
-  glucoseCatOther: GlucoseCat; // for "Other Criteria": IGT/IFG but NOT DM
-  otherIR: boolean; // “Other features of insulin resistance”
+  requiredIR: RequiredIR;
+  bmi: string;
+  sex: Sex;
+  tg: string;
+  hdl: string;
+  sbp: string;
+  dbp: string;
+  glucoseCatOther: GlucoseCat;
+  otherIR: boolean;
 }) {
-  // Parse numbers
   const bmiN = num(bmi);
   const tgN = num(tg);
   const hdlN = num(hdl);
   const sbpN = num(sbp);
   const dbpN = num(dbp);
 
-  // Check required field completeness
   const complete =
     requiredIR !== "" &&
     sex !== "" &&
@@ -58,16 +56,14 @@ export function computeMetAACE2003({
     };
   }
 
-  // Required criterion
   const requiredMet = requiredIR === "IGT" || requiredIR === "IFG";
 
-  // Other criteria:
   const c_bmi = bmiN >= 25;
   const c_tg_hdl =
     tgN >= 150 &&
     ((sex === "male" && hdlN < 40) || (sex === "female" && hdlN < 50));
   const c_bp = sbpN >= 130 || dbpN >= 85;
-  const c_glu_not_dm = glucoseCatOther === "IGT" || glucoseCatOther === "IFG"; // but NOT DM
+  const c_glu_not_dm = glucoseCatOther === "IGT" || glucoseCatOther === "IFG";
   const c_otherIR = !!otherIR;
 
   const otherCount =

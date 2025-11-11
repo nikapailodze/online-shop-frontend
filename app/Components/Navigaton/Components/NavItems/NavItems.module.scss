@@ -1,16 +1,16 @@
 .navItems {
   position: absolute;
-  top: 80px; // right below your sticky navbar height
+  top: 80px;
   left: 0;
   width: 100%;
   overflow: hidden;
   max-height: 0;
   transition: max-height 0.4s ease-in-out;
-  background-color: white; // or whatever background you need
-  z-index: 998; // or slightly less than your navWrapper if needed
+  background-color: white;
+  z-index: 998;
 
   &.open {
-    max-height: 500px; // or 1000px if needed
+    max-height: 500px;
   }
 
   &.closed {
@@ -18,7 +18,7 @@
   }
 }
 
-  
+
   .list {
     display: flex;
     flex-direction: column;
@@ -26,7 +26,7 @@
     list-style: none;
     gap: 24px;
   }
-  
+
   .listItem {
     font-size: 28px;
     letter-spacing: 0;
@@ -37,4 +37,3 @@
     text-decoration: none;
     color: black;
   }
-  

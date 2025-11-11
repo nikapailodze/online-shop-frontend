@@ -12,14 +12,7 @@ function num(s: string) {
   return Number.isFinite(n) ? n : NaN;
 }
 
-// Return waist threshold by sex & ethnicity (IDF 2005)
 function idfWaistThresholdCm(sex: Sex, eth: Ethnicity) {
-  // IDF 2005 cut-offs:
-  // Europid: M ≥94, F ≥80
-  // South Asian/Chinese/Japanese: M ≥90, F ≥80
-  // South & Central American: use South Asian cut-offs
-  // Sub-Saharan African: use Europid
-  // Eastern Mediterranean & Middle East: use Europid
   if (sex === "male") {
     if (eth === "south_asian_chinese_japanese" || eth === "south_central_american") {
       return 90;
@@ -48,15 +41,15 @@ export function computeMetIDF2005({
 }: {
   sex: Sex;
   ethnicity: Ethnicity;
-  waistCm: string;   // cm
-  tgMgdl: string;    // mg/dL
+  waistCm: string;
+  tgMgdl: string;
   onTgRx: boolean;
-  hdlMgdl: string;   // mg/dL
+  hdlMgdl: string;
   onHdlRx: boolean;
-  sbp: string;       // mmHg
-  dbp: string;       // mmHg
+  sbp: string;
+  dbp: string;
   onBpRx: boolean;
-  fpgMgdl: string;   // mg/dL
+  fpgMgdl: string;
   hasDiabetes: boolean;
 }) {
   const waist = num(waistCm);
@@ -81,11 +74,9 @@ export function computeMetIDF2005({
     };
   }
 
-  // Required
   const waistThreshold = idfWaistThresholdCm(sex, ethnicity);
   const c_abdominal = waist >= waistThreshold;
 
-  // Other
   const c_tg = tg >= 150 || onTgRx;
   const c_hdl =
     (sex === "male" ? hdl < 40 : hdl < 50) || onHdlRx;

@@ -39,7 +39,7 @@ export default function OraiView() {
         </div>
 
         <div className={styles.grid}>
-          {/* Inputs */}
+          {}
           <SectionCard title="Inputs">
             <div className={styles.stack}>
               <UnitNumberInput
@@ -85,7 +85,7 @@ export default function OraiView() {
             </div>
           </SectionCard>
 
-          {/* Result */}
+          {}
           <SectionCard title="Result">
             <div className={styles.stack}>
               {!result.complete && (
@@ -138,7 +138,7 @@ export default function OraiView() {
 
               <Collapsible title="References">
                 <div className={styles.small}>
-                  Cadarette SM, Jaglal SB, Kreiger N, et al. CMAJ. 2000;162(9):1289–94.  
+                  Cadarette SM, Jaglal SB, Kreiger N, et al. CMAJ. 2000;162(9):1289–94.
                   Reginster J. ACP J Club. 2001;134:37.
                 </div>
               </Collapsible>

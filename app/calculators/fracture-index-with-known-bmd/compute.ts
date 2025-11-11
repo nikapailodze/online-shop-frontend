@@ -26,15 +26,12 @@ function agePoints(band: AgeBand) {
 
 function bmdPoints(tScore: number) {
   if (tScore >= -1) return 0;
-  if (tScore < -1 && tScore > -2) return 2;        // (-2, -1)
-  if (tScore <= -2 && tScore > -2.5) return 3;     // (-2.5, -2]
-  // tScore <= -2.5
+  if (tScore < -1 && tScore > -2) return 2;
+  if (tScore <= -2 && tScore > -2.5) return 3;
   return 4;
 }
 
 function riskFromTotal(total: number) {
-  // Validated groupings:
-  // 1–2, 3–4, 5, 6–7, 8–15
   if (total >= 1 && total <= 2) {
     return {
       group: "1–2",
@@ -75,7 +72,6 @@ function riskFromTotal(total: number) {
       vertebralPct: 11.2,
     };
   }
-  // total = 0 or >15 (out of table range)
   return {
     group: null,
     nonvertebralPct: null,
@@ -94,12 +90,12 @@ export function computeFractureWithBmd({
   tScore,
 }: {
   ageBand: AgeBand;
-  priorFractureAfter50: boolean;   // 1 point
-  maternalHipFxOver50: boolean;    // 1 point
-  weightLbs: string;               // <125 lbs → 1 point
-  smoker: boolean;                 // 1 point
-  chairStandArmAssist: boolean;    // 2 points
-  tScore: string;                  // BMD T-score
+  priorFractureAfter50: boolean;
+  maternalHipFxOver50: boolean;
+  weightLbs: string;
+  smoker: boolean;
+  chairStandArmAssist: boolean;
+  tScore: string;
 }) {
   const wt = num(weightLbs);
   const t = num(tScore);
@@ -138,7 +134,6 @@ export function computeFractureWithBmd({
 
   const lowWeight = wt < 125;
 
-  // Risk factor points
   const rfPts =
     (priorFractureAfter50 ? 1 : 0) +
     (maternalHipFxOver50 ? 1 : 0) +

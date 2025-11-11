@@ -1,9 +1,3 @@
-// Equations (per your spec):
-// IFCC mmol/mol  = 10.929 * (A1C% - 2.15)
-// eAG mg/dL      = (28.7 * A1C%) - 46.7
-// eAG mmol/L     = (eAG mg/dL) / 18.015
-//
-// Reverse forms used as needed.
 
 export type Fields = "a1cPct" | "a1cIfcc" | "eagMg" | "eagMmol";
 
@@ -12,7 +6,7 @@ export type Inputs = {
   a1cIfcc: string;
   eagMg: string;
   eagMmol: string;
-  active: Fields | ""; 
+  active: Fields | "";
 };
 
 function num(x: string) {

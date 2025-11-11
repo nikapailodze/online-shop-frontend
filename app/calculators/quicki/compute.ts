@@ -3,8 +3,8 @@ export function computeQUICKI({
   insulin,
   glucose,
 }: {
-  insulin: string;  // μIU/mL (aka microIU/mL)
-  glucose: string;  // mg/dL
+  insulin: string;
+  glucose: string;
 }) {
   const ins = Number((insulin || "").toString().replace(",", ".").trim());
   const glu = Number((glucose || "").toString().replace(",", ".").trim());

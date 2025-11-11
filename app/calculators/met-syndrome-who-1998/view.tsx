@@ -54,7 +54,7 @@ export default function MetSyndromeWHO1998View() {
         </div>
 
         <div className={styles.grid}>
-          {/* REQUIRED */}
+          {}
           <SectionCard title="Required Criterion">
             <RadioGroup
               name="glucCat"
@@ -71,7 +71,7 @@ export default function MetSyndromeWHO1998View() {
             />
           </SectionCard>
 
-          {/* OTHER */}
+          {}
           <SectionCard title="Other Criteria">
             <RadioGroup
               name="sex"
@@ -109,7 +109,7 @@ export default function MetSyndromeWHO1998View() {
             />
           </SectionCard>
 
-          {/* RESULT */}
+          {}
           <SectionCard title="Result">
             <div className={styles.stack}>
               {!result.complete && (
@@ -139,15 +139,15 @@ export default function MetSyndromeWHO1998View() {
 
               <Collapsible title="Notes & Criteria">
                 <div className={styles.small}>
-                  Required: insulin resistance (IGT, IFG, T2DM, or reduced sensitivity).  
-                  Other: obesity (BMI &gt;30 or WHR &gt;0.9 male / &gt;0.85 female), TG ≥150 or HDL low, BP ≥140/90, glucose abnormal, or microalbuminuria.  
+                  Required: insulin resistance (IGT, IFG, T2DM, or reduced sensitivity).
+                  Other: obesity (BMI &gt;30 or WHR &gt;0.9 male / &gt;0.85 female), TG ≥150 or HDL low, BP ≥140/90, glucose abnormal, or microalbuminuria.
                   Diagnosis = required + ≥2 other criteria.
                 </div>
               </Collapsible>
 
               <Collapsible title="References">
                 <div className={styles.small}>
-                  WHO 1998 metabolic syndrome criteria. Grundy SM et al, Circulation 2005;112:2735–52.  
+                  WHO 1998 metabolic syndrome criteria. Grundy SM et al, Circulation 2005;112:2735–52.
                   Cross-ref: ATP III 2001, AHA/NHLBI 2005, IDF 2005, EGIR, AACE 2003.
                 </div>
               </Collapsible>
