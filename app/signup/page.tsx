@@ -3,6 +3,8 @@ import styles from "./page.module.css";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { API_BASE_URL } from "../lib/api";
+import { clearAuth } from "../lib/auth";
 
 interface SignupFormData {
   firstName: string;
@@ -11,8 +13,6 @@ interface SignupFormData {
   password: string;
   terms: boolean;
 }
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5001";
 
 export default function Home() {
   const router = useRouter();
@@ -52,6 +52,7 @@ export default function Home() {
         throw new Error(body?.message ?? "Failed to create account");
       }
 
+      clearAuth();
       setStatusMessage("Account created! Redirecting to login...");
       setStatusType("success");
       router.push("/login");

@@ -1,23 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../SizeSelector/SizesSelector.module.scss";
 
-type ColorOption = "black" | "blue" | "white" | "gray" | "brown";
-
 interface ColorSelectorProps {
-  colors: ColorOption[];
+  colors: string[];
+  selectedColor?: string | null;
+  onSelect?: (color: string) => void;
 }
 
-const ColorSelector = ({ colors }: ColorSelectorProps) => {
-  const [selectedColor, setSelectedColor] = useState<ColorOption | null>(null);
+const ColorSelector = ({ colors, selectedColor, onSelect }: ColorSelectorProps) => {
+  const [currentColor, setCurrentColor] = useState<string | null>(selectedColor ?? null);
 
-  const handleClick = (color: ColorOption) => {
-    setSelectedColor(color);
+  useEffect(() => {
+    setCurrentColor(selectedColor ?? null);
+  }, [selectedColor]);
+
+  const handleClick = (color: string) => {
+    setCurrentColor(color);
+    onSelect?.(color);
   };
 
   return (
     <div className={styles.sizes}>
       {colors.map((color) => {
-        const isActive = selectedColor === color;
+        const isActive = currentColor === color;
 
         return (
           <div

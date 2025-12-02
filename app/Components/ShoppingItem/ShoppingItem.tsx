@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./ShoppingItem.module.scss";
 import { useRouter } from "next/navigation";
 interface ShoppingItemProps {
+  id: number;
   name: string;
   description: string;
   price: number;
@@ -14,12 +15,13 @@ const ShoppingItem: React.FC<ShoppingItemProps> = ({
   description,
   price,
   imageUrl,
+  id,
 }) => {
 
   const router = useRouter()
 
   const handleClick = () => {
-    router.push("/proditempage/1");
+    router.push(`/proditempage/${id}`);
   };
   return (
     <div  onClick={handleClick} className={styles.shoppingItemContianer}>

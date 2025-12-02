@@ -1,25 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./SizesSelector.module.scss";
 
 interface SizeSelectorProps {
-  sizes: ("XS" | "S" | "M" | "L" | "XL" | "XXL")[];
-  disabledSizes?: ("XS" | "S" | "M" | "L" | "XL" | "XXL")[];
+  sizes: string[];
+  disabledSizes?: string[];
+  selectedSize?: string | null;
+  onSelect?: (size: string) => void;
 }
 
-const SizeSelector = ({ sizes, disabledSizes = [] }: SizeSelectorProps) => {
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+const SizeSelector = ({
+  sizes,
+  disabledSizes = [],
+  selectedSize,
+  onSelect,
+}: SizeSelectorProps) => {
+  const [currentSize, setCurrentSize] = useState<string | null>(selectedSize ?? null);
 
-  const handleClick = (size: "XS" | "S" | "M" | "L" | "XL" | "XXL") => {
+  useEffect(() => {
+    setCurrentSize(selectedSize ?? null);
+  }, [selectedSize]);
+
+  const handleClick = (size: string) => {
     if (!disabledSizes.includes(size)) {
-      setSelectedSize(size);
+      setCurrentSize(size);
+      onSelect?.(size);
     }
   };
+
+  const isSelected = (size: string) => currentSize === size;
 
   return (
     <div className={styles.sizes}>
       {sizes.map((size) => {
         const isDisabled = disabledSizes.includes(size);
-        const isActive = selectedSize === size;
+        const isActive = isSelected(size);
 
         return (
           <div

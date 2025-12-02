@@ -8,13 +8,14 @@ import Clock from "./Components/Clock/Clock";
 import AsideCart from "../AsideCart/AsideCart";
 import { useRouter } from "next/navigation";
 import { useCartRef } from "@/app/Context/CartRefContext";
+import { useCart } from "@/app/Context/CartContext";
 
 const Navigaton = () => {
   const [showNavItems, setShowNavItems] = useState(false);
-  const [showCart, setShowCart] = useState(false);
 
   const router = useRouter();
   const cartRef = useCartRef();
+  const { toggleCart, isCartOpen, closeCart } = useCart();
   return (
     <div className={styles.navWrapper}>
       <div className={styles.navContent}>
@@ -35,7 +36,7 @@ const Navigaton = () => {
             <div>
               <div
                 className={styles.cartIcon}
-                onClick={() => setShowCart((prev) => !prev)}
+                onClick={toggleCart}
                 ref={cartRef}
               >
                 <BsCart4 />
@@ -44,66 +45,7 @@ const Navigaton = () => {
           </div>
         </nav>
 
-        <AsideCart
-          isOpen={showCart}
-          onClose={() => setShowCart(false)}
-          items={[
-            {
-              id: 1,
-              name: "Product 1",
-              price: 10.99,
-              quantity: 1,
-              image: "/merch1.png",
-              color: "red",
-              size: "M",
-            },
-            {
-              id: 2,
-              name: "Product 2",
-              price: 15.49,
-              quantity: 2,
-              image: "/merch2.png",
-              color: "blue",
-              size: "L",
-            },
-            {
-              id: 3,
-              name: "Product 3",
-              price: 7.99,
-              quantity: 1,
-              image: "/merch3.png",
-              color: "green",
-              size: "S",
-            },
-            {
-              id: 4,
-              name: "Product 3",
-              price: 7.99,
-              quantity: 1,
-              image: "/merch3.png",
-              color: "green",
-              size: "S",
-            },
-            {
-              id: 5,
-              name: "Product 3",
-              price: 7.99,
-              quantity: 1,
-              image: "/merch3.png",
-              color: "green",
-              size: "S",
-            },
-            {
-              id: 6,
-              name: "Product 2",
-              price: 15.49,
-              quantity: 2,
-              image: "/merch2.png",
-              color: "blue",
-              size: "L",
-            },
-          ]}
-        />
+        <AsideCart isOpen={isCartOpen} onClose={closeCart} />
         <NavItems
           isOpen={showNavItems}
           onClose={() => setShowNavItems(false)}

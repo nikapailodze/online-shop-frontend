@@ -1,66 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./AsideCart.module.scss";
 import Image from "next/image";
 import { GoPlus } from "react-icons/go";
 import { AiOutlineMinus } from "react-icons/ai";
 import { IoMdClose } from "react-icons/io";
-
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-  color: string;
-  size: string;
-}
+import { useCart } from "@/app/Context/CartContext";
 
 interface AsideCartProps {
   isOpen: boolean;
   onClose: () => void;
-  items: CartItem[];
 }
 
-const AsideCart: React.FC<AsideCartProps> = ({ isOpen, onClose, items }) => {
-  const [itemsArray, setItems] = React.useState<CartItem[]>(items);
+const AsideCart: React.FC<AsideCartProps> = ({ isOpen, onClose }) => {
+  const { items, updateQuantity, removeItem, clearCart, checkout, isLoading } = useCart();
+  const [checkoutMessage, setCheckoutMessage] = useState<string | null>(null);
 
-  const totalPrice = itemsArray.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0);
 
   const onPlusClick = (itemId: number) => {
-    const updatedItems = itemsArray.map((item) =>
-      item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
-    );
-    setItems(updatedItems);
+    const target = items.find((item) => item.id === itemId);
+    if (target) {
+      updateQuantity(itemId, target.quantity + 1);
+    }
   };
 
   const onMinusClick = (itemId: number) => {
-    const updatedItems = itemsArray.map((item) =>
-      item.id === itemId
-        ? { ...item, quantity: Math.max(item.quantity - 1, 1) }
-        : item
-    );
-    setItems(updatedItems);
+    const target = items.find((item) => item.id === itemId);
+    if (target) {
+      updateQuantity(itemId, Math.max(target.quantity - 1, 1));
+    }
   };
 
   const onDeleteButtonClick = (itemId: number) => {
-    const filteredItems = itemsArray.filter((item) => item.id !== itemId);
-    setItems(filteredItems);
+    removeItem(itemId);
   };
 
   const onClearCartClick = () => {
-    setItems([]);
+    clearCart();
+  };
+
+  const onCheckoutClick = async () => {
+    if (!items.length) return;
+    try {
+      const result = await checkout();
+      setCheckoutMessage(
+        `Order #${result.orderId} placed. Total ${result.totalPrice.toFixed(2)} GEL.`
+      );
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Unable to place the order.";
+      setCheckoutMessage(message);
+    }
   };
 
   return (
     <div className={`${styles.asideCart} ${isOpen ? styles.open : ""}`}>
       <div className={styles.asideCartHeader}>
         <h2 className={styles.bodyheadingTitle}>
-          {itemsArray.length === 0
-            ? `Your Cart is empty`
-            : `${itemsArray.length} items in cart`}
+          {items.length === 0 ? `Your Cart is empty` : `${items.length} items in cart`}
         </h2>
         <button onClick={onClose} className={styles.closeButton}>
           <IoMdClose size={24} />
@@ -68,10 +65,10 @@ const AsideCart: React.FC<AsideCartProps> = ({ isOpen, onClose, items }) => {
       </div>
 
       <div className={styles.cartItemsWrapper}>
-        {itemsArray.map((item) => (
+        {items.map((item) => (
           <div key={item.id} className={styles.cartItem}>
             <Image
-              src={item.image}
+              src={item.imageUrl ?? "/merch1.png"}
               alt={item.name}
               width={140}
               height={160}
@@ -132,11 +129,24 @@ const AsideCart: React.FC<AsideCartProps> = ({ isOpen, onClose, items }) => {
           </span>
         </div>
         <div className={styles.btns}>
-          <button className={styles.checkoutBtn}>Checkout</button>
-          <button onClick={onClearCartClick} className={styles.clearCartButton}>
+          <button
+            className={styles.checkoutBtn}
+            disabled={!items.length || isLoading}
+            onClick={onCheckoutClick}
+          >
+            {isLoading ? "Working..." : "Checkout"}
+          </button>
+          <button
+            onClick={onClearCartClick}
+            className={styles.clearCartButton}
+            disabled={!items.length || isLoading}
+          >
             Clear Cart
           </button>
         </div>
+        {checkoutMessage && (
+          <p className={styles.bodyheadingTitle}>{checkoutMessage}</p>
+        )}
       </div>
     </div>
   );

@@ -2,8 +2,40 @@
 
 import ShoppingItem from "../Components/ShoppingItem/ShoppingItem";
 import styles from "./page.module.css";
+import { useEffect, useState } from "react";
+import { API_BASE_URL } from "../lib/api";
+
+type Product = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+};
 
 export default function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/Products`);
+        if (!response.ok) {
+          throw new Error("Unable to load products");
+        }
+        const body = await response.json();
+        setProducts(body);
+      } catch (err) {
+        const message =
+          err instanceof Error ? err.message : "Failed to load products.";
+        setError(message);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <div className={styles.page}>
       <div className={styles.pageTitleWrapper}>
@@ -23,78 +55,17 @@ export default function Home() {
         </p>
       </div>
       <div className={styles.productionItemsWrapper}>
-        <ShoppingItem
-          imageUrl="/merch1.png"
-          name={"VANTA Coat"}
-          price={320}
-          description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
-          }
-        />
-        <ShoppingItem
-          imageUrl="/merch2.png"
-          name={"VANTA Coat"}
-          price={320}
-          description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
-          }
-        />
-        <ShoppingItem
-          imageUrl="/merch3.png"
-          name={"VANTA Coat"}
-          price={320}
-          description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
-          }
-        />
-        <ShoppingItem
-          imageUrl="/merch1.png"
-          name={"VANTA Coat"}
-          price={320}
-          description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
-          }
-        />
-        <ShoppingItem
-          imageUrl="/merch2.png"
-          name={"VANTA Coat"}
-          price={320}
-          description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
-          }
-        />
-        <ShoppingItem
-          imageUrl="/merch3.png"
-          name={"VANTA Coat"}
-          price={320}
-          description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
-          }
-        />
-        <ShoppingItem
-          imageUrl="/merch1.png"
-          name={"VANTA Coat"}
-          price={320}
-          description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
-          }
-        />
-        <ShoppingItem
-          imageUrl="/merch2.png"
-          name={"VANTA Coat"}
-          price={320}
-          description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
-          }
-        />
-        <ShoppingItem
-          imageUrl="/merch3.png"
-          name={"VANTA Coat"}
-          price={320}
-          description={
-            "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience."
-          }
-        />
+        {error && <p className={styles.subTitle}>{error}</p>}
+        {products.map((product) => (
+          <ShoppingItem
+            key={product.id}
+            id={product.id}
+            imageUrl={product.imageUrl}
+            name={product.name}
+            price={product.price}
+            description={product.description}
+          />
+        ))}
       </div>
     </div>
   );

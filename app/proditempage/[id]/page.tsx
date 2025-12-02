@@ -5,38 +5,77 @@ import styles from "./page.module.css";
 import SizeSelector from "./Components/SizeSelector/SizeSelector";
 import ColorSelector from "./Components/ColorsSelector/ColorsSelector";
 import InformationCard from "./Components/InformationCard/InformationCard";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useCartRef } from "@/app/Context/CartRefContext";
+import { useCart } from "@/app/Context/CartContext";
+import { API_BASE_URL } from "@/app/lib/api";
 
-export type ColorOption = "black" | "blue" | "white" | "gray" | "brown";
+export type ColorOption = string;
 
 interface Product {
-  image: string;
+  id: number;
+  imageUrl: string;
   price: number;
   name: string;
   description: string;
-  sizes: ("XS" | "S" | "M" | "L" | "XL" | "XXL")[];
+  sizes: string[];
   colors: ColorOption[];
 }
 
-const product: Product = {
-  image: "/merch1.png",
-  price: 99.99,
-  name: "VANTA Suite",
-  description:
-    "tralaleo tralala tishirt Fluid structure meets bold tailoring. A statement in modern minimalism.",
-  sizes: ["S", "M", "L", "XL"],
-  colors: ["black", "blue", "gray", "brown"],
-};
-
-export default function Home() {
+export default function Home({ params }: { params: { id: string } }) {
   const cartRef = useCartRef();
+  const { addToCart } = useCart();
   const imageRef = useRef<HTMLDivElement>(null);
   const mainImageRef = useRef<HTMLDivElement>(null);
   const [showFlyingImage, setShowFlyingImage] = useState(false);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [status, setStatus] = useState<{ type: "error" | "success"; message: string } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const productId = Number(params.id);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      setIsLoading(true);
+      setStatus(null);
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/Products/${productId}`);
+        if (!response.ok) {
+          throw new Error("Unable to load product.");
+        }
+        const body = await response.json();
+        setProduct({
+          id: body.id,
+          imageUrl: body.imageUrl,
+          price: body.price,
+          name: body.name,
+          description: body.description,
+          sizes: body.sizes ?? [],
+          colors: body.colors ?? [],
+        });
+        setSelectedSize(body.sizes?.[0] ?? null);
+        setSelectedColor(body.colors?.[0] ?? null);
+      } catch (error) {
+        const message =
+          error instanceof Error ? error.message : "Failed to load product.";
+        setStatus({ type: "error", message });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [productId]);
 
   const handleAddToCart = () => {
+    if (!product) return;
+    if (!selectedSize || !selectedColor) {
+      setStatus({ type: "error", message: "Please choose a size and color first." });
+      return;
+    }
     if (!mainImageRef.current || !cartRef?.current || !imageRef.current) return;
 
     const imgRect = mainImageRef.current.getBoundingClientRect();
@@ -63,7 +102,36 @@ export default function Home() {
       opacity: 0,
       delay: 0.5,
     });
+
+    addToCart({
+      productId: product.id,
+      quantity: 1,
+      color: selectedColor,
+      size: selectedSize,
+    })
+      .then(() => setStatus({ type: "success", message: "Added to cart." }))
+      .catch((error) => {
+        const message =
+          error instanceof Error ? error.message : "Unable to add to cart.";
+        setStatus({ type: "error", message });
+      });
   };
+
+  if (isLoading) {
+    return (
+      <div className={styles.page}>
+        <p className={styles.description}>Loading product...</p>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className={styles.page}>
+        <p className={styles.description}>Product not found.</p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.page}>
@@ -81,7 +149,7 @@ export default function Home() {
       >
         {showFlyingImage && (
           <Image
-            src={product.image}
+            src={product.imageUrl}
             width={535}
             height={800}
             alt={product.name}
@@ -93,7 +161,7 @@ export default function Home() {
       <section className={styles.mainInfoWrapper}>
         <div className={styles.mainImageWrapper} ref={mainImageRef}>
           <Image
-            src={product.image}
+            src={product.imageUrl}
             width={535}
             height={800}
             alt={product.name}
@@ -113,11 +181,20 @@ export default function Home() {
             <div className={styles.slectionWrapper}>
               <div className={styles.sizesWrapper}>
                 <h3 className={styles.heading3}>Size</h3>
-                <SizeSelector sizes={product.sizes} disabledSizes={["XL"]} />
+                <SizeSelector
+                  sizes={product.sizes}
+                  disabledSizes={[]}
+                  selectedSize={selectedSize}
+                  onSelect={(size) => setSelectedSize(size)}
+                />
               </div>
               <div className={styles.sizesWrapper}>
                 <h3 className={styles.heading3}>Color</h3>
-                <ColorSelector colors={product.colors} />
+                <ColorSelector
+                  colors={product.colors}
+                  selectedColor={selectedColor}
+                  onSelect={(color) => setSelectedColor(color)}
+                />
               </div>
             </div>
 
@@ -128,6 +205,14 @@ export default function Home() {
               >
                 ADD TO CART
               </button>
+              {status && (
+                <p
+                  className={styles.description}
+                  style={{ color: status.type === "error" ? "#c0392b" : "#2ecc71" }}
+                >
+                  {status.message}
+                </p>
+              )}
             </div>
           </div>
 

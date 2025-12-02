@@ -54,3 +54,31 @@
   width: 32px;
   height: 32px;
 }
+.profileWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profileButton,
+.logoutButton {
+  background: transparent;
+  border: 1px solid #000;
+  color: #000;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: "Host Grotesk", sans-serif;
+  transition: opacity 0.2s ease;
+}
+
+.logoutButton {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.profileButton:hover,
+.logoutButton:hover {
+  opacity: 0.8;
+}

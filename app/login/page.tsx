@@ -3,13 +3,13 @@ import styles from "./page.module.css";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { API_BASE_URL } from "../lib/api";
+import { setAuth } from "../lib/auth";
 
 interface LoginFormData {
   email: string;
   password: string;
 }
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5001";
 
 export default function Home() {
   const router = useRouter();
@@ -50,12 +50,7 @@ export default function Home() {
         throw new Error("Authentication token is missing in the response.");
       }
 
-      if (typeof window !== "undefined") {
-        localStorage.setItem("authToken", body.token);
-        if (body?.user) {
-          localStorage.setItem("user", JSON.stringify(body.user));
-        }
-      }
+      setAuth(body.token, body?.user);
 
       setStatusMessage("Signed in successfully. Redirecting...");
       setStatusType("success");
