@@ -21,7 +21,7 @@ const Navigaton = () => {
       <div className={styles.navContent}>
         <nav className={styles.nav}>
           <div onClick={() => router.push("/")} className={styles.logo}>
-            <p className={styles.logoText}>ENDOPIE</p>
+            <p className={styles.logoText}>ENDOPAIL</p>
           </div>
 
           <div className={styles.navItemsRight}>
