@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 import SizeSelector from "./Components/SizeSelector/SizeSelector";
 import ColorSelector from "./Components/ColorsSelector/ColorsSelector";
 import InformationCard from "./Components/InformationCard/InformationCard";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useCartRef } from "@/app/Context/CartRefContext";
 import { useCart } from "@/app/Context/CartContext";
@@ -23,7 +23,7 @@ interface Product {
   colors: ColorOption[];
 }
 
-export default function Home({ params }: { params: { id: string } }) {
+export default function Home({ params }: { params: Promise<{ id: string }> }) {
   const cartRef = useCartRef();
   const { addToCart } = useCart();
   const imageRef = useRef<HTMLDivElement>(null);
@@ -35,7 +35,8 @@ export default function Home({ params }: { params: { id: string } }) {
   const [status, setStatus] = useState<{ type: "error" | "success"; message: string } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const productId = Number(params.id);
+  const { id } = use(params);
+  const productId = Number(id);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -76,32 +77,36 @@ export default function Home({ params }: { params: { id: string } }) {
       setStatus({ type: "error", message: "Please choose a size and color first." });
       return;
     }
-    if (!mainImageRef.current || !cartRef?.current || !imageRef.current) return;
 
-    const imgRect = mainImageRef.current.getBoundingClientRect();
-    const cartRect = cartRef.current.getBoundingClientRect();
+    const hasAnimationRefs =
+      mainImageRef.current && cartRef?.current && imageRef.current;
 
-    const flyImage = imageRef.current;
-    flyImage.style.left = `${imgRect.left}px`;
-    flyImage.style.top = `${imgRect.top}px`;
-    flyImage.style.opacity = "1";
-    flyImage.style.width = "200px";
+    if (hasAnimationRefs) {
+      const imgRect = mainImageRef.current!.getBoundingClientRect();
+      const cartRect = cartRef!.current!.getBoundingClientRect();
 
-    setShowFlyingImage(true);
+      const flyImage = imageRef.current!;
+      flyImage.style.left = `${imgRect.left}px`;
+      flyImage.style.top = `${imgRect.top}px`;
+      flyImage.style.opacity = "1";
+      flyImage.style.width = "200px";
 
-    gsap.to(flyImage, {
-      duration: 0.8,
-      left: cartRect.left,
-      top: cartRect.top,
-      width: 20,
-      onComplete: () => setShowFlyingImage(false),
-    });
+      setShowFlyingImage(true);
 
-    gsap.to(flyImage, {
-      duration: 0.3,
-      opacity: 0,
-      delay: 0.5,
-    });
+      gsap.to(flyImage, {
+        duration: 0.8,
+        left: cartRect.left,
+        top: cartRect.top,
+        width: 20,
+        onComplete: () => setShowFlyingImage(false),
+      });
+
+      gsap.to(flyImage, {
+        duration: 0.3,
+        opacity: 0,
+        delay: 0.5,
+      });
+    }
 
     addToCart({
       productId: product.id,

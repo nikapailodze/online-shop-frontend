@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AsideCart.module.scss";
 import Image from "next/image";
 import { GoPlus } from "react-icons/go";
@@ -12,10 +12,25 @@ interface AsideCartProps {
 }
 
 const AsideCart: React.FC<AsideCartProps> = ({ isOpen, onClose }) => {
-  const { items, updateQuantity, removeItem, clearCart, checkout, isLoading } = useCart();
+  const {
+    items,
+    updateQuantity,
+    removeItem,
+    clearCart,
+    checkout,
+    isLoading,
+    error,
+    refreshCart,
+  } = useCart();
   const [checkoutMessage, setCheckoutMessage] = useState<string | null>(null);
 
   const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0);
+
+  useEffect(() => {
+    if (isOpen) {
+      refreshCart();
+    }
+  }, [isOpen, refreshCart]);
 
   const onPlusClick = (itemId: number) => {
     const target = items.find((item) => item.id === itemId);
@@ -65,6 +80,7 @@ const AsideCart: React.FC<AsideCartProps> = ({ isOpen, onClose }) => {
       </div>
 
       <div className={styles.cartItemsWrapper}>
+        {error && <p className={styles.bodyheadingTitle}>{error}</p>}
         {items.map((item) => (
           <div key={item.id} className={styles.cartItem}>
             <Image

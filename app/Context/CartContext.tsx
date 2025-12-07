@@ -112,13 +112,19 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         throw new Error("Please sign in to manage your cart.");
       }
 
+      const buildHeaders = (input?: HeadersInit) => {
+        const headers = new Headers(input);
+        headers.set("Content-Type", "application/json");
+        const authHeaders = withAuthHeaders(token);
+        Object.entries(authHeaders).forEach(([key, value]) => {
+          if (value) headers.set(key, value);
+        });
+        return headers;
+      };
+
       const response = await fetch(`${API_BASE_URL}${path}`, {
         ...init,
-        headers: {
-          "Content-Type": "application/json",
-          ...(init?.headers ?? {}),
-          ...withAuthHeaders(token),
-        },
+        headers: buildHeaders(init?.headers),
       });
 
       if (!response.ok) {
