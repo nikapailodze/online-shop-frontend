@@ -6,7 +6,7 @@ const HomeSection = () => {
     <section className={styles.homeSectionWrapper}>
       <div className={styles.homeSectionContent}>
         <div className={styles.heroText}>
-          <h1 className={styles.title}>Welcome to EndoPie</h1>
+          <h1 className={styles.title}>Welcome to EndoPail</h1>
           <p className={styles.title}>Smart Calculators for Smarter Care</p>
         </div>
         <div className={styles.subTitleWrapper}>

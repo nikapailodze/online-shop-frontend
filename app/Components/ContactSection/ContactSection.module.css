@@ -1,0 +1,105 @@
+.contact {
+  width: 100%;
+  max-width: 1200px;
+  padding: 64px 32px;
+  display: grid;
+  gap: 32px;
+  align-items: center;
+  background: radial-gradient(circle at 20% 20%, rgba(240, 240, 240, 0.6), transparent 45%),
+    radial-gradient(circle at 80% 10%, rgba(230, 230, 230, 0.5), transparent 35%),
+    #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 28px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.06);
+}
+
+.header {
+  display: grid;
+  gap: 12px;
+}
+
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #555;
+  font-weight: 700;
+}
+
+.title {
+  font-size: clamp(32px, 3vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: #444;
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  padding: 18px 18px 22px;
+  border-radius: 16px;
+  border: 1px solid #ededed;
+  background: linear-gradient(180deg, #fbfbfb 0%, #f5f5f5 100%);
+}
+
+.cardTitle {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.cardText {
+  color: #404040;
+  line-height: 1.55;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.pill {
+  border-radius: 999px;
+  padding: 10px 14px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  font-weight: 600;
+}
+
+.button {
+  border: 1px solid #111;
+  background: #111;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+
+.button.secondary {
+  background: white;
+  color: #111;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 48px 20px;
+  }
+}

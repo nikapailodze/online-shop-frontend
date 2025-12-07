@@ -2,6 +2,7 @@
 import CalculatorSection from "./Components/CalculatorSection/CalculatorSection";
 import HomeSection from "./Components/HomeSection/HomeSection";
 import ProductionSection from "./Components/ProductionSection/ProductionSection";
+import ContactSection from "./Components/ContactSection/ContactSection";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -18,6 +19,10 @@ export default function Home() {
 
       <div className={styles.productionSection}>
         <ProductionSection />
+      </div>
+
+      <div className={styles.contactSection}>
+        <ContactSection />
       </div>
     </div>
   );
