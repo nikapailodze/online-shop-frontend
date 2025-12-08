@@ -1,11 +1,11 @@
 "use client";
 import { useMemo, useState } from "react";
-import styles from "@/app/calculators/page.module.scss";
+import styles from "../page.module.scss";
 
-import SectionCard from "@/app/calculators/components/SectionCard/SectionCard";
-import RadioGroup from "@/app/calculators/components/RadioGroup/RadioGroup";
-import UnitNumberInput from "@/app/calculators/components/UnitNumberInput/UnitNumberInput";
-import Collapsible from "@/app/calculators/components/Collapsible/Collapsible";
+import SectionCard from "../components/SectionCard/SectionCard";
+import RadioGroup from "../components/RadioGroup/RadioGroup";
+import UnitNumberInput from "../components/UnitNumberInput/UnitNumberInput";
+import Collapsible from "../components/Collapsible/Collapsible";
 
 import { computeGriffin, type Inputs } from "./compute";
 

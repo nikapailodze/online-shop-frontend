@@ -1,11 +1,11 @@
 "use client";
 import { useMemo, useState } from "react";
-import styles from "@/app/calculators/page.module.scss";
+import styles from "../page.module.scss";
 
 import { computeConversions, type Fields } from "./compute";
-import SectionCard from "@/app/calculators/components/SectionCard/SectionCard";
-import UnitNumberInput from "@/app/calculators/components/UnitNumberInput/UnitNumberInput";
-import Collapsible from "@/app/calculators/components/Collapsible/Collapsible";
+import SectionCard from "../components/SectionCard/SectionCard";
+import UnitNumberInput from "../components/UnitNumberInput/UnitNumberInput";
+import Collapsible from "../components/Collapsible/Collapsible";
 
 export default function A1cToAverageGlucoseView() {
   const [a1cPct, setA1cPct] = useState("");
