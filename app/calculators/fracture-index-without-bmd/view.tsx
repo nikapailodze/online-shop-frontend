@@ -1,11 +1,11 @@
 "use client";
 import { useMemo, useState } from "react";
-import styles from "../page.module.scss";
+import styles from "@/app/calculators/page.module.scss";
 
-import SectionCard from "../components/SectionCard/SectionCard";
-import CheckboxRow from "../components/CheckboxRow/CheckboxRow";
-import RadioGroup from "../components/RadioGroup/RadioGroup";
-import Collapsible from "../components/Collapsible/Collapsible";
+import SectionCard from "@/app/calculators/components/SectionCard/SectionCard";
+import CheckboxRow from "@/app/calculators/components/CheckboxRow/CheckboxRow";
+import RadioGroup from "@/app/calculators/components/RadioGroup/RadioGroup";
+import Collapsible from "@/app/calculators/components/Collapsible/Collapsible";
 
 import { computeFractureIndexWithoutBmd, type Inputs } from "./compute";
 

@@ -1,12 +1,12 @@
 "use client";
 import React, { useState, useMemo } from "react";
-import styles from "../page.module.scss";
-import SectionCard from "../components/SectionCard/SectionCard";
-import RadioGroup from "../components/RadioGroup/RadioGroup";
-import UnitNumberInput from "../components/UnitNumberInput/UnitNumberInput";
-import CheckboxRow from "../components/CheckboxRow/CheckboxRow";
-import Collapsible from "../components/Collapsible/Collapsible";
-import RiskScoreCard from "../components/RiskScoreCard/RiskScoreCard";
+import styles from "@/app/calculators/page.module.scss";
+import SectionCard from "@/app/calculators/components/SectionCard/SectionCard";
+import RadioGroup from "@/app/calculators/components/RadioGroup/RadioGroup";
+import UnitNumberInput from "@/app/calculators/components/UnitNumberInput/UnitNumberInput";
+import CheckboxRow from "@/app/calculators/components/CheckboxRow/CheckboxRow";
+import Collapsible from "@/app/calculators/components/Collapsible/Collapsible";
+import RiskScoreCard from "@/app/calculators/components/RiskScoreCard/RiskScoreCard";
 import { computeDiabetesRisk } from "./compute";
 
 
