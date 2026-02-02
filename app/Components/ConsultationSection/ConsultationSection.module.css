@@ -1,137 +1,126 @@
 .section {
+  background: #ffffff;
+  padding: 90px 0 110px;
+}
+
+.container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
   width: 100%;
-  max-width: 1200px;
-  padding: 64px 32px;
-  display: grid;
-  gap: 32px;
-  align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  background: radial-gradient(circle at 10% 20%, rgba(255, 245, 238, 0.9), transparent 45%),
-    radial-gradient(circle at 85% 30%, rgba(230, 246, 255, 0.6), transparent 40%),
-    #fdfdfc;
-  border: 1px solid #e9e4df;
-  border-radius: 28px;
-  box-shadow: 0 22px 48px rgba(15, 15, 15, 0.08);
-}
-
-.copy {
-  display: grid;
-  gap: 16px;
-}
-
-.eyebrow {
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #6d5345;
-  font-weight: 700;
 }
 
 .title {
-  font-size: clamp(32px, 3vw, 42px);
+  font-size: clamp(32px, 4vw, 40px);
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #1b1b1b;
+  color: #1a2024;
 }
 
-.subtitle {
-  font-size: 17px;
-  color: #3f3f3f;
+.content {
+  display: flex;
+  align-items: flex-start;
+  gap: 36px;
+  width: 100%;
+}
+
+.imageCard {
+  width: clamp(180px, 22vw, 240px);
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 32px rgba(31, 41, 51, 0.16);
+  background: #f3f6f8;
+  flex-shrink: 0;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1f2b34;
+}
+
+.bio {
+  font-size: 16px;
   line-height: 1.6;
-  max-width: 520px;
-}
-
-.actions {
-  display: grid;
-  gap: 12px;
+  color: #3e4d56;
 }
 
 .primaryButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 22px;
-  border-radius: 14px;
-  background: #111;
-  color: #fff;
-  font-weight: 700;
+  align-self: flex-start;
+  border: none;
   text-decoration: none;
-  width: fit-content;
-  transition: transform 140ms ease, box-shadow 140ms ease;
+  background: #465865;
+  color: #f5f8fa;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 20px rgba(31, 41, 51, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .primaryButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px rgba(31, 41, 51, 0.22);
+  background: #3b4b57;
 }
 
-.note {
-  font-size: 14px;
-  color: #5a5a5a;
-}
-
-.panel {
-  padding: 28px;
-  border-radius: 22px;
-  background: linear-gradient(160deg, #fff6ef 0%, #ffffff 50%, #eef7ff 100%);
-  border: 1px solid #f0e7df;
-  display: grid;
-  gap: 16px;
-}
-
-.panelHeader {
-  display: grid;
-  gap: 6px;
-}
-
-.panelTitle {
-  font-size: 20px;
-  font-weight: 700;
-  color: #1b1b1b;
-}
-
-.panelText {
-  font-size: 15px;
-  color: #4f4f4f;
-}
-
-.list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 10px;
-  color: #3a3a3a;
-}
-
-.list li {
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-}
-
-.panelFooter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.badge {
-  border-radius: 999px;
-  padding: 8px 12px;
-  border: 1px solid #e2d7cf;
-  background: #fff;
-  font-weight: 600;
-  font-size: 13px;
-}
-
-@media (max-width: 768px) {
-  .section {
-    padding: 48px 20px;
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .primaryButton {
-    width: 100%;
+    align-self: stretch;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .section {
+    padding: 70px 0 90px;
+  }
+
+  .imageCard {
+    width: min(220px, 100%);
+  }
+}
+
+@media (max-width: 520px) {
+  .content {
+    gap: 24px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .name {
+    font-size: 20px;
   }
 }
