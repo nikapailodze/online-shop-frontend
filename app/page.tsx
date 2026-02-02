@@ -4,6 +4,7 @@ import HomeSection from "./Components/HomeSection/HomeSection";
 import ProductionSection from "./Components/ProductionSection/ProductionSection";
 import ContactSection from "./Components/ContactSection/ContactSection";
 import ConsultationSection from "./Components/ConsultationSection/ConsultationSection";
+import FooterSection from "./Components/FooterSection/FooterSection";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -26,9 +27,10 @@ export default function Home() {
         <ConsultationSection />
       </div>
 
-      <div className={styles.contactSection}>
-        <ContactSection />
+      <div className={styles.footerSection}>
+        <FooterSection />
       </div>
+
     </div>
   );
 }
