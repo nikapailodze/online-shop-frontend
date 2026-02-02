@@ -1,0 +1,137 @@
+.section {
+  width: 100%;
+  max-width: 1200px;
+  padding: 64px 32px;
+  display: grid;
+  gap: 32px;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  background: radial-gradient(circle at 10% 20%, rgba(255, 245, 238, 0.9), transparent 45%),
+    radial-gradient(circle at 85% 30%, rgba(230, 246, 255, 0.6), transparent 40%),
+    #fdfdfc;
+  border: 1px solid #e9e4df;
+  border-radius: 28px;
+  box-shadow: 0 22px 48px rgba(15, 15, 15, 0.08);
+}
+
+.copy {
+  display: grid;
+  gap: 16px;
+}
+
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6d5345;
+  font-weight: 700;
+}
+
+.title {
+  font-size: clamp(32px, 3vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1b1b1b;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: #3f3f3f;
+  line-height: 1.6;
+  max-width: 520px;
+}
+
+.actions {
+  display: grid;
+  gap: 12px;
+}
+
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: #111;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  width: fit-content;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+}
+
+.note {
+  font-size: 14px;
+  color: #5a5a5a;
+}
+
+.panel {
+  padding: 28px;
+  border-radius: 22px;
+  background: linear-gradient(160deg, #fff6ef 0%, #ffffff 50%, #eef7ff 100%);
+  border: 1px solid #f0e7df;
+  display: grid;
+  gap: 16px;
+}
+
+.panelHeader {
+  display: grid;
+  gap: 6px;
+}
+
+.panelTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1b1b1b;
+}
+
+.panelText {
+  font-size: 15px;
+  color: #4f4f4f;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+  color: #3a3a3a;
+}
+
+.list li {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.panelFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge {
+  border-radius: 999px;
+  padding: 8px 12px;
+  border: 1px solid #e2d7cf;
+  background: #fff;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 48px 20px;
+  }
+
+  .primaryButton {
+    width: 100%;
+  }
+}
