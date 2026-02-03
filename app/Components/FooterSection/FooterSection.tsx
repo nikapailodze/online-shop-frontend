@@ -1,14 +1,21 @@
 "use client";
 import styles from "./FooterSection.module.scss";
+import Image from "next/image";
 
 const FooterSection = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.brand}>
-          <div className={styles.logoMark}>EP</div>
+          <Image
+            src="/Logo/logo.png"
+            alt="Endopail logo"
+            width={48}
+            height={48}
+            className={styles.logoMark}
+          />
           <div className={styles.brandText}>
-            <span className={styles.brandName}>ENDOPAIL</span>
+            Endopai
             <span className={styles.brandSub}>Endocrinology Clinic</span>
           </div>
         </div>

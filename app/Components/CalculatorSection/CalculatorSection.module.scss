@@ -34,11 +34,9 @@
 }
 
 .cardsContainer {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
 }
 
 .exploreAllButton {
@@ -74,4 +72,16 @@
   font-family: "Manrope", sans-serif;
   font-weight: 500;
   color: #545454;
+}
+
+@media (max-width: 1024px) {
+  .cardsContainer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .cardsContainer {
+    grid-template-columns: 1fr;
+  }
 }

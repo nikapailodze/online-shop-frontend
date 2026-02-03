@@ -9,6 +9,7 @@ import AsideCart from "../AsideCart/AsideCart";
 import { useRouter } from "next/navigation";
 import { useCartRef } from "@/app/Context/CartRefContext";
 import { useCart } from "@/app/Context/CartContext";
+import Image from "next/image";
 
 const Navigaton = () => {
   const [showNavItems, setShowNavItems] = useState(false);
@@ -21,7 +22,14 @@ const Navigaton = () => {
       <div className={styles.navContent}>
         <nav className={styles.nav}>
           <div onClick={() => router.push("/")} className={styles.logo}>
-            <p className={styles.logoText}>ENDOPAIL</p>
+            <Image
+              src="/Logo/logoName.png"
+              alt="Endopail"
+              width={140}
+              height={32}
+              className={styles.logoImage}
+              priority
+            />
           </div>
 
           <div className={styles.navItemsRight}>

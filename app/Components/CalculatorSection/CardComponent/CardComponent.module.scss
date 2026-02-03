@@ -3,94 +3,97 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  max-width: 400px;
-  height: 200px;
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  max-width: 520px;
+  min-height: 240px;
+  padding: 26px 24px;
+  background: #6b7c86;
+  border-radius: 26px;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
-
-  &:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-    transform: translateY(-2px);
-    .calculatorLink {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-  }
+  color: #f5f8fa;
 }
+
+.card:hover {
+  box-shadow: 0 16px 30px rgba(31, 41, 51, 0.2);
+  transform: translateY(-2px);
+}
+
 .container {
   display: flex;
   align-items: flex-start;
+  flex-direction: row;
   gap: 16px;
+  text-align: left;
 }
+
 .iconContainer {
   flex-shrink: 0;
-  padding: 12px;
-  background-color: #f8fafc;
-  border-radius: 12px;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-
-  svg {
-    width: 24px;
-    height: 24px;
-    stroke-width: 2;
-    color: #475569;
-  }
 }
+
+.iconContainer svg {
+  width: 28px;
+  height: 28px;
+  stroke-width: 2;
+  color: #f5f8fa;
+}
+
 .textContainer{
   display: flex;
   flex-direction: column;
   gap: 4px;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .title {
   display: block;
-  font-weight: 200;
-  font-size: 24px;
-  color: #0f172a;
+  font-weight: 700;
+  font-size: 20px;
+  color: #f5f8fa;
 }
 
 .subTitle {
-  font-size: 0.875rem;
-  color: #475569;
+  font-size: 15px;
+  color: #e6eef1;
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-   -webkit-line-clamp: 3;
+  -webkit-line-clamp: 3;
   line-clamp: 3;
 }
 
 .calculatorLink {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   font-size: 16px;
-  font-weight: 400;
-
-  color: #475569;
-  text-decoration: underline;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(4px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  font-weight: 700;
+  color: #1f1f1f;
   text-decoration: none;
-
-  &:hover {
-    color: #0369a1;
-  }
-  div {
-    display: flex;
-    align-items: center;
-  }
+  margin-top: 12px;
+  background: #f0b7ab;
+  padding: 12px 18px;
+  border-radius: 12px;
+  box-shadow: 0 10px 18px rgba(31, 41, 51, 0.18);
+  width: fit-content;
 }
 
-.card:hover {
-  box-shadow: 0 8px 20px #475569;
+.calculatorLink:hover {
+  transform: translateY(-1px);
+}
+
+.calculatorLink div {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .card {
+    min-height: 220px;
+  }
 }
