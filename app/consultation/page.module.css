@@ -453,25 +453,69 @@
   }
 
   .sidebar {
+    display: flex;
+    flex-direction: column;
     border-right: none;
     border-bottom: 1px solid #e2e8ee;
+    padding: 20px 20px 16px;
+    gap: 16px;
+  }
+
+  .sidebarHeader {
+    display: none;
+  }
+
+  .profileCard {
+    display: none;
+  }
+
+  .stepTimeline {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  .stepLine {
+    display: none;
+  }
+
+  .stepItemActive,
+  .stepItemMuted {
+    min-width: 200px;
   }
 }
 
 @media (max-width: 768px) {
   .page {
-    padding: 120px 20px 60px;
+    padding: 0 12px 24px;
+  }
+
+  .shell {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
   }
 
   .form {
-    padding: 24px;
+    padding: 20px;
   }
 
   .content {
-    padding: 24px 20px 28px;
+    padding: 20px 16px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .stepTimeline {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
-  .sidebar {
-    display: none;
+  .stepItemActive,
+  .stepItemMuted {
+    min-width: 0;
+    flex: 1 1 140px;
   }
 }
