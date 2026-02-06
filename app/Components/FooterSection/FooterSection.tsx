@@ -1,0 +1,45 @@
+"use client";
+import styles from "./FooterSection.module.scss";
+import Image from "next/image";
+
+const FooterSection = () => {
+  return (
+    <footer className={styles.footer}>
+      <div className={styles.inner}>
+        <div className={styles.brand}>
+          <Image
+            src="/Logo/logo.png"
+            alt="Endopail logo"
+            width={48}
+            height={48}
+            className={styles.logoMark}
+          />
+          <div className={styles.brandText}>
+            Endopai
+            <span className={styles.brandSub}>Endocrinology Clinic</span>
+          </div>
+        </div>
+
+        <div className={styles.links}>
+          <a href="#">Admin Log In</a>
+          <span className={styles.divider}>|</span>
+          <a href="#">Site Map</a>
+          <span className={styles.divider}>|</span>
+          <a href="#">Privacy Policy</a>
+        </div>
+
+        <div className={styles.socials}>
+          <button aria-label="Instagram">IG</button>
+          <button aria-label="X">X</button>
+          <button aria-label="Facebook">FB</button>
+        </div>
+      </div>
+
+      <div className={styles.copyright}>
+        Copyright © 2026 Endopail. All rights reserved.
+      </div>
+    </footer>
+  );
+};
+
+export default FooterSection;

@@ -24,6 +24,9 @@ const NavItems = ({ isOpen, onClose }: NavItemsProps) => {
           <Link href="/calculators" className={styles.listItem}>Calculators</Link>
         </li>
         <li onClick={onNavItemClick} className={styles.listItem}>
+          <Link href="/consultation" className={styles.listItem}>Consultation</Link>
+        </li>
+        <li onClick={onNavItemClick} className={styles.listItem}>
           <Link href="/profile" className={styles.listItem}>Profile</Link>
         </li>
         <li onClick={onNavItemClick} className={styles.listItem}>
