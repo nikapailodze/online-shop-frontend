@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 import { API_BASE_URL } from "../lib/api";
 import { getStoredToken, getStoredUser, getUserFromToken } from "../lib/auth";
 import Image from "next/image";
-import { FiUser, FiMail, FiPhone, FiCreditCard, FiCalendar } from "react-icons/fi";
+import { FiUser, FiMail, FiPhone, FiCreditCard, FiCalendar, FiSend } from "react-icons/fi";
 import { FaRegClock } from "react-icons/fa";
 
 const timeSlots = [
@@ -137,6 +137,8 @@ export default function ConsultationPage() {
   const canProceedFromStep2 = Boolean(
     formData.name && formData.surname && formData.email && formData.phone && formData.reason
   );
+  const isStep1Complete = step >= 2;
+  const isStep2Complete = step >= 3;
 
   return (
     <div className={styles.page}>
@@ -153,7 +155,11 @@ export default function ConsultationPage() {
             </div>
           </div>
           <div className={styles.stepTimeline}>
-            <div className={step === 1 ? styles.stepItemActive : styles.stepItemMuted}>
+            <div
+              className={`${step === 1 ? styles.stepItemActive : styles.stepItemMuted} ${
+                isStep1Complete ? styles.stepCompleted : ""
+              }`}
+            >
               <div className={styles.stepIcon}>
                 <FiCalendar />
               </div>
@@ -162,24 +168,32 @@ export default function ConsultationPage() {
                 <span>{formData.date || "Select a date"}</span>
               </div>
             </div>
-            <div className={styles.stepLine} />
-            <div className={step === 1 ? styles.stepItemMuted : styles.stepItemActive}>
-              <div className={styles.stepIcon}>
-                <FiUser />
-              </div>
-              <div className={styles.stepContent}>
-                <strong>Time</strong>
-                <span>{formData.time || "Pick a time"}</span>
-              </div>
+            <div className={`${styles.stepLine} ${isStep1Complete ? styles.stepLineFilled : ""}`}>
+              <span className={styles.stepLineFill} />
             </div>
-            <div className={styles.stepLine} />
-            <div className={step === 3 ? styles.stepItemActive : styles.stepItemMuted}>
+            <div
+              className={`${step === 1 ? styles.stepItemMuted : styles.stepItemActive} ${
+                isStep2Complete ? styles.stepCompleted : ""
+              }`}
+            >
               <div className={styles.stepIcon}>
                 <FiUser />
               </div>
               <div className={styles.stepContent}>
                 <strong>Information</strong>
                 <span>Enter details</span>
+              </div>
+            </div>
+            <div className={`${styles.stepLine} ${isStep2Complete ? styles.stepLineFilled : ""}`}>
+              <span className={styles.stepLineFill} />
+            </div>
+            <div className={step === 3 ? styles.stepItemActive : styles.stepItemMuted}>
+              <div className={styles.stepIcon}>
+                <FiSend />
+              </div>
+              <div className={styles.stepContent}>
+                <strong>Send</strong>
+                <span>Review & submit</span>
               </div>
             </div>
           </div>
