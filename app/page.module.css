@@ -35,6 +35,16 @@
 
 
 @media (max-width: 768px) {
+    .page {
+        scroll-snap-type: none;
+        overflow-y: visible;
+    }
 
-
+    .homeSection,
+    .productionSection,
+    .contactSection {
+        height: auto;
+        min-height: 100svh;
+        align-items: flex-start;
+    }
 }

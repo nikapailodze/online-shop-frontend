@@ -1,4 +1,5 @@
 .shoppingItemContianer {
+  width: 100%;
   max-width: 347px;
   height: auto;
   display: flex;
@@ -22,6 +23,23 @@
 
   &:hover .responsiveImage {
     transform: scale(1.1);
+  }
+}
+
+@media (max-width: 1024px) {
+  .shoppingItemContianer {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .shoppingItemContianer {
+    max-width: 100%;
+  }
+
+  .imageWrapper {
+    height: auto;
+    aspect-ratio: 3 / 4;
   }
 }
 

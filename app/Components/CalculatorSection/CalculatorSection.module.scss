@@ -75,3 +75,15 @@
   font-weight: 500;
   color: #545454;
 }
+
+@media (max-width: 768px) {
+  .calculatorSectionWrapper {
+    height: auto;
+    min-height: 100svh;
+    gap: 28px;
+  }
+
+  .cardsContainer {
+    justify-content: center;
+  }
+}

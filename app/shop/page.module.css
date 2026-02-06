@@ -11,6 +11,8 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    gap: 24px;
+    align-items: stretch;
 }
 
 .pageTitleWrapper {
@@ -66,5 +68,22 @@
 
     100% {
         transform: rotateY(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .productionItemsWrapper {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 20px;
+    }
+
+    .title {
+        font-size: 40px;
+    }
+
+    .subTitle {
+        font-size: 18px;
     }
 }
