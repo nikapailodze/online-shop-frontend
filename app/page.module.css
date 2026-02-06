@@ -43,8 +43,18 @@
     display: block;
 }
 
+@media (max-width: 1300px) {
+    .page {
+        gap: 80px;
+        padding-bottom: 80px;
+    }
 
-@media (max-width: 768px) {
-
-
+    .homeSection,
+    .productionSection,
+    .contactSection,
+    .consultationSection {
+        min-height: auto;
+        height: auto;
+        align-items: flex-start;
+    }
 }

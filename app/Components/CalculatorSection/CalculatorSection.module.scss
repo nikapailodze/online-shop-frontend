@@ -75,6 +75,12 @@
 }
 
 @media (max-width: 1024px) {
+  .calculatorSectionWrapper {
+    height: auto;
+    min-height: 100svh;
+    gap: 28px;
+  }
+
   .cardsContainer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
