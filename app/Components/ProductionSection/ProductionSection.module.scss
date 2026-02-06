@@ -23,16 +23,30 @@
 .productionItemsWrapper{
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+    .productionSection{
+        height: auto;
+        min-height: 100svh;
+        padding: 40px 0;
+    }
+
+    .content{
+        height: auto;
+    }
+
     .productionItemsWrapper{
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .productionItemsWrapper{
+        grid-template-columns: 1fr;
     }
 
 }
