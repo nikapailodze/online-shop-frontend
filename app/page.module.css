@@ -34,7 +34,7 @@
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .page {
         scroll-snap-type: none;
         overflow-y: visible;
@@ -46,5 +46,19 @@
         height: auto;
         min-height: 100svh;
         align-items: flex-start;
+    }
+}
+
+@media (max-width: 1300px) {
+    .page {
+        gap: 80px;
+        padding-bottom: 80px;
+    }
+
+    .homeSection,
+    .productionSection,
+    .contactSection {
+        height: auto;
+        min-height: auto;
     }
 }

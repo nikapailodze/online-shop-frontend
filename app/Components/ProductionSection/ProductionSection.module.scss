@@ -23,14 +23,19 @@
 .productionItemsWrapper{
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
     align-items: stretch;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+    .productionItemsWrapper{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
     .productionSection{
         height: auto;
         min-height: 100svh;
@@ -42,9 +47,7 @@
     }
 
     .productionItemsWrapper{
-        justify-content: flex-start;
-        align-items: stretch;
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
 
 }
