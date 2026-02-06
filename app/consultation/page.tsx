@@ -460,29 +460,6 @@ export default function ConsultationPage() {
               </div>
             </form>
 
-            <aside className={styles.summary}>
-              <div className={styles.summaryCard}>
-                <h2 className={styles.summaryTitle}>Your booking</h2>
-                <div className={styles.summaryItem}>
-                  <span>Date</span>
-                  <strong>{formData.date || "Select a date"}</strong>
-                </div>
-                <div className={styles.summaryItem}>
-                  <span>Time</span>
-                  <strong>{formData.time || "Select a time"}</strong>
-                </div>
-                <div className={styles.summaryItem}>
-                  <span>Name</span>
-                  <strong>
-                    {formData.name || "Your name"} {formData.surname || ""}
-                  </strong>
-                </div>
-                <div className={styles.summaryDivider} />
-                <p className={styles.summaryText}>
-                  We will send the appointment confirmation to {formData.email || "your email"}.
-                </p>
-              </div>
-            </aside>
           </div>
         </section>
       </div>
