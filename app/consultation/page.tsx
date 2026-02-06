@@ -7,7 +7,6 @@ import { API_BASE_URL } from "../lib/api";
 import { getStoredToken, getStoredUser, getUserFromToken } from "../lib/auth";
 import Image from "next/image";
 import { FiUser, FiMail, FiPhone, FiCreditCard, FiCalendar, FiSend } from "react-icons/fi";
-import { FaRegClock } from "react-icons/fa";
 
 const timeSlots = [
   "09:00",
