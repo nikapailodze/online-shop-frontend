@@ -27,6 +27,10 @@ export default function Home() {
         <ConsultationSection />
       </div>
 
+      <div className={styles.contactSection}>
+        <ContactSection />
+      </div>
+
       <div className={styles.footerSection}>
         <FooterSection />
       </div>
