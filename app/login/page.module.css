@@ -20,7 +20,7 @@
 .signUpIndicator {
     display: flex;
     justify-content: flex-end;
-    font-family: Archivo;
+    font-family: var(--font-satoshi), sans-serif;
     font-size: 14px;
     line-height: 22px;
     font-weight: 400;
@@ -62,7 +62,7 @@
 }
 
 .title {
-    font-family: Archivo;
+    font-family: var(--font-publica-play), sans-serif;
     font-size: 32px;
     line-height: 48px;
     font-weight: 700;
@@ -116,7 +116,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 8px;
-    font-family: Inter;
+    font-family: var(--font-satoshi), sans-serif;
     font-size: 18px;
     line-height: 28px;
     font-weight: 700;
@@ -128,7 +128,7 @@
     height: 52px;
     padding-left: 20px;
     padding-right: 52px;
-    font-family: Inter;
+    font-family: var(--font-satoshi), sans-serif;
     font-size: 18px;
     line-height: 28px;
     font-weight: 400;
@@ -173,7 +173,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: Inter;
+    font-family: var(--font-satoshi), sans-serif;
     font-size: 18px;
     line-height: 28px;
     font-weight: 400;
@@ -218,7 +218,7 @@
 }
 
 .statusMessage{
-    font-family: Inter;
+    font-family: var(--font-satoshi), sans-serif;
     font-size: 16px;
     line-height: 24px;
     margin: 0;
