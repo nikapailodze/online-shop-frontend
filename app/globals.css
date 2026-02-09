@@ -7,7 +7,7 @@
 .bodyTag{
   display: flex;
   justify-content: center;
-  background-color: #F9F9F9;
+  background-color: var(--color-bg);
 }
 
 
@@ -22,4 +22,10 @@
 
 body, html {
   font-family: "Host Grotesk", sans-serif;
+}
+
+:root {
+  --color-primary: #6BA0ED;
+  --color-bg: #F3F3F3;
+  --color-text: #070707;
 }

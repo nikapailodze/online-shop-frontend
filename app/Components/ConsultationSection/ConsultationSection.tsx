@@ -12,7 +12,7 @@ const ConsultationSection = () => {
         <div className={styles.content}>
           <div className={styles.imageCard}>
             <Image
-              src="/test/manHandUp.avif"
+              src="/drPicture/drPic.JPG"
               alt="Doctor portrait"
               width={420}
               height={520}
@@ -31,7 +31,7 @@ const ConsultationSection = () => {
               quasi consectetur unde sed! Libero veniam iure iste laudantium. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam atque vero beatae numquam provident nisi cupiditate necessitatibus, aspernatur incidunt sed iure consequuntur eligendi quidem eum veritatis repudiandae suscipit dolor inventore!
             </p>
             <Link href="/consultation" className={styles.primaryButton}>
-              Schedule consultation with me
+              Schedule appointment with me
             </Link>
           </div>
         </div>

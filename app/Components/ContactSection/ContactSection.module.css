@@ -8,9 +8,9 @@
   background: radial-gradient(circle at 20% 20%, rgba(240, 240, 240, 0.6), transparent 45%),
     radial-gradient(circle at 80% 10%, rgba(230, 230, 230, 0.5), transparent 35%),
     #ffffff;
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--color-text);
   border-radius: 28px;
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 18px 48px rgba(7, 7, 7, 0.2);
 }
 
 .header {
@@ -22,7 +22,7 @@
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #555;
+  color: var(--color-text);
   font-weight: 700;
 }
 
@@ -34,7 +34,7 @@
 
 .subtitle {
   font-size: 17px;
-  color: #444;
+  color: var(--color-text);
   max-width: 720px;
   line-height: 1.6;
 }
@@ -48,8 +48,8 @@
 .card {
   padding: 18px 18px 22px;
   border-radius: 16px;
-  border: 1px solid #ededed;
-  background: linear-gradient(180deg, #fbfbfb 0%, #f5f5f5 100%);
+  border: 1px solid var(--color-text);
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg) 100%);
 }
 
 .cardTitle {
@@ -58,7 +58,7 @@
 }
 
 .cardText {
-  color: #404040;
+  color: var(--color-text);
   line-height: 1.55;
 }
 
@@ -72,15 +72,15 @@
 .pill {
   border-radius: 999px;
   padding: 10px 14px;
-  border: 1px solid #e0e0e0;
-  background: #fff;
+  border: 1px solid var(--color-text);
+  background: var(--color-bg);
   font-weight: 600;
 }
 
 .button {
-  border: 1px solid #111;
-  background: #111;
-  color: white;
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-bg);
   padding: 12px 18px;
   border-radius: 12px;
   font-weight: 700;
@@ -89,13 +89,13 @@
 }
 
 .button.secondary {
-  background: white;
-  color: #111;
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 .button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 22px rgba(7, 7, 7, 0.2);
 }
 
 @media (max-width: 768px) {

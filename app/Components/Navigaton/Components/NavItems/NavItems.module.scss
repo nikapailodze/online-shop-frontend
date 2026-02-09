@@ -6,7 +6,7 @@
   overflow: hidden;
   max-height: 0;
   transition: max-height 0.4s ease-in-out;
-  background-color: white;
+  background-color: var(--color-bg);
   z-index: 998;
 
   &.open {
@@ -35,5 +35,5 @@
     font-family: 'Host Grotesk', sans-serif;
     list-style: none;
     text-decoration: none;
-    color: black;
+    color: var(--color-text);
   }

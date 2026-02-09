@@ -27,7 +27,7 @@
     font-size: 14px;
     line-height: 22px;
     font-weight: 400;
-    color: #171A1FFF;
+    color: var(--color-text);
 
 }
 
@@ -42,7 +42,7 @@
 
 .signUpIndicatorAnch {
     text-decoration: none;
-    color: #AC1947FF;
+    color: var(--color-text);
 }
 
 .btnsWrapper {
@@ -58,7 +58,7 @@
     font-size: 32px;
     line-height: 48px;
     font-weight: 700;
-    color: black;
+    color: var(--color-text);
 }
 
 .content {
@@ -92,13 +92,13 @@
     font-size: 14px;
     line-height: 22px;
     font-weight: 400;
-    color: #565E6CFF;
+    color: var(--color-text);
 }
 
 .orLine {
     flex-grow: 1;
     height: 1px;
-    background-color: #E0E0E0;
+    background-color: var(--color-bg);
 }
 
 .labelWrapper {
@@ -123,7 +123,7 @@
     font-size: 18px;
     line-height: 28px;
     font-weight: 400;
-    background: #F3F4F6FF;
+    background: var(--color-bg);
     border-radius: 6px;
     border-width: 0px;
     outline: none;
@@ -145,18 +145,18 @@
 
 
 .input:hover {
-    color: #BCC1CAFF;
-    background: #F3F4F6FF;
+    color: var(--color-text);
+    background: var(--color-bg);
 }
 
 .input:focus {
-    color: #BCC1CAFF;
-    background: #FFFFFFFF;
+    color: var(--color-text);
+    background: var(--color-bg);
 }
 
 .input:disabled {
-    color: #BCC1CAFF;
-    background: #F3F4F6FF;
+    color: var(--color-text);
+    background: var(--color-bg);
 }
 
 
@@ -168,23 +168,28 @@
     font-size: 18px;
     line-height: 28px;
     font-weight: 400;
-    color: #FFFFFFFF;
-    background: #636AE8FF;
+    color: var(--color-bg);
+    background: var(--color-primary);
     opacity: 1;
     border: none;
     border-radius: 6px;
     height: 52px;
     max-width: 486px;
+    transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
 }
 
 .submitButton:hover {
-    color: #FFFFFFFF;
-    background: #4850E4FF;
+    color: var(--color-bg);
+    background: var(--color-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(7, 7, 7, 0.2);
 }
 
 .submitButton:hover:active {
-    color: #FFFFFFFF;
-    background: #2C35E0FF;
+    color: var(--color-bg);
+    background: var(--color-primary);
+    transform: translateY(0);
+    box-shadow: 0 6px 14px rgba(7, 7, 7, 0.2);
 }
 
 .submitButton:disabled {
@@ -197,7 +202,7 @@
     gap: 24px;
 }
 .error{
-    color: red;
+    color: var(--color-text);
     font-size: 14px;
     line-height: 22px;
     font-weight: 400;
@@ -211,11 +216,11 @@
 }
 
 .statusError{
-    color: #C62828;
+    color: var(--color-text);
 }
 
 .statusSuccess{
-    color: #1B5E20;
+    color: var(--color-text);
 }
 
 
