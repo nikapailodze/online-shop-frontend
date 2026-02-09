@@ -43,7 +43,7 @@
     margin: 0;
     font-family: "Host Grotesk", sans-serif;
     font-weight: 300;
-    color: #252525;
+    color: var(--color-text);
 }
 
 .description {
@@ -53,7 +53,7 @@
     margin: 0;
     font-family: "Manrope", sans-serif;
     font-weight: 200;
-    color: #252525;
+    color: var(--color-text);
 }
 
 .heading3 {
@@ -89,19 +89,17 @@
     overflow: hidden;
     position: relative;
     font: inherit;
-    background-color: #f0f0f0;
+    background-color: var(--color-primary);
     border: 0;
-    color: #242424;
+    color: var(--color-bg);
     border-radius: 0;
     font-size: 3rem;
     padding: 0.01em 1em;
     font-weight: 100;
     font-family: "Host Grotesk", sans-serif;
 
-    text-shadow: 0 0.0625em 0 #fff;
-    box-shadow: inset 0 0.0625em 0 0 #f4f4f4, 0 0.0625em 0 0 #efefef,
-        0 0.125em 0 0 #ececec, 0 0.25em 0 0 #e0e0e0, 0 0.3125em 0 0 #dedede,
-        0 0.375em 0 0 #dcdcdc, 0 0.425em 0 0 #cacaca, 0 0.425em 0.5em 0 #cecece;
+    text-shadow: 0 0.0625em 0 rgba(7, 7, 7, 0.2);
+    box-shadow: 0 10px 22px rgba(7, 7, 7, 0.2);
     transition: 0.25s ease;
     cursor: pointer;
     touch-action: manipulation;
@@ -110,9 +108,7 @@
 
     &:active {
         transform: translateY(0.225em);
-        box-shadow: inset 0 0.03em 0 0 #f4f4f4, 0 0.03em 0 0 #efefef,
-            0 0.0625em 0 0 #ececec, 0 0.125em 0 0 #e0e0e0, 0 0.125em 0 0 #dedede,
-            0 0.2em 0 0 #dcdcdc, 0 0.225em 0 0 #cacaca, 0 0.225em 0.375em 0 #cecece;
+        box-shadow: 0 6px 14px rgba(7, 7, 7, 0.2);
 
         &:after {
             height: calc(100% + 0.225em);

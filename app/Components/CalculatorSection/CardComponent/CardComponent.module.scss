@@ -7,13 +7,13 @@
   flex: 1 1 300px;
   height: 200px;
   padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-text);
   border-radius: 12px;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 
   &:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 20px rgba(7, 7, 7, 0.2);
     transform: translateY(-2px);
     .calculatorLink {
       opacity: 1;
@@ -30,7 +30,7 @@
 .iconContainer {
   flex-shrink: 0;
   padding: 12px;
-  background-color: #f8fafc;
+  background-color: var(--color-bg);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -40,7 +40,7 @@
     width: 24px;
     height: 24px;
     stroke-width: 2;
-    color: #475569;
+    color: var(--color-text);
   }
 }
 .textContainer{
@@ -54,12 +54,12 @@
   display: block;
   font-weight: 200;
   font-size: 24px;
-  color: #0f172a;
+  color: var(--color-text);
 }
 
 .subTitle {
   font-size: 0.875rem;
-  color: #475569;
+  color: var(--color-text);
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -75,7 +75,7 @@
   font-size: 16px;
   font-weight: 400;
 
-  color: #475569;
+  color: var(--color-text);
   text-decoration: underline;
   opacity: 0;
   visibility: hidden;
@@ -84,7 +84,7 @@
   text-decoration: none;
 
   &:hover {
-    color: #0369a1;
+    color: var(--color-text);
   }
   div {
     display: flex;
@@ -93,5 +93,5 @@
 }
 
 .card:hover {
-  box-shadow: 0 8px 20px #475569;
+  box-shadow: 0 8px 20px rgba(7, 7, 7, 0.2);
 }

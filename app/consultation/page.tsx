@@ -146,7 +146,7 @@ export default function ConsultationPage() {
           <div className={styles.sidebarHeader} />
           <div className={styles.profileCard}>
             <div className={styles.avatar}>
-              <Image src="/test/manHandUp.avif" alt="Doctor" width={64} height={64} />
+              <Image src="/drPicture/drPic.JPG" alt="Doctor" width={64} height={64} />
             </div>
             <div className={styles.profileMeta}>
               <span>Clinical Lead</span>

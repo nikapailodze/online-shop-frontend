@@ -20,7 +20,7 @@
 
 .subtitle {
   font-size: 18px;
-  color: #3a3a3a;
+  color: var(--color-text);
   line-height: 1.5;
   max-width: 780px;
 }
@@ -33,10 +33,10 @@
 
 .card {
   padding: 18px 18px 20px;
-  border: 1px solid #ebebeb;
+  border: 1px solid var(--color-text);
   border-radius: 12px;
-  background: #fafafa;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  background: var(--color-bg);
+  box-shadow: 0 8px 24px rgba(7, 7, 7, 0.2);
 }
 
 .cardTitle {
@@ -47,7 +47,7 @@
 
 .cardText {
   font-size: 16px;
-  color: #414141;
+  color: var(--color-text);
   line-height: 1.5;
 }
 
@@ -56,8 +56,8 @@
   gap: 8px;
   padding: 16px;
   border-radius: 12px;
-  background: linear-gradient(120deg, #f8f9ff, #f1f8ff);
-  border: 1px solid #e1e8ff;
+  background: linear-gradient(120deg, var(--color-bg), var(--color-bg));
+  border: 1px solid var(--color-text);
 }
 
 .label {
@@ -65,7 +65,7 @@
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #4f46e5;
+  color: var(--color-text);
 }
 
 .cta {
@@ -75,9 +75,9 @@
 }
 
 .button {
-  border: 1px solid #141414;
-  background: #141414;
-  color: white;
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-bg);
   padding: 12px 18px;
   border-radius: 10px;
   font-weight: 600;
@@ -86,12 +86,12 @@
 }
 
 .button.secondary {
-  background: white;
-  color: #141414;
-  border-color: #d0d0d0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-color: var(--color-text);
 }
 
 .button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 22px rgba(7, 7, 7, 0.2);
 }
