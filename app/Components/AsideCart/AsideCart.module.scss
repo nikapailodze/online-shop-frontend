@@ -25,7 +25,7 @@
   line-height: 1.4em;
   text-align: left;
   font-weight: 300;
-  font-family: "Host Grotesk", sans-serif;
+  font-family: var(--font-satoshi), sans-serif;
 }
 
 .bodyheading {
@@ -34,7 +34,7 @@
   line-height: 1.4em;
   text-align: left;
   font-weight: 300;
-  font-family: "Host Grotesk", sans-serif;
+  font-family: var(--font-satoshi), sans-serif;
 }
 
 .asideCartHeader {
@@ -77,7 +77,7 @@
 }
 
 .itemTitle {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-satoshi), sans-serif;
   font-size: 16px;
   line-height: 1em;
   color: var(--color-text);
@@ -176,7 +176,7 @@
   line-height: 1.4em;
   text-align: left;
   font-weight: 300;
-  font-family: "Host Grotesk", sans-serif;
+  font-family: var(--font-satoshi), sans-serif;
   color: var(--color-bg);
   border: none;
 }
@@ -193,7 +193,7 @@
   line-height: 1.4em;
   text-align: left;
   font-weight: 300;
-  font-family: "Host Grotesk", sans-serif;
+  font-family: var(--font-satoshi), sans-serif;
   color: var(--color-text);
   border: none;
   border: var(--color-text) solid 1px;

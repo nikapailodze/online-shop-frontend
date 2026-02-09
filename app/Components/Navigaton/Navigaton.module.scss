@@ -54,7 +54,7 @@
   letter-spacing: 0;
   line-height: 13px;
   font-weight: 200;
-  font-family: "Host Grotesk", sans-serif;
+  font-family: var(--font-satoshi), sans-serif;
 }
 .burgerMenu svg {
   width: 28px;
@@ -80,7 +80,7 @@
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  font-family: "Host Grotesk", sans-serif;
+  font-family: var(--font-satoshi), sans-serif;
   transition: opacity 0.2s ease;
 }
 
