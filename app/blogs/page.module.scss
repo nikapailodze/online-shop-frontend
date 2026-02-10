@@ -166,15 +166,18 @@
 
 .readMore {
   align-self: flex-start;
-  background: none;
+  background: var(--color-primary);
   border: none;
-  color: #2b60d4;
+  color: #fff;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
   text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  box-shadow: 0 12px 24px rgba(107, 160, 237, 0.35);
 }
 
 .filters {
@@ -333,7 +336,7 @@
 }
 
 .cardLink:hover .cardTitle {
-  color: #4b59e6;
+  color: var(--color-primary);
 }
 
 .cardImage {

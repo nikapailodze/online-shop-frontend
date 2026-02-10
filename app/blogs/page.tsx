@@ -185,7 +185,7 @@ export default function BlogsPage() {
               href={`/blogs/${featuredArticle.id}`}
               className={styles.readMore}
             >
-              Read article <span aria-hidden>-></span>
+              Read article
             </Link>
           </div>
         </section>

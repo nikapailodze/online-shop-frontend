@@ -116,7 +116,7 @@ const ConsultationSection = () => {
                 href={`/blogs/${featuredArticle.id}`}
                 className={styles.blogRead}
               >
-                Read article <span aria-hidden>-></span>
+                Read article
               </Link>
             </div>
             </div>
