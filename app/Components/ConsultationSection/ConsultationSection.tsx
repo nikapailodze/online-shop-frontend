@@ -2,9 +2,40 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./ConsultationSection.module.css";
+import { getStoredBlogs, type BlogArticle } from "@/app/lib/blogs";
+import { staticArticles } from "@/app/lib/blogData";
 
 const ConsultationSection = () => {
+  const [storedBlogs, setStoredBlogs] = useState<BlogArticle[]>([]);
+  const [featuredIndex, setFeaturedIndex] = useState(0);
+
+  useEffect(() => {
+    setStoredBlogs(getStoredBlogs().filter((blog) => blog.status !== "draft"));
+  }, []);
+
+  const featuredPool = useMemo(() => {
+    const resolveTime = (article: BlogArticle) => {
+      if (typeof article.createdAt === "number") return article.createdAt;
+      const parsed = Date.parse(article.date);
+      return Number.isNaN(parsed) ? 0 : parsed;
+    };
+    const combined = [...storedBlogs, ...staticArticles];
+    const sorted = combined.sort((a, b) => resolveTime(b) - resolveTime(a));
+    return sorted.slice(0, 5);
+  }, [storedBlogs]);
+
+  const featuredArticle = featuredPool[featuredIndex] ?? null;
+
+  useEffect(() => {
+    if (featuredPool.length <= 1) return;
+    const interval = window.setInterval(() => {
+      setFeaturedIndex((prev) => (prev + 1) % featuredPool.length);
+    }, 5000);
+    return () => window.clearInterval(interval);
+  }, [featuredPool]);
+
   return (
     <section className={styles.section} id="consultation">
       <div className={styles.container}>
@@ -35,6 +66,62 @@ const ConsultationSection = () => {
             </Link>
           </div>
         </div>
+
+        {featuredArticle && (
+          <>
+            <div className={styles.blogHeader}>
+              <h3 className={styles.blogHeaderTitle}>Articles</h3>
+              <Link href="/blogs" className={styles.blogBrowse}>
+                Explore all blogs
+              </Link>
+            </div>
+            <div className={styles.blogSlider} key={featuredArticle.id}>
+              <div className={styles.blogMedia}>
+              <div
+                className={styles.blogImage}
+                style={
+                  featuredArticle.coverImage
+                    ? { backgroundImage: `url(${featuredArticle.coverImage})` }
+                    : undefined
+                }
+              />
+              <div className={styles.blogRing} />
+              </div>
+              <div className={styles.blogContent}>
+              <div className={styles.blogTags}>
+                <span className={styles.blogPill}>
+                  {featuredArticle.category}
+                </span>
+                <span className={styles.blogFeatured}>Featured</span>
+              </div>
+              <h3 className={styles.blogTitle}>{featuredArticle.title}</h3>
+              <p className={styles.blogExcerpt}>{featuredArticle.excerpt}</p>
+              <div className={styles.blogMeta}>
+                <div className={styles.blogAvatar}>
+                  {featuredArticle.author
+                    .split(" ")
+                    .map((word) => word[0])
+                    .join("")}
+                </div>
+                <div>
+                  <div className={styles.blogAuthor}>
+                    {featuredArticle.author}
+                  </div>
+                  <div className={styles.blogDate}>
+                    {featuredArticle.date} - {featuredArticle.readTime} read
+                  </div>
+                </div>
+              </div>
+              <Link
+                href={`/blogs/${featuredArticle.id}`}
+                className={styles.blogRead}
+              >
+                Read article
+              </Link>
+            </div>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );

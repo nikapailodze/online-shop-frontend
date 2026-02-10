@@ -1,0 +1,267 @@
+.page {
+  width: 100%;
+  padding: 28px 0 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.topBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.leftGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.backLink {
+  color: #8a8a8a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.title {
+  font-size: clamp(28px, 3vw, 36px);
+}
+
+
+.card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: 0 24px 50px rgba(12, 12, 12, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label {
+  font-weight: 600;
+  color: #3a3a3a;
+}
+
+.input {
+  border-radius: 16px;
+  border: 1px solid #e2e2e2;
+  padding: 14px 16px;
+  font-size: 15px;
+  outline: none;
+  background: #fff;
+}
+
+.input:focus {
+  border-color: #6ba0ed;
+  box-shadow: 0 0 0 3px rgba(107, 160, 237, 0.15);
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.uploadBox {
+  border-radius: 18px;
+  border: 2px dashed #e0e0e0;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: #8c8c8c;
+  background: #fafafa;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.uploadIcon {
+  font-size: 20px;
+}
+
+.fileInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.uploadPreview {
+  width: 100%;
+  height: 180px;
+  border-radius: 14px;
+  background-size: cover;
+  background-position: center;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+}
+
+.tagRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tagChip {
+  border: 1px solid #e2e2e2;
+  background: #f5f7fb;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: #4b5e7a;
+  cursor: pointer;
+}
+
+.tagButton {
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+  font-weight: 600;
+}
+
+.content {
+  min-height: 220px;
+  resize: vertical;
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: #5a5a5a;
+}
+
+.footer {
+  display: flex;
+  gap: 16px;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 24px;
+}
+
+.drafts {
+  background: #fff;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(12, 12, 12, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.draftsHeader h2 {
+  font-size: 18px;
+}
+
+.draftsHeader p {
+  color: #8a8a8a;
+  font-size: 14px;
+}
+
+.draftsEmpty {
+  color: #9a9a9a;
+  font-size: 14px;
+}
+
+.draftsList {
+  display: grid;
+  gap: 12px;
+}
+
+.draftCard {
+  border: 1px solid #ececec;
+  background: #fafafa;
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.draftTitle {
+  font-weight: 600;
+}
+
+.draftMeta {
+  color: #8a8a8a;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.draftBadge {
+  background: #f0f3ff;
+  color: #4c6fd1;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.secondaryButton {
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+  font-weight: 600;
+}
+
+.primaryButton {
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: none;
+  background: #6ba0ed;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 12px 24px rgba(107, 160, 237, 0.35);
+}
+
+.errorText {
+  color: #cc3b3b;
+  font-size: 13px;
+}
+
+@media (max-width: 720px) {
+  .topBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .topActions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .card {
+    padding: 24px;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+}

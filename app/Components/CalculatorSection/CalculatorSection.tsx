@@ -1,7 +1,6 @@
 import styles from "./CalculatorSection.module.scss";
 import { FaBone } from "react-icons/fa6";
 import { PiBoneFill } from "react-icons/pi";
-import { FaCalculator } from "react-icons/fa6";
 
 import CardComponent from "./CardComponent/CardComponent";
 import CalcFooter from "./CalcFooter/CalcFooter";
@@ -55,17 +54,14 @@ const CalculatorSection = () => {
   const router = useRouter();
   return (
     <div className={styles.calculatorSectionWrapper}>
-      <div className={styles.calculatorsSection}>
-        <h3 className={styles.title}>Endocrinology Calculators</h3>
-        <div className={styles.divider}>
-          <p className={styles.subTitle}>
-            Professional medical calculators designed for healthcare providers
-            to
-          </p>
-          <p className={styles.subTitle}>
-            support clinical decision-making in endocrinology
-          </p>
-        </div>
+      <div className={styles.buttonRow}>
+        <h3 className={styles.sectionHeading}>Endocrinology Calculators</h3>
+        <button
+          className={styles.exploreAllLink}
+          onClick={() => router.push("/calculators")}
+        >
+          Explore all calculators
+        </button>
       </div>
 
       <div className={styles.cardsContainer}>
@@ -79,20 +75,6 @@ const CalculatorSection = () => {
         ))}
       </div>
 
-      <div className={styles.buttonWrapper}>
-        <button
-          className={styles.exploreAllButton}
-          onClick={() => router.push("/calculators")}
-        >
-          <FaCalculator color="white" />
-          <p>Explore All Calculators</p>
-        </button>
-        <p className={styles.buttonSubtitle}>
-          Access our complete suite of endocrinology calculation tools
-        </p>
-      </div>
-
-      <CalcFooter />
     </div>
   );
 };
