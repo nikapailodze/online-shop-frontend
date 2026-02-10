@@ -5,7 +5,7 @@ export type BlogCard = BlogArticle & { imageClass: string };
 export const staticArticles: BlogCard[] = [
   {
     id: "1",
-    category: "Technology",
+    category: "Clinical Research",
     readTime: "10 min",
     title: "Building Resilient Microservices in 2026",
     excerpt:
@@ -13,7 +13,7 @@ export const staticArticles: BlogCard[] = [
     author: "Marcus Chen",
     date: "Feb 6, 2026",
     imageClass: "cardImageOne",
-    tags: ["microservices", "cloud", "architecture", "devops"],
+    tags: ["research", "clinical-guidelines", "case-studies", "metabolism"],
     createdAt: new Date("2026-02-06").getTime(),
     coverImage: "/mainBG.png",
     content:
@@ -21,7 +21,7 @@ export const staticArticles: BlogCard[] = [
   },
   {
     id: "2",
-    category: "Business",
+    category: "Patient Education",
     readTime: "6 min",
     title: "The Psychology of Pricing Strategies",
     excerpt:
@@ -29,14 +29,14 @@ export const staticArticles: BlogCard[] = [
     author: "Sarah Kim",
     date: "Feb 4, 2026",
     imageClass: "cardImageTwo",
-    tags: ["pricing", "psychology", "strategy", "retail"],
+    tags: ["patient-education", "nutrition", "hormones", "diabetes"],
     createdAt: new Date("2026-02-04").getTime(),
     content:
       "## Pricing is perception\nPrices are anchors. They tell a story before customers read a single word.\n\n### Behavioral levers\n- Anchoring and contrast\n- Loss aversion framing\n- Decoy pricing\n\nStart by testing a single change and measuring downstream conversions.",
   },
   {
     id: "3",
-    category: "Lifestyle",
+    category: "Endocrinology",
     readTime: "5 min",
     title: "Digital Minimalism in a Connected World",
     excerpt:
@@ -44,7 +44,7 @@ export const staticArticles: BlogCard[] = [
     author: "James Park",
     date: "Feb 2, 2026",
     imageClass: "cardImageThree",
-    tags: ["minimalism", "wellness", "focus", "productivity"],
+    tags: ["endocrinology", "thyroid", "pcos", "insulin"],
     createdAt: new Date("2026-02-02").getTime(),
     content:
       "## Quieting the noise\nMinimalism is about choice, not restriction.\n\n### Practical steps\n- Schedule focused blocks\n- Remove non-essential notifications\n- Curate your information diet\n\nThe goal is intentionality, not abstinence.",

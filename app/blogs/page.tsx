@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FiEdit3 } from "react-icons/fi";
+import { FiEdit3, FiSearch } from "react-icons/fi";
 import { useEffect, useMemo, useState } from "react";
 import { getStoredBlogs, type BlogArticle } from "../lib/blogs";
 import { staticArticles, type BlogCard } from "../lib/blogData";
@@ -9,39 +9,40 @@ import styles from "./page.module.scss";
 
 const categories = [
   "All",
-  "Technology",
-  "Design",
-  "Business",
-  "Lifestyle",
-  "Science",
-  "Culture",
+  "Endocrinology",
+  "Diabetes Care",
+  "Thyroid",
+  "Metabolism",
+  "Nutrition",
+  "Clinical Research",
+  "Patient Education",
 ];
 
 const tags = [
-  "ai",
-  "architecture",
-  "automation",
-  "books",
-  "cloud",
-  "community",
-  "computing",
-  "culture",
-  "design-systems",
-  "devops",
-  "focus",
-  "innovation",
-  "microservices",
-  "minimalism",
-  "pricing",
-  "productivity",
-  "psychology",
-  "quantum",
+  "endocrinology",
+  "diabetes",
+  "thyroid",
+  "pcos",
+  "obesity",
+  "insulin",
+  "hba1c",
+  "metabolism",
+  "hormones",
+  "pituitary",
+  "adrenal",
+  "lipids",
+  "cardio-risk",
+  "nutrition",
+  "exercise",
+  "clinical-guidelines",
+  "case-studies",
+  "patient-education",
+  "pregnancy",
+  "pediatrics",
+  "osteoporosis",
+  "vitamin-d",
+  "renal",
   "research",
-  "retail",
-  "saas",
-  "strategy",
-  "ux",
-  "wellness",
 ];
 
 const articles: BlogCard[] = staticArticles.map((article) => ({
@@ -52,6 +53,7 @@ const articles: BlogCard[] = staticArticles.map((article) => ({
 export default function BlogsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const [storedBlogs, setStoredBlogs] = useState<BlogArticle[]>([]);
   const [featuredIndex, setFeaturedIndex] = useState(0);
 
@@ -94,13 +96,21 @@ export default function BlogsPage() {
   }, [featuredPool, activeCategory, activeTag]);
 
   const filteredArticles = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
     return allArticles.filter((article) => {
       const matchesCategory =
         activeCategory === "All" || article.category === activeCategory;
       const matchesTag = !activeTag || article.tags.includes(activeTag);
-      return matchesCategory && matchesTag;
+      const matchesSearch =
+        !query ||
+        article.title.toLowerCase().includes(query) ||
+        article.excerpt.toLowerCase().includes(query) ||
+        article.author.toLowerCase().includes(query) ||
+        article.category.toLowerCase().includes(query) ||
+        article.tags.some((tag) => tag.toLowerCase().includes(query));
+      return matchesCategory && matchesTag && matchesSearch;
     });
-  }, [activeCategory, activeTag, allArticles]);
+  }, [activeCategory, activeTag, allArticles, searchQuery]);
 
   const featuredArticle = useMemo(() => {
     return featuredFiltered[featuredIndex] ?? null;
@@ -198,14 +208,14 @@ export default function BlogsPage() {
             ))}
           </div>
           <div className={styles.search}>
-            <span className={styles.searchIcon} aria-hidden>
-              Search
-            </span>
+            <FiSearch className={styles.searchIcon} aria-hidden />
             <input
               type="text"
               placeholder="Search articles..."
               className={styles.searchInput}
               aria-label="Search articles"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
             />
           </div>
         </div>
@@ -258,7 +268,14 @@ export default function BlogsPage() {
                       : undefined
                   }
                 >
-                  <span className={styles.cardBadge}>{article.category}</span>
+                  <span
+                    className={`${styles.cardBadge} ${
+                      styles[`badge${article.category.replace(/\s+/g, "")}`] ??
+                      ""
+                    }`}
+                  >
+                    {article.category}
+                  </span>
                 </div>
                 <div className={styles.cardBody}>
                   <div className={styles.cardMeta}>
@@ -292,6 +309,27 @@ export default function BlogsPage() {
           <p>Try adjusting your search or filters to find what you're looking for.</p>
         </section>
       )}
+
+      <section className={styles.newsletter}>
+        <div className={styles.newsletterContent}>
+          <h3>Stay in the loop</h3>
+          <p>
+            Get the latest endocrine insights delivered to your inbox. No spam,
+            just clear and practical updates.
+          </p>
+          <div className={styles.newsletterForm}>
+            <input
+              type="email"
+              placeholder="you@email.com"
+              className={styles.newsletterInput}
+              aria-label="Email address"
+            />
+            <button className={styles.newsletterButton} type="button">
+              Send
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

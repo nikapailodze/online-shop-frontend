@@ -26,7 +26,7 @@ export default function WriteArticlePage() {
   const router = useRouter();
   const { register, handleSubmit, reset } = useForm<FormValues>({
     defaultValues: {
-      category: "technology",
+      category: "endocrinology",
       readTime: 5,
       featured: false,
     },
@@ -72,13 +72,16 @@ export default function WriteArticlePage() {
       year: "numeric",
     });
 
+    const categoryTitle = values.category
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
     return {
       id: draftId ?? `${Date.now()}`,
       title: values.title,
       excerpt: values.excerpt,
-      category:
-        values.category.charAt(0).toUpperCase() +
-        values.category.slice(1),
+      category: categoryTitle,
       author: values.author,
       readTime: `${values.readTime} min`,
       date,
@@ -278,10 +281,13 @@ export default function WriteArticlePage() {
           <div className={styles.field}>
             <label className={styles.label}>Category</label>
             <select className={styles.input} {...register("category")}>
-              <option value="technology">technology</option>
-              <option value="design">design</option>
-              <option value="business">business</option>
-              <option value="lifestyle">lifestyle</option>
+              <option value="endocrinology">endocrinology</option>
+              <option value="diabetes care">diabetes care</option>
+              <option value="thyroid">thyroid</option>
+              <option value="metabolism">metabolism</option>
+              <option value="nutrition">nutrition</option>
+              <option value="clinical research">clinical research</option>
+              <option value="patient education">patient education</option>
             </select>
           </div>
           <div className={styles.field}>

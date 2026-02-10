@@ -35,7 +35,7 @@
   font-weight: 400;
   font-size: clamp(24px, 3.2vw, 40px);
   line-height: 1.1;
-  color: var(--color-text);
+  color: var(--color-primary);
   margin-bottom: 6px;
 }
 
@@ -45,5 +45,5 @@
   font-size: 0.875rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-text);
+  color: var(--color-primary);
 }
