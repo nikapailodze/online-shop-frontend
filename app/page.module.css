@@ -4,7 +4,13 @@
     flex-direction: column;
     width: 100%;
     gap: 80px;
-    padding-bottom: 80px;
+    min-height: 100vh;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
 }
 
 .homeSection {
@@ -39,6 +45,8 @@
     width: 100vw;
     margin-left: calc(50% - 50vw);
     display: block;
+    margin-top: auto;
+    flex-shrink: 0;
 }
 
 @media (max-width: 1300px) {
