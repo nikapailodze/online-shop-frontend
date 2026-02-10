@@ -3,7 +3,6 @@ import { FaBone } from "react-icons/fa6";
 import { PiBoneFill } from "react-icons/pi";
 
 import CardComponent from "./CardComponent/CardComponent";
-import CalcFooter from "./CalcFooter/CalcFooter";
 import { useRouter } from "next/navigation";
 const calculators = [
   {

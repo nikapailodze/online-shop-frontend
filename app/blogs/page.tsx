@@ -306,7 +306,10 @@ export default function BlogsPage() {
         <section className={styles.emptyState}>
           <div className={styles.emptyIcon}>Doc</div>
           <h3>No articles found</h3>
-          <p>Try adjusting your search or filters to find what you're looking for.</p>
+          <p>
+            Try adjusting your search or filters to find what you&apos;re
+            looking for.
+          </p>
         </section>
       )}
 
