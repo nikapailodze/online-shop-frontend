@@ -18,18 +18,19 @@ export default function Home() {
         <CalculatorSection />
       </div>
 
-
-      <div className={styles.productionSection}>
-        <ProductionSection />
-      </div>
-
       <div className={styles.consultationSection}>
         <ConsultationSection />
       </div>
 
+      <div className={styles.productionSection}>
+        <ProductionSection />
+      </div>
+      
       <div className={styles.contactSection}>
         <ContactSection />
       </div>
+
+
 
       <div className={styles.footerSection}>
         <FooterSection />
