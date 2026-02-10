@@ -20,7 +20,7 @@ const formatDate = (value: string) => {
 const renderContent = (content?: string) => {
   if (!content) return null;
   const lines = content.split(/\r?\n/);
-  const blocks: Array<JSX.Element> = [];
+  const blocks: React.ReactElement[] = [];
   let listItems: string[] = [];
 
   const flushList = () => {
