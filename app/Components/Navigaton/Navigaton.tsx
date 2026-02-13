@@ -9,31 +9,18 @@ import AsideCart from "../AsideCart/AsideCart";
 import { useRouter } from "next/navigation";
 import { useCartRef } from "@/app/Context/CartRefContext";
 import { useCart } from "@/app/Context/CartContext";
+import { useLanguage } from "@/app/Context/LanguageContext";
 import Image from "next/image";
-
-type LanguageCode = "en" | "ka";
 
 const Navigaton = () => {
   const [showNavItems, setShowNavItems] = useState(false);
-  const [language, setLanguage] = useState<LanguageCode>("en");
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const languageMenuRef = useRef<HTMLDivElement>(null);
+  const { language, setLanguage } = useLanguage();
 
   const router = useRouter();
   const cartRef = useCartRef();
   const { toggleCart, isCartOpen, closeCart } = useCart();
-
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem("selectedLanguage");
-    if (savedLanguage === "en" || savedLanguage === "ka") {
-      setLanguage(savedLanguage);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.lang = language;
-    localStorage.setItem("selectedLanguage", language);
-  }, [language]);
 
   useEffect(() => {
     const onDocumentClick = (event: MouseEvent) => {
@@ -53,6 +40,18 @@ const Navigaton = () => {
   }, []);
 
   const languageLabel = language === "en" ? "EN" : "GE";
+  const applyLanguage = (nextLanguage: "en" | "ka") => {
+    if (nextLanguage === language) {
+      setIsLanguageOpen(false);
+      return;
+    }
+
+    localStorage.setItem("selectedLanguage", nextLanguage);
+    document.documentElement.lang = nextLanguage;
+    setLanguage(nextLanguage);
+    setIsLanguageOpen(false);
+    window.location.reload();
+  };
 
   return (
     <div className={styles.navWrapper}>
@@ -77,7 +76,7 @@ const Navigaton = () => {
                 onClick={() => setIsLanguageOpen((prev) => !prev)}
                 aria-haspopup="menu"
                 aria-expanded={isLanguageOpen}
-                aria-label="Select language"
+                aria-label={language === "en" ? "Select language" : "აირჩიეთ ენა"}
               >
                 <BsGlobe2 />
                 <span>{languageLabel}</span>
@@ -92,10 +91,7 @@ const Navigaton = () => {
                   <button
                     type="button"
                     className={styles.languageOption}
-                    onClick={() => {
-                      setLanguage("en");
-                      setIsLanguageOpen(false);
-                    }}
+                    onClick={() => applyLanguage("en")}
                     role="menuitem"
                   >
                     EN
@@ -103,10 +99,7 @@ const Navigaton = () => {
                   <button
                     type="button"
                     className={styles.languageOption}
-                    onClick={() => {
-                      setLanguage("ka");
-                      setIsLanguageOpen(false);
-                    }}
+                    onClick={() => applyLanguage("ka")}
                     role="menuitem"
                   >
                     GE
