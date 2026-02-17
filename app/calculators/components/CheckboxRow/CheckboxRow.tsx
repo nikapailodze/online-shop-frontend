@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./CheckboxRow.module.scss";
+import { useLanguage } from "@/app/Context/LanguageContext";
+import { translateText } from "@/app/lib/translate";
 
 export default function CheckboxRow(props: {
   id: string;
@@ -9,6 +11,8 @@ export default function CheckboxRow(props: {
   badge?: string;
   badgeTone?: "green" | "orange";
 }) {
+  const { language } = useLanguage();
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     props.onChange(e.target.checked);
   }
@@ -22,7 +26,7 @@ export default function CheckboxRow(props: {
         onChange={handleChange}
         className={styles.checkbox}
       />
-      <span className={styles.text}>{props.label}</span>
+      <span className={styles.text}>{translateText(props.label, language)}</span>
       {props.badge ? (
         <span
           className={`${styles.badge} ${

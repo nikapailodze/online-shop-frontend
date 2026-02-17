@@ -94,6 +94,12 @@
   text-align: center;
 }
 
+.copyrightKa {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
 @media (max-width: 900px) {
   .inner {
     grid-template-columns: 1fr;

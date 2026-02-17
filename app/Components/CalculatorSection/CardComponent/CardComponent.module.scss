@@ -3,8 +3,6 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  max-width: 400px;
-  flex: 1 1 300px;
   height: 200px;
   padding: 20px;
   background-color: var(--color-bg);
@@ -26,6 +24,7 @@
   display: flex;
   align-items: flex-start;
   gap: 16px;
+  min-width: 0;
 }
 .iconContainer {
   flex-shrink: 0;
@@ -46,33 +45,47 @@
 .textContainer{
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   align-items: flex-start;
+  flex: 1;
+  min-width: 0;
 }
 
 .title {
-  display: block;
   font-weight: 200;
-  font-size: 24px;
+  font-size: 22px;
+  line-height: 1.2;
   color: var(--color-text);
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  width: 100%;
+  max-width: 100%;
+  white-space: normal;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .subTitle {
   font-size: 0.875rem;
+  min-height: calc(1.4em * 2);
   color: var(--color-text);
   line-height: 1.4;
+  width: 100%;
+  max-width: 100%;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  white-space: normal;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   overflow: hidden;
-   -webkit-line-clamp: 3;
-  line-clamp: 3;
   text-overflow: ellipsis;
+}
+
+.highlight {
+  color: #6ba0ed;
+  font-weight: 600;
 }
 
 .calculatorLink {

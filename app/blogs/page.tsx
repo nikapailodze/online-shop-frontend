@@ -50,6 +50,28 @@ const articles: BlogCard[] = staticArticles.map((article) => ({
   imageClass: styles[article.imageClass as keyof typeof styles] ?? "",
 }));
 
+const escapeRegExp = (value: string) =>
+  value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const highlightText = (text: string, query: string, className: string) => {
+  const q = query.trim();
+  if (!q) return text;
+
+  const pattern = new RegExp(`(${escapeRegExp(q)})`, "ig");
+  const parts = text.split(pattern);
+  if (parts.length === 1) return text;
+
+  return parts.map((part, index) =>
+    part.toLowerCase() === q.toLowerCase() ? (
+      <span key={`${part}-${index}`} className={className}>
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  );
+};
+
 export default function BlogsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeTag, setActiveTag] = useState<string | null>(null);
@@ -152,17 +174,28 @@ export default function BlogsPage() {
                   : undefined
               }
             />
-            <div className={styles.heroOrbit} />
           </div>
           <div className={styles.heroContent}>
             <div className={styles.heroTags}>
               <span className={styles.heroPill}>
-                {featuredArticle.category}
+                {highlightText(
+                  featuredArticle.category,
+                  searchQuery,
+                  styles.highlight
+                )}
               </span>
               <span className={styles.heroTab}>Featured</span>
             </div>
-            <h1 className={styles.heroTitle}>{featuredArticle.title}</h1>
-            <p className={styles.heroExcerpt}>{featuredArticle.excerpt}</p>
+            <h1 className={styles.heroTitle}>
+              {highlightText(featuredArticle.title, searchQuery, styles.highlight)}
+            </h1>
+            <p className={styles.heroExcerpt}>
+              {highlightText(
+                featuredArticle.excerpt,
+                searchQuery,
+                styles.highlight
+              )}
+            </p>
             <div className={styles.heroMeta}>
               <div className={styles.avatar}>
                 <span>
@@ -174,7 +207,11 @@ export default function BlogsPage() {
               </div>
               <div>
                 <div className={styles.metaName}>
-                  {featuredArticle.author}
+                  {highlightText(
+                    featuredArticle.author,
+                    searchQuery,
+                    styles.highlight
+                  )}
                 </div>
                 <div className={styles.metaInfo}>
                   {featuredArticle.date} - {featuredArticle.readTime} read
@@ -274,15 +311,19 @@ export default function BlogsPage() {
                       ""
                     }`}
                   >
-                    {article.category}
+                    {highlightText(article.category, searchQuery, styles.highlight)}
                   </span>
                 </div>
                 <div className={styles.cardBody}>
                   <div className={styles.cardMeta}>
                     <span>{article.readTime}</span>
                   </div>
-                  <h2 className={styles.cardTitle}>{article.title}</h2>
-                  <p className={styles.cardExcerpt}>{article.excerpt}</p>
+                  <h2 className={styles.cardTitle}>
+                    {highlightText(article.title, searchQuery, styles.highlight)}
+                  </h2>
+                  <p className={styles.cardExcerpt}>
+                    {highlightText(article.excerpt, searchQuery, styles.highlight)}
+                  </p>
                   <div className={styles.cardFooter}>
                     <div className={styles.cardAvatar}>
                       <span>
@@ -293,7 +334,13 @@ export default function BlogsPage() {
                       </span>
                     </div>
                     <div>
-                      <div className={styles.cardAuthor}>{article.author}</div>
+                      <div className={styles.cardAuthor}>
+                        {highlightText(
+                          article.author,
+                          searchQuery,
+                          styles.highlight
+                        )}
+                      </div>
                       <div className={styles.cardDate}>{article.date}</div>
                     </div>
                   </div>

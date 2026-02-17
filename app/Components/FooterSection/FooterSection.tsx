@@ -1,8 +1,12 @@
 "use client";
 import styles from "./FooterSection.module.scss";
 import Image from "next/image";
+import { useLanguage } from "@/app/Context/LanguageContext";
+import { translateText } from "@/app/lib/translate";
 
 const FooterSection = () => {
+  const { language } = useLanguage();
+
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
@@ -16,16 +20,18 @@ const FooterSection = () => {
           />
           <div className={styles.brandText}>
             Endopai
-            <span className={styles.brandSub}>Endocrinology Clinic</span>
+            <span className={styles.brandSub}>
+              {translateText("Endocrinology Clinic", language)}
+            </span>
           </div>
         </div>
 
         <div className={styles.links}>
-          <a href="#">Admin Log In</a>
+          <a href="#">{translateText("Admin Log In", language)}</a>
           <span className={styles.divider}>|</span>
-          <a href="#">Site Map</a>
+          <a href="#">{translateText("Site Map", language)}</a>
           <span className={styles.divider}>|</span>
-          <a href="#">Privacy Policy</a>
+          <a href="#">{translateText("Privacy Policy", language)}</a>
         </div>
 
         <div className={styles.socials}>
@@ -35,8 +41,12 @@ const FooterSection = () => {
         </div>
       </div>
 
-      <div className={styles.copyright}>
-        Copyright © 2026 Endopail. All rights reserved.
+      <div
+        className={`${styles.copyright} ${
+          language === "ka" ? styles.copyrightKa : ""
+        }`}
+      >
+        {translateText("Copyright © 2026 Endopail. All rights reserved.", language)}
       </div>
     </footer>
   );

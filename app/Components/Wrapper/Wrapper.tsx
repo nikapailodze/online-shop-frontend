@@ -4,6 +4,9 @@ import React, { ReactNode } from "react";
 import Navigaton from "../Navigaton/Navigaton";
 import { CartRefProvider } from "@/app/Context/CartRefContext";
 import { CartProvider } from "@/app/Context/CartContext";
+import { LanguageProvider } from "@/app/Context/LanguageContext";
+import LanguageRuntimeTranslator from "../LanguageRuntimeTranslator/LanguageRuntimeTranslator";
+import FooterSection from "../FooterSection/FooterSection";
 import { usePathname } from "next/navigation";
 
 interface WrapperProps {
@@ -18,8 +21,12 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
     <div className={styles.container}>
       <CartRefProvider>
         <CartProvider>
-          {!isExcludedPath && <Navigaton />}
-          <div className={styles.wrapper}>{children}</div>
+          <LanguageProvider>
+            <LanguageRuntimeTranslator />
+            {!isExcludedPath && <Navigaton />}
+            <div className={styles.wrapper}>{children}</div>
+            <FooterSection />
+          </LanguageProvider>
         </CartProvider>
       </CartRefProvider>
     </div>

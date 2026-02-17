@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./RadioOption.module.scss";
+import { useLanguage } from "@/app/Context/LanguageContext";
+import { translateText } from "@/app/lib/translate";
 
 type Props = {
   name: string;
@@ -11,6 +13,8 @@ type Props = {
 };
 
 export default function RadioOption(props: Props) {
+  const { language } = useLanguage();
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (props.onChange) props.onChange(e.target.value);
   }
@@ -26,7 +30,7 @@ export default function RadioOption(props: Props) {
         onChange={handleChange}
         className={styles.input}
       />
-      <span className={styles.label}>{props.label}</span>
+      <span className={styles.label}>{translateText(props.label, language)}</span>
     </label>
   );
 }
