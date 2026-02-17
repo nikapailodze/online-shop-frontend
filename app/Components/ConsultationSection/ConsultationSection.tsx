@@ -53,13 +53,15 @@ const ConsultationSection = () => {
           <div className={styles.textBlock}>
             <h3 className={styles.name}>Dr. Mariami Pailodze</h3>
             <p className={styles.bio}>
-              Dedicated to endocrine care and practical tools that help
-              clinicians make confident decisions. EndoPail blends clinical
-              expertise with approachable design so every calculator feels
-              clear, fast, and trustworthy. Lorem ipsum dolor, sit amet
-              consectetur adipisicing elit. Sunt, cupiditate neque? Eius id
-              facilis vero at voluptates consequatur corrupti, reprehenderit ut
-              quasi consectetur unde sed! Libero veniam iure iste laudantium. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam atque vero beatae numquam provident nisi cupiditate necessitatibus, aspernatur incidunt sed iure consequuntur eligendi quidem eum veritatis repudiandae suscipit dolor inventore!
+              Hi there! As a Medical Doctor and Endocrinology Resident at
+              Caucasus Medical Center, I specialize in diagnosing and managing
+              endocrine disorders while actively contributing to medical
+              research. With expertise in drug safety, pharmacovigilance, and
+              clinical trials, I ensure patient safety and evidence-based
+              treatment approaches. As a Study Coordinator for a Phase III
+              clinical trial, and member of the Endocrinology Association, I
+              am committed to advancing healthcare through research,
+              innovation, and multidisciplinary collaboration.
             </p>
             <Link href="/consultation" className={styles.primaryButton}>
               Schedule appointment with me
