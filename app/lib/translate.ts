@@ -9,13 +9,15 @@ const georgianTranslations: Record<string, string> = {
   Profile: "პროფილი",
   "About ENDOPAIL": "ENDOPAIL-ის შესახებ",
   Welcome: "კეთილი იყოს თქვენი მობრძანება",
-  "Welcome to EndoPail": "კეთილი იყოს თქვენი მობრძანება EndoPail-ზე",
+  "Welcome to EndoPail": "",
   "Smart Calculators for Smarter Care": "ჭკვიანი კალკულატორები უკეთესი კლინიკური პრაქტიკისთვის",
   "Built by a passionate endocrine specialist,":
     "შექმნილია ენდოკრინოლოგიის სპეციალისტის მიერ,",
   "this site is designed to empower the endocrine community with practical tools and relatable flair.":
     "ეს საიტი ენდოკრინოლოგიურ საზოგადოებას სთავაზობს პრაქტიკულ და მარტივად გამოსაყენებელ ინსტრუმენტებს.",
   "Meet the Doctor": "გაიცანით ექიმი",
+  "Hi there! As a Medical Doctor and Endocrinology Resident at Caucasus Medical Center, I specialize in diagnosing and managing endocrine disorders while actively contributing to medical research. With expertise in drug safety, pharmacovigilance, and clinical trials, I ensure patient safety and evidence-based treatment approaches. As a Study Coordinator for a Phase III clinical trial, and member of the Endocrinology Association, I am committed to advancing healthcare through research, innovation, and multidisciplinary collaboration.":
+    "გამარჯობა! როგორც ექიმი და ენდოკრინოლოგიის რეზიდენტი კავკასიის სამედიცინო ცენტრში, სპეციალიზებული ვარ ენდოკრინული დაავადებების დიაგნოსტიკასა და მართვაში და აქტიურად ვმონაწილეობ სამედიცინო კვლევებში. მედიკამენტების უსაფრთხოების, ფარმაკოვიგილანსისა და კლინიკური კვლევების გამოცდილებით, უზრუნველვყოფ პაციენტის უსაფრთხოებასა და მტკიცებულებაზე დაფუძნებულ მკურნალობის მიდგომებს. როგორც III ფაზის კლინიკური კვლევის კოორდინატორი და ენდოკრინოლოგთა ასოციაციის წევრი, ერთგული ვარ ჯანდაცვის განვითარებისადმი კვლევის, ინოვაციისა და მულტიდისციპლინური თანამშრომლობის გზით.",
   "Schedule appointment with me": "დაჯავშნეთ კონსულტაცია ჩემთან",
   Articles: "სტატიები",
   Featured: "რჩეული",
@@ -281,21 +283,22 @@ export function translateText(text: string, language: LanguageCode): string {
   const trailingWhitespaceMatch = text.match(/\s*$/);
   const leadingWhitespace = leadingWhitespaceMatch?.[0] ?? "";
   const trailingWhitespace = trailingWhitespaceMatch?.[0] ?? "";
+  const normalized = trimmed.replace(/\s+/g, " ");
 
-  const directMatch = georgianTranslations[trimmed];
-  if (directMatch) {
+  if (Object.prototype.hasOwnProperty.call(georgianTranslations, normalized)) {
+    const directMatch = georgianTranslations[normalized];
     return `${leadingWhitespace}${directMatch}${trailingWhitespace}`;
   }
 
   for (const rule of dynamicGeorgianRules) {
-    const match = trimmed.match(rule.pattern);
+    const match = normalized.match(rule.pattern);
     if (!match) continue;
     return `${leadingWhitespace}${rule.replace(
       ...(match.slice(1) as string[])
     )}${trailingWhitespace}`;
   }
 
-  let translated = trimmed;
+  let translated = normalized;
   const sortedPhrases = Object.keys(georgianPhraseReplacements).sort(
     (a, b) => b.length - a.length
   );
@@ -304,7 +307,7 @@ export function translateText(text: string, language: LanguageCode): string {
     translated = translated.split(phrase).join(georgianPhraseReplacements[phrase]);
   }
 
-  if (translated !== trimmed) {
+  if (translated !== normalized) {
     return `${leadingWhitespace}${translated}${trailingWhitespace}`;
   }
 
