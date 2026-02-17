@@ -183,3 +183,64 @@
 .logoutButton:hover {
   opacity: 0.8;
 }
+
+@media (max-width: 640px) {
+  .navWrapper {
+    padding: 0 14px;
+  }
+
+  .nav {
+    padding: 14px 0;
+  }
+
+  .logoImage {
+    width: 92px;
+  }
+
+  .navItemsRight {
+    gap: 8px;
+  }
+
+  .languageTrigger {
+    font-size: 16px;
+    padding: 4px 6px;
+    gap: 4px;
+  }
+
+  .languageTrigger svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .languageDropdown {
+    left: auto;
+    right: 0;
+    transform: none;
+    width: 74px;
+  }
+
+  .languageDropdown::before {
+    left: auto;
+    right: 12px;
+    transform: rotate(45deg);
+  }
+
+  .languageOption {
+    font-size: 14px;
+    padding: 8px 6px;
+  }
+
+  .timeWrapper {
+    font-size: 16px;
+  }
+
+  .burgerMenu svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .cartIcon svg {
+    width: 26px;
+    height: 26px;
+  }
+}

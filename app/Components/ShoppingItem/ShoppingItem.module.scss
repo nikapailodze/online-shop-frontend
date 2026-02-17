@@ -1,5 +1,6 @@
 .shoppingItemContianer {
   max-width: 347px;
+  width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -32,8 +33,10 @@
 }
 
 .shoppingItemContent {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px;
 }
 
 .heading3 {
@@ -43,4 +46,48 @@
   text-align: left;
   font-weight: 300;
   font-family: var(--font-satoshi), sans-serif;
+  margin: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.price {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-weight: 300;
+  font-family: var(--font-satoshi), sans-serif;
+}
+
+.itemDescription {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 640px) {
+  .shoppingItemContianer {
+    max-width: none;
+  }
+
+  .imageWrapper {
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+
+  .heading3 {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .price {
+    font-size: 24px;
+  }
+
+  .itemDescription {
+    font-size: 15px;
+  }
 }

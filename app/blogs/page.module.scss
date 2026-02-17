@@ -205,6 +205,8 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 14px;
+  white-space: nowrap;
+  line-height: 1.2;
 }
 
 .categoryActive {
@@ -599,6 +601,16 @@
 @media (max-width: 640px) {
   .page {
     padding: 20px 0 60px;
+  }
+
+  .categories {
+    gap: 8px;
+    padding-bottom: 4px;
+  }
+
+  .category {
+    font-size: 13px;
+    padding: 8px 12px;
   }
 
   .topActions {

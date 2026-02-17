@@ -52,4 +52,8 @@
   .cardsContainer {
     grid-template-columns: 1fr;
   }
+
+  .cardsContainer > *:nth-child(n + 4) {
+    display: none;
+  }
 }

@@ -38,7 +38,7 @@ const ShoppingItem: React.FC<ShoppingItemProps> = ({
       <div className={styles.infoWrapper}>
         <div className={styles.shoppingItemContent}>
           <h3 className={styles.heading3}>{name}</h3>
-          <p className={styles.heading3}>{price.toFixed(2)} GEL</p>
+          <p className={styles.price}>{price.toFixed(2)} GEL</p>
         </div>
         <p className={styles.itemDescription}>{description}</p>
       </div>
