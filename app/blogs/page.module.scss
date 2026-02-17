@@ -89,17 +89,6 @@
   background-position: center;
 }
 
-.heroOrbit {
-  position: absolute;
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  border: 1px solid rgba(17, 17, 17, 0.08);
-  top: 60px;
-  left: 60px;
-  box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.4);
-}
-
 .heroContent {
   display: flex;
   flex-direction: column;

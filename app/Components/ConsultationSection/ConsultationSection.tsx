@@ -85,7 +85,6 @@ const ConsultationSection = () => {
                     : undefined
                 }
               />
-              <div className={styles.blogRing} />
               </div>
               <div className={styles.blogContent}>
               <div className={styles.blogTags}>

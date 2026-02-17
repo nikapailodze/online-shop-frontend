@@ -152,7 +152,6 @@ export default function BlogsPage() {
                   : undefined
               }
             />
-            <div className={styles.heroOrbit} />
           </div>
           <div className={styles.heroContent}>
             <div className={styles.heroTags}>
