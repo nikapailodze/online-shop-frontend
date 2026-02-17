@@ -12,15 +12,19 @@ export default function RadioGroup(props: {
   options: Option[];
   onChange: (v: string) => void;
   columns?: number;
+  showLabel?: boolean;
 }) {
   const cols = props.columns && props.columns > 1 ? styles.two : styles.one;
   const { language } = useLanguage();
+  const showLabel = props.showLabel ?? false;
 
   return (
     <>
-      <label htmlFor={props.name} className={styles.label}>
-        {translateText(props.name, language)}
-      </label>
+      {showLabel ? (
+        <label htmlFor={props.name} className={styles.label}>
+          {translateText(props.name, language)}
+        </label>
+      ) : null}
       <div className={`${styles.group} ${cols}`}>
         {props.options.map(function (opt, idx) {
           return (
