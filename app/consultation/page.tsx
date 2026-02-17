@@ -164,7 +164,7 @@ export default function ConsultationPage() {
               </div>
               <div className={styles.stepContent}>
                 <strong>Choose date</strong>
-                <span>{formData.date || "Select a date"}</span>
+                <span>{formData.date || "Not selected"}</span>
               </div>
             </div>
             <div className={`${styles.stepLine} ${isStep1Complete ? styles.stepLineFilled : ""}`}>

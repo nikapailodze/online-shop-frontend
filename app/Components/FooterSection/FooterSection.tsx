@@ -41,7 +41,11 @@ const FooterSection = () => {
         </div>
       </div>
 
-      <div className={styles.copyright}>
+      <div
+        className={`${styles.copyright} ${
+          language === "ka" ? styles.copyrightKa : ""
+        }`}
+      >
         {translateText("Copyright © 2026 Endopail. All rights reserved.", language)}
       </div>
     </footer>

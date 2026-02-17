@@ -28,14 +28,26 @@ export default function LanguageRuntimeTranslator() {
       if (!parent) return;
       if (parent.closest("script, style, noscript")) return;
 
-      const originalText =
-        textNodeOriginals.get(textNode) ?? textNode.nodeValue ?? "";
-      if (!textNodeOriginals.has(textNode)) {
+      const currentValue = textNode.nodeValue ?? "";
+      let originalText = textNodeOriginals.get(textNode);
+      if (originalText == null) {
+        originalText = currentValue;
         textNodeOriginals.set(textNode, originalText);
+      } else {
+        const translatedFromStored = translateText(originalText, language);
+        // If UI updates text to a new value (not the translator output),
+        // treat it as a new source string and translate from that.
+        if (
+          currentValue !== translatedFromStored &&
+          currentValue !== originalText
+        ) {
+          originalText = currentValue;
+          textNodeOriginals.set(textNode, originalText);
+        }
       }
 
       const translated = translateText(originalText, language);
-      if (textNode.nodeValue !== translated) {
+      if (currentValue !== translated) {
         textNode.nodeValue = translated;
       }
     };
@@ -55,7 +67,16 @@ export default function LanguageRuntimeTranslator() {
           originalMap.set(attribute, currentValue);
         }
 
-        const originalValue = originalMap.get(attribute) ?? currentValue;
+        let originalValue = originalMap.get(attribute) ?? currentValue;
+        const translatedFromStored = translateText(originalValue, language);
+        if (
+          currentValue !== translatedFromStored &&
+          currentValue !== originalValue
+        ) {
+          originalValue = currentValue;
+          originalMap.set(attribute, originalValue);
+        }
+
         const translated = translateText(originalValue, language);
         if (currentValue !== translated) {
           element.setAttribute(attribute, translated);
