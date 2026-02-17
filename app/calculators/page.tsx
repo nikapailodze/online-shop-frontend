@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useMemo, useState } from "react";
 import CardComponent from "../Components/CalculatorSection/CardComponent/CardComponent";
 import styles from "./page.module.scss";
 import { useLanguage } from "../Context/LanguageContext";
@@ -176,15 +177,37 @@ const kaBySlug: Record<string, { title: string; short: string }> = {
 
 export default function CalculatorsIndex() {
   const { language } = useLanguage();
-  const localizeCard = (slug: string, title: string, short: string) => {
-    if (language === "ka" && kaBySlug[slug]) {
-      return kaBySlug[slug];
-    }
-    return {
-      title: translateText(title, language),
-      short: translateText(short, language),
-    };
-  };
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const localizeCard = useCallback(
+    (slug: string, title: string, short: string) => {
+      if (language === "ka" && kaBySlug[slug]) {
+        return kaBySlug[slug];
+      }
+      return {
+        title: translateText(title, language),
+        short: translateText(short, language),
+      };
+    },
+    [language]
+  );
+
+  const filteredCalculators = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return calculators;
+
+    return calculators.filter((c) => {
+      const localized = localizeCard(c.slug, c.title, c.short);
+      return (
+        localized.title.toLowerCase().includes(query) ||
+        localized.short.toLowerCase().includes(query) ||
+        c.category.toLowerCase().includes(query)
+      );
+    });
+  }, [searchQuery, localizeCard]);
+
+  const hasResults = filteredCalculators.length > 0;
+  const categories = ["Diabetes", "Fracture Risk", "Metabolic Syndrome", "Osteoporosis"] as const;
 
   return (
     <main className={styles.main}>
@@ -198,93 +221,52 @@ export default function CalculatorsIndex() {
             language
           )}
         </p>
-      </div>
-      <div className={styles.cardsMain}>
-        <div className={styles.cardsWrapper}>
-          <h3 className={styles.categoryTitle}>
-            {translateText("Diabetes", language)}
-          </h3>
-          <div className={styles.cardsContainer}>
-            {calculators
-              .filter((c) => c.category === "Diabetes")
-              .map((c) => {
-                const localized = localizeCard(c.slug, c.title, c.short);
-                return (
-                  <CardComponent
-                    key={c.slug}
-                    title={localized.title}
-                    subTitle={localized.short}
-                    slug={c.slug}
-                    icon={c.icon}
-                  />
-                );
-              })}
-          </div>
-        </div>
-        <div className={styles.cardsWrapper}>
-          <h3 className={styles.categoryTitle}>
-            {translateText("Fracture Risk", language)}
-          </h3>
-          <div className={styles.cardsContainer}>
-            {calculators
-              .filter((c) => c.category === "Fracture Risk")
-              .map((c) => {
-                const localized = localizeCard(c.slug, c.title, c.short);
-                return (
-                  <CardComponent
-                    key={c.slug}
-                    title={localized.title}
-                    subTitle={localized.short}
-                    slug={c.slug}
-                    icon={c.icon}
-                  />
-                );
-              })}
-          </div>
-        </div>
-        <div className={styles.cardsWrapper}>
-          <h3 className={styles.categoryTitle}>
-            {translateText("Metabolic Syndrome", language)}
-          </h3>
-          <div className={styles.cardsContainer}>
-            {calculators
-              .filter((c) => c.category === "Metabolic Syndrome")
-              .map((c) => {
-                const localized = localizeCard(c.slug, c.title, c.short);
-                return (
-                  <CardComponent
-                    key={c.slug}
-                    title={localized.title}
-                    subTitle={localized.short}
-                    slug={c.slug}
-                    icon={c.icon}
-                  />
-                );
-              })}
-          </div>
-        </div>
-        <div className={styles.cardsWrapper}>
-          <h3 className={styles.categoryTitle}>
-            {translateText("Osteoporosis", language)}
-          </h3>
-          <div className={styles.cardsContainer}>
-            {calculators
-              .filter((c) => c.category === "Osteoporosis")
-              .map((c) => {
-                const localized = localizeCard(c.slug, c.title, c.short);
-                return (
-                  <CardComponent
-                    key={c.slug}
-                    title={localized.title}
-                    subTitle={localized.short}
-                    slug={c.slug}
-                    icon={c.icon}
-                  />
-                );
-              })}
-          </div>
+        <div className={styles.searchWrap}>
+          <input
+            type="text"
+            className={styles.searchInput}
+            placeholder={translateText("Search calculators...", language)}
+            aria-label={translateText("Search calculators...", language)}
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+          />
         </div>
       </div>
+      {hasResults ? (
+        <div className={styles.cardsMain}>
+          {categories.map((category) => {
+            const items = filteredCalculators.filter((c) => c.category === category);
+            if (items.length === 0) return null;
+
+            return (
+              <div className={styles.cardsWrapper} key={category}>
+                <h3 className={styles.categoryTitle}>
+                  {translateText(category, language)}
+                </h3>
+                <div className={styles.cardsContainer}>
+                  {items.map((c) => {
+                    const localized = localizeCard(c.slug, c.title, c.short);
+                    return (
+                      <CardComponent
+                        key={c.slug}
+                        title={localized.title}
+                        subTitle={localized.short}
+                        slug={c.slug}
+                        icon={c.icon}
+                        highlightQuery={searchQuery}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <p className={styles.emptyState}>
+          {translateText("No calculators found", language)}
+        </p>
+      )}
     </main>
   );
 }

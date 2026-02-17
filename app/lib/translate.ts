@@ -35,6 +35,8 @@ const georgianTranslations: Record<string, string> = {
   "Endocrinology Calculators": "ენდოკრინოლოგიური კალკულატორები",
   "Explore all calculators": "ყველა კალკულატორის ნახვა",
   "Open calculator": "კალკულატორის გახსნა",
+  "Search calculators...": "კალკულატორების ძიება...",
+  "No calculators found": "კალკულატორები ვერ მოიძებნა",
   "Endocrinology Clinic": "ენდოკრინოლოგიური კლინიკა",
   "Admin Log In": "ადმინის შესვლა",
   "Site Map": "საიტის რუკა",
@@ -47,6 +49,12 @@ const georgianTranslations: Record<string, string> = {
   Diabetes: "დიაბეტი",
   "Fracture Risk": "მოტეხილობის რისკი",
   "Metabolic Syndrome": "მეტაბოლური სინდრომი",
+  "Metabolic Syndrome Criteria (AACE 2003)":
+    "მეტაბოლური სინდრომის კრიტერიუმები (AACE 2003)",
+  "Metabolic Syndrome Criteria (ATP III)":
+    "მეტაბოლური სინდრომის კრიტერიუმები (ATP III)",
+  "Metabolic Syndrome Criteria (IDF 2005)":
+    "მეტაბოლური სინდრომის კრიტერიუმები (IDF 2005)",
   Osteoporosis: "ოსტეოპოროზი",
   "Your wardrobe called — it’s low on hormones.":
     "თქვენი გარდერობი გეძახით — ჰორმონები აკლია.",
@@ -155,13 +163,156 @@ const georgianTranslations: Record<string, string> = {
   "Diabetes Risk Calculator": "დიაბეტის რისკის კალკულატორი",
   "Assess your diabetes risk with this screening tool":
     "შეაფასეთ დიაბეტის რისკი ამ სკრინინგ-ინსტრუმენტით",
+  "USDA DRI Calculator (Adults)": "USDA DRI კალკულატორი (მოზრდილები)",
+  "Estimates energy and macronutrient targets from DRI equations.":
+    "აფასებს დღიურ ენერგიასა და მაკრონუტრიენტების მიზნობრივ დიაპაზონებს DRI ფორმულებით.",
+  "Physical activity": "ფიზიკური აქტივობა",
+  "Activity level": "აქტივობის დონე",
+  Sedentary: "მჯდომარე",
+  "Low active": "დაბალი აქტივობა",
+  Active: "აქტიური",
+  "Very active": "ძალიან აქტიური",
+  "Estimated Energy Requirement (kcal/day)":
+    "ენერგიის სავარაუდო მოთხოვნა (კკალ/დღე)",
+  "Carbohydrate range (g/day)": "ნახშირწყლების დიაპაზონი (გ/დღე)",
+  "Protein range (g/day)": "ცილების დიაპაზონი (გ/დღე)",
+  "Fat range (g/day)": "ცხიმების დიაპაზონი (გ/დღე)",
+  "Total water AI (L/day)": "წყლის საერთო AI (ლ/დღე)",
+  "This implementation currently supports adults 19+ years.":
+    "ამ ვერსიაში მხარდაჭერილია მხოლოდ 19+ წლის მოზრდილები.",
+  "EER equations use sex-specific IOM/DRI adult formulas and physical activity coefficients.":
+    "EER განტოლებები იყენებს IOM/DRI-ის სქეს-სპეციფიკურ მოზრდილთა ფორმულებს და ფიზიკური აქტივობის კოეფიციენტებს.",
+  "Macronutrient ranges use AMDR: carbs 45-65%, protein 10-35%, fat 20-35%.":
+    "მაკრონუტრიენტების დიაპაზონები ეფუძნება AMDR-ს: ნახშირწყლები 45-65%, ცილა 10-35%, ცხიმი 20-35%.",
+  "Total water AI shown: women 2.7 L/day, men 3.7 L/day.":
+    "წყლის საერთო AI: ქალები 2.7 ლ/დღე, კაცები 3.7 ლ/დღე.",
+  "For the full USDA DRI nutrient calculator, use:":
+    "USDA DRI-ის სრული ნუტრიენტული კალკულატორისთვის გამოიყენეთ:",
+  "USDA DRI Calculator": "USDA DRI კალკულატორი",
   "Risk of Acquiring Diabetes Mellitus (7.5-year)":
     "შაქრიანი დიაბეტის განვითარების რისკი (7.5 წელი)",
+  "FBS (fasting blood sugar)": "უზმოზე სისხლის შაქარი (FBS)",
+  "HDL Cholesterol": "HDL ქოლესტერინი",
+  "MA (Ethnicity)": "MA (ეთნიკურობა)",
+  "Measured plasma/serum sodium": "პლაზმის/შრატის გაზომილი ნატრიუმი",
+  "Serum glucose": "შრატის გლუკოზა",
+  "Measured Sodium": "გაზომილი ნატრიუმი",
+  "Corrected Sodium": "კორექტირებული ნატრიუმი",
+  "Glucose": "გლუკოზა",
+  "Glucose: Normal": "გლუკოზა: ნორმა",
+  "Glucose: არაrmal": "გლუკოზა: ნორმა",
+  IGT: "IGT",
+  IFG: "IFG",
+  "Type 2 Diabetes": "ტიპი 2 დიაბეტი",
+  "Reduced insulin sensitivity": "ინსულინის მგრძნობელობის დაქვეითება",
+  "Microalbuminuria present": "მიკროალბუმინურია აღინიშნება",
+  Waist: "წელის გარშემოწერილობა",
+  Hip: "თეძოს გარშემოწერილობა",
+  Triglycerides: "ტრიგლიცერიდები",
+  "Systolic BP": "სისტოლური არტერიული წნევა",
+  "Less than 65 (0)": "65-ზე ნაკლები (0)",
+  "65–69 (1)": "65–69 (1)",
+  "70–74 (2)": "70–74 (2)",
+  "75–79 (3)": "75–79 (3)",
+  "80–85 (4)": "80–85 (4)",
+  "85 and over (5)": "85 და მეტი (5)",
+  "−1 or greater (0)": "−1 ან მეტი (0)",
+  "between −1 and −2 (2)": "−1-დან −2-მდე (2)",
+  "between −2 and −2.5 (3)": "−2-დან −2.5-მდე (3)",
+  "less than −2.5 (4)": "−2.5-ზე ნაკლები (4)",
+  "BMD T-score": "BMD T-ქულა",
+  "Total criteria": "სულ კრიტერიუმები",
+  "Point Count": "ქულების რაოდენობა",
+  "5 Year Nonvertebral Fracture Risk":
+    "5-წლიანი არავერტებერალური მოტეხილობის რისკი",
+  "5 Year Hip Fracture Risk": "5-წლიანი ბარძაყის მოტეხილობის რისკი",
+  "5 Year Vertebral Fracture Risk": "5-წლიანი ვერტებრალური მოტეხილობის რისკი",
+  Smoker: "მწეველი",
+  "UBPI (Ultrasound Bone Profile Index)":
+    "UBPI (ულტრაბგერითი ძვლის პროფილის ინდექსი)",
+  "On Estrogen: Yes (0 points)": "ესტროგენი: დიახ (0 ქულა)",
+  "On Estrogen: No (2 points)": "ესტროგენი: არა (2 ქულა)",
+  "American Indian or Alaska Native (5)":
+    "ამერიკელი ინდიელი ან ალასკის მკვიდრი (5)",
+  "Asian (5)": "აზიელი (5)",
+  "Black or African American (0)": "შავკანიანი ან აფროამერიკელი (0)",
+  "Native Hawaiian or Other Pacific Islander (5)":
+    "ჰავაის მკვიდრი ან წყნარი ოკეანის სხვა კუნძულელი (5)",
+  "White (5)": "თეთრკანიანი (5)",
+  "Rheumatoid Arthritis: Present (4)":
+    "რევმატოიდული ართრიტი: აღინიშნება (4)",
+  "Rheumatoid Arthritis: Absent (0)":
+    "რევმატოიდული ართრიტი: არ აღინიშნება (0)",
+  "OST score": "OST ქულა",
+  Cutoffs: "ზღვრები",
+  "Interpretation bands": "ინტერპრეტაციის დიაპაზონები",
   "HOMA Formula: Homeostasis Model Assessment of Insulin Resistance":
     "HOMA ფორმულა: ინსულინრეზისტენტობის ჰომეოსტაზური შეფასება",
   "Diabetes Risk Score (Type 2)": "დიაბეტის რისკის ქულა (ტიპი 2)",
+  "A tool that calculates the likelihood of developing type 2 diabetes based on various risk factors.":
+    "ინსტრუმენტი, რომელიც სხვადასხვა რისკ-ფაქტორის მიხედვით ითვლის ტიპი 2 დიაბეტის განვითარების ალბათობას.",
+  "Diabetes Type Predictor TreeCalc": "დიაბეტის ტიპის პროგნოზირების TreeCalc",
+  "A tool that uses a decision tree style logic to suggest the likely diabetes type.":
+    "ინსტრუმენტი, რომელიც გადაწყვეტილების ხის ლოგიკით გვთავაზობს დიაბეტის სავარაუდო ტიპს.",
+  "Is patient obese?": "პაციენტი ჭარბწონიანია?",
+  "Ketosis present": "კეტოზი არსებობს",
+  "Initial treatment": "საწყისი მკურნალობა",
+  "End Point": "დასკვნა",
+  Prediction: "პროგნოზი",
+  "Physician review required for individual assessment":
+    "ინდივიდუალური შეფასებისთვის აუცილებელია ექიმის შეფასება",
+  "Complete all inputs to generate a suggestion.":
+    "რეკომენდაციის მისაღებად შეავსეთ ყველა ველი.",
+  "Likely Type 1": "სავარაუდოდ ტიპი 1",
+  "Likely Type 2": "სავარაუდოდ ტიპი 2",
+  Indeterminate: "განუსაზღვრელი",
+  "Ketosis is present, which commonly accompanies absolute insulin deficiency.":
+    "არსებობს კეტოზი, რაც ხშირად ახლავს ინსულინის აბსოლუტურ დეფიციტს.",
+  "Obesity without ketosis and initial management not requiring insulin suggests insulin resistance predominance.":
+    "ჭარბწონიანობა კეტოზის გარეშე და საწყისი მართვა ინსულინის გარეშე უფრო მეტად მიუთითებს ინსულინრეზისტენტობაზე.",
+  "The combination of features does not clearly distinguish type; clinical review and labs (e.g., C-peptide, autoantibodies) are warranted.":
+    "ნიშნების კომბინაცია ტიპს მკაფიოდ ვერ განასხვავებს; საჭიროა კლინიკური შეფასება და ლაბორატორიული კვლევები (მაგ., C-პეპტიდი, ავტოანტისხეულები).",
+  "Fasting Insulin": "უზმოზე ინსულინი",
+  "Fasting Glucose": "უზმოზე გლუკოზა",
+  "LPIR Index": "LPIR ინდექსი",
+  Breakdown: "დეტალები",
+  "LPIR Index ranges from 0 to 100.": "LPIR ინდექსი მერყეობს 0-დან 100-მდე.",
+  "Rx HTN": "ჰიპერტენზიის მკურნალობა",
+  "On HTN meds (1.222)": "იღებს ჰიპერტენზიის მედიკამენტებს (1.222)",
+  "No HTN meds (0)": "არ იღებს ჰიპერტენზიის მედიკამენტებს (0)",
+  "Rx Steroids": "სტეროიდების მიღება",
+  "On steroids (2.191)": "იღებს სტეროიდებს (2.191)",
+  "Not on steroids (0)": "არ იღებს სტეროიდებს (0)",
+  FMH: "ოჯახური ანამნეზი (FMH)",
+  "No 1st-degree family with DM (0)":
+    "პირველი ხარისხის ნათესავში დიაბეტი არ არის (0)",
+  "Parent OR sibling (0.728)": "მშობელი ან და/ძმა (0.728)",
+  "Parent AND sibling (0.753)": "მშობელიც და და/ძმაც (0.753)",
+  "Non-smoker (0)": "არამწეველი (0)",
+  "Used to smoke (−0.218)": "ადრე ეწეოდა (−0.218)",
+  "Smoker (0.855)": "მწეველი (0.855)",
+  Terms: "ფორმულის შედეგი",
+  "Decimal Precision": "ათწილადის სიზუსტე",
+  "Diabetes Screening TreeCalc": "დიაბეტის სკრინინგის TreeCalc",
+  "Identify individuals at increased risk for undiagnosed diabetes.":
+    "გამოავლენს პირებს, რომლებსაც დაუდგენელი დიაბეტის გაზრდილი რისკი აქვთ.",
+  "Sedentary with little or no exercise":
+    "მჯდომარე ცხოვრების წესი, მცირე ან საერთოდ არანაირი ვარჯიშით",
+  "Obesity (>120% IBW)": "ჭარბწონიანობა (>120% IBW)",
+  Recommendation: "რეკომენდაცია",
+  "Decision Points": "გადაწყვეტის კრიტერიუმები",
+  "Age 65 or older:": "ასაკი 65 ან მეტი:",
+  "Age 45 or older:": "ასაკი 45 ან მეტი:",
+  "Screening not indicated": "სკრინინგი მითითებული არ არის",
+  "Screening indicated (Age ≥65)": "სკრინინგი რეკომენდებულია (ასაკი ≥65)",
+  "Screening indicated (Obesity)":
+    "სკრინინგი რეკომენდებულია (ჭარბწონიანობა)",
+  "Screening indicated (Age ≥45 and sedentary)":
+    "სკრინინგი რეკომენდებულია (ასაკი ≥45 და მჯდომარე ცხოვრების წესი)",
   "Glycemic Assessment: A1C to Average Glucose Conversions":
     "გლიკემიური შეფასება: A1C-დან საშუალო გლუკოზის კონვერსია",
+  "Estimated average glucose": "საშუალო გლუკოზის შეფასება",
+  "Estimated average glucose (SI)": "საშუალო გლუკოზის შეფასება (SI)",
   "QUICKI Formula for Insulin Resistance":
     "QUICKI ფორმულა ინსულინრეზისტენტობისთვის",
   "Lipoprotein Insulin Resistance Index (LPIR Index)":
@@ -192,6 +343,10 @@ const dynamicGeorgianRules: Array<{
   pattern: RegExp;
   replace: (...args: string[]) => string;
 }> = [
+  {
+    pattern: /^[eE]\.g\.\s+(.+)$/,
+    replace: (value) => `მაგ. ${value}`,
+  },
   {
     pattern: /^(\d+)\sitems in cart$/,
     replace: (count) => `კალათაში ${count} პროდუქტი`,
@@ -243,14 +398,21 @@ const georgianPhraseReplacements: Record<string, string> = {
   "Schedule appointment": "კონსულტაციის დაჯავშნა",
   "Explore all": "ყველას ნახვა",
   "Open": "გახსნა",
+  "cholesterol": "ქოლესტერინი",
   "read": "წასაკითხად",
   "Score": "ქულა",
   "Risk": "რისკი",
   "High": "მაღალი",
   "Moderate": "საშუალო",
   "Low": "დაბალი",
+  "Obesity": "ჭარბწონიანობა",
+  "obesity": "ჭარბწონიანობა",
+  "sedentary": "მჯდომარე",
   "Result": "შედეგი",
   "Results": "შედეგები",
+  "Total": "სულ",
+  "Count": "რაოდენობა",
+  "Point": "ქულა",
   "Input": "შეყვანა",
   "Age": "ასაკი",
   "Weight": "წონა",
@@ -267,6 +429,106 @@ const georgianPhraseReplacements: Record<string, string> = {
   "Surname": "გვარი",
   "Color": "ფერი",
   "Size": "ზომა",
+  "Important: Inputs must be complete to perform calculation.":
+    "მნიშვნელოვანია: გამოსათვლელად ყველა ველი უნდა იყოს შევსებული.",
+  "Decimal precision": "ათწილადის სიზუსტე",
+  "Scoring": "ქულების დათვლა",
+  "References": "წყაროები",
+  "Criteria": "კრიტერიუმები",
+  "Required Criteria": "აუცილებელი კრიტერიუმები",
+  "Required Criterion": "აუცილებელი კრიტერიუმი",
+  "Clinical Criteria": "კლინიკური კრიტერიუმები",
+  "Other Criteria": "სხვა კრიტერიუმები",
+  "Notes": "შენიშვნები",
+  "Notes & Criteria": "შენიშვნები და კრიტერიუმები",
+  "Notes & References": "შენიშვნები და წყაროები",
+  "Equation": "ფორმულა",
+  "Equation & Reference": "ფორმულა და წყარო",
+  "Meets criteria": "აკმაყოფილებს კრიტერიუმებს",
+  "Does not meet": "ვერ აკმაყოფილებს",
+  "Present (≥3)": "არსებობს (≥3)",
+  "Not started yet": "ჯერ არ დაწყებულა",
+  "Risk Bands (5 years)": "რისკის დიაპაზონები (5 წელი)",
+  "Diet/Lifestyle": "დიეტა/ცხოვრების წესი",
+  "Physical activity": "ფიზიკური აქტივობა",
+  "Activity level": "აქტივობის დონე",
+  "Sedentary": "მჯდომარე",
+  "Low active": "დაბალი აქტივობა",
+  "Very active": "ძალიან აქტიური",
+  "yes": "დიახ",
+  "no": "არა",
+  "Yes": "დიახ",
+  "No": "არა",
+  "years": "წელი",
+  "yr": "წ",
+  "Body weight": "სხეულის წონა",
+  "Body weight < 125 lbs": "სხეულის წონა < 125 ფუნტი",
+  "Arm assistance to stand from chair":
+    "სკამიდან წამოდგომა ხელის დახმარებით",
+  "Maternal hip fracture over 50 years old":
+    "დედის ბარძაყის მოტეხილობა 50 წლის შემდეგ",
+  "Fracture after age 50": "მოტეხილობა 50 წლის შემდეგ",
+  "Fractures after age 50": "მოტეხილობები 50 წლის შემდეგ",
+  "BMD T-score": "BMD T-ქულა",
+  "HDL cholesterol": "HDL ქოლესტერინი",
+  "On TG-lowering Rx": "იღებს TG-ის დამწევ თერაპიას",
+  "On HDL-C Rx": "იღებს HDL-C თერაპიას",
+  "On BP medication": "იღებს არტერიული წნევის მედიკამენტს",
+  "Required criterion met": "აუცილებელი კრიტერიუმი შესრულებულია",
+  "Other criteria met": "სხვა კრიტერიუმები შესრულებულია",
+  "Diagnostic (AACE 2003)": "დიაგნოზი (AACE 2003)",
+  "Diagnostic (IDF 2005)": "დიაგნოზი (IDF 2005)",
+  "Other criteria breakdown": "სხვა კრიტერიუმების დეტალები",
+  "Total Criteria Point Count": "კრიტერიუმების საერთო ქულა",
+  "Criteria breakdown": "კრიტერიუმების დეტალები",
+  "Abdominal obesity": "აბდომინური ჭარბწონიანობა",
+  "HDL low": "HDL დაბალია",
+  "T-score": "T-ქულა",
+  "Fasting glucose": "უზმოზე გლუკოზა",
+  "Fasting plasma glucose": "უზმოზე პლაზმის გლუკოზა",
+  "Fasting blood sugar": "უზმოზე სისხლის შაქარი",
+  "Systolic Blood Pressure": "სისტოლური არტერიული წნევა",
+  "Diastolic BP": "დიასტოლური არტერიული წნევა",
+  "Waist circumference": "წელის გარშემოწერილობა",
+  "On blood pressure therapy": "იღებს არტერიული წნევის თერაპიას",
+  "On blood pressure medication": "იღებს არტერიული წნევის მედიკამენტს",
+  "On TG-lowering therapy": "იღებს TG-ის დამწევ თერაპიას",
+  "On glucose-lowering therapy": "იღებს გლუკოზის დამწევ თერაპიას",
+  "On HDL improvement therapy": "იღებს HDL-ის გამაუმჯობესებელ თერაპიას",
+  "South Asian/Chinese/Japanese": "სამხრეთ აზიური/ჩინური/იაპონური",
+  "South & Central American": "სამხრეთ და ცენტრალური ამერიკული",
+  "Sub-Saharan African": "სუბ-საჰარული აფრიკული",
+  "Eastern Mediterranean & Middle East":
+    "აღმოსავლეთ ხმელთაშუა ზღვისა და ახლო აღმოსავლეთის",
+  "Europid": "ევროპული",
+  "VLDL Size:": "VLDL ზომა:",
+  "Large VLDL-P:": "დიდი VLDL-P:",
+  "LDL Size:": "LDL ზომა:",
+  "Small LDL-P:": "პატარა LDL-P:",
+  "HDL Size:": "HDL ზომა:",
+  "Large HDL-P:": "დიდი HDL-P:",
+  "VLDL Size": "VLDL ზომა",
+  "Large VLDL-P": "დიდი VLDL-P",
+  "LDL Size": "LDL ზომა",
+  "Small LDL-P": "პატარა LDL-P",
+  "HDL Size": "HDL ზომა",
+  "Large HDL-P": "დიდი HDL-P",
+};
+
+const georgianWordReplacements: Record<string, string> = {
+  Large: "დიდი",
+  Small: "პატარა",
+  Underweight: "დაბალი წონა",
+  Overweight: "ჭარბი წონა",
+  Normal: "ნორმა",
+  Higher: "მაღალი",
+  Lower: "დაბალი",
+  Recommendation: "რეკომენდაცია",
+  Prediction: "პროგნოზი",
+  Decision: "გადაწყვეტა",
+  Points: "პუნქტები",
+  End: "დასასრული",
+  Point: "წერტილი",
 };
 
 export function translateText(text: string, language: LanguageCode): string {
@@ -290,6 +552,17 @@ export function translateText(text: string, language: LanguageCode): string {
     return `${leadingWhitespace}${directMatch}${trailingWhitespace}`;
   }
 
+  // Handle common label variants where UI adds trailing punctuation.
+  const punctMatch = normalized.match(/^(.*?)([:.])$/);
+  if (punctMatch) {
+    const base = punctMatch[1];
+    const punct = punctMatch[2];
+    if (Object.prototype.hasOwnProperty.call(georgianTranslations, base)) {
+      const directBase = georgianTranslations[base];
+      return `${leadingWhitespace}${directBase}${punct}${trailingWhitespace}`;
+    }
+  }
+
   for (const rule of dynamicGeorgianRules) {
     const match = normalized.match(rule.pattern);
     if (!match) continue;
@@ -302,13 +575,32 @@ export function translateText(text: string, language: LanguageCode): string {
   const sortedPhrases = Object.keys(georgianPhraseReplacements).sort(
     (a, b) => b.length - a.length
   );
+  const escapeRegExp = (value: string) =>
+    value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   for (const phrase of sortedPhrases) {
     if (!translated.includes(phrase)) continue;
-    translated = translated.split(phrase).join(georgianPhraseReplacements[phrase]);
+    const replacement = georgianPhraseReplacements[phrase];
+    const isSingleWord = /^[A-Za-z]+$/.test(phrase);
+    if (isSingleWord) {
+      const wordRe = new RegExp(`\\b${escapeRegExp(phrase)}\\b`, "g");
+      translated = translated.replace(wordRe, replacement);
+      continue;
+    }
+    translated = translated.split(phrase).join(replacement);
   }
 
   if (translated !== normalized) {
     return `${leadingWhitespace}${translated}${trailingWhitespace}`;
+  }
+
+  // Last fallback: translate common standalone words inside mixed labels.
+  let wordTranslated = normalized;
+  for (const [word, replacement] of Object.entries(georgianWordReplacements)) {
+    const re = new RegExp(`(^|[^A-Za-z])(${word})(?=$|[^A-Za-z])`, "g");
+    wordTranslated = wordTranslated.replace(re, (_m, p1) => `${p1}${replacement}`);
+  }
+  if (wordTranslated !== normalized) {
+    return `${leadingWhitespace}${wordTranslated}${trailingWhitespace}`;
   }
 
   return text;
