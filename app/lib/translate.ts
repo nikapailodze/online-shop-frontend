@@ -150,7 +150,6 @@ const georgianTranslations: Record<string, string> = {
   "Clear Cart": "კალათის გასუფთავება",
   "Working...": "მუშავდება...",
   "Color:": "ფერი:",
-  "Color:": "ფერი:",
   "Size:": "ზომა:",
   Logout: "გასვლა",
   Cancel: "გაუქმება",

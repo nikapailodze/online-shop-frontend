@@ -96,7 +96,7 @@ export default function LanguageRuntimeTranslator() {
       processElementAttributes(element);
 
       const walker = document.createTreeWalker(element, NodeFilter.SHOW_ALL);
-      let current = walker.currentNode;
+      let current: Node | null = walker.currentNode;
       while (current) {
         if (current.nodeType === Node.TEXT_NODE) {
           processTextNode(current as Text);
