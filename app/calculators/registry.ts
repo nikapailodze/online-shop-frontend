@@ -16,6 +16,7 @@ export const registry: Record<string, RegistryEntry> = {
     load: () => import("./diabetes-type-predictor-treecalc/view"),
   },
   "a1c-to-average-glucose": { load: () => import("./a1c-to-average-glucose/view") },
+  "dri-usda": { load: () => import("./dri-usda/view") },
   "homa-ir": { load: () => import("./homa-ir/view") },
   "lpir-index": { load: () => import("./lpir-index/view") },
   quicki: { load: () => import("./quicki/view") },

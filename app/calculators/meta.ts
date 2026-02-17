@@ -127,6 +127,15 @@ export const a1cAvgGluMeta = {
   icon: MdTimeline,
 };
 
+export const driUsdaMeta = {
+  slug: "dri-usda",
+  title: "USDA DRI Calculator (Adults)",
+  short:
+    "Estimate daily energy needs, AMDR macro ranges, and water target using DRI equations.",
+  category: "Diabetes",
+  icon: MdTimeline,
+};
+
 export const fractureWithBmdMeta = {
   slug: "fracture-index-with-bmd",
   title: "Fracture Index WITH known Bone Mineral Density (BMD)",

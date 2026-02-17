@@ -10,6 +10,7 @@ import {
   screeningTreeMeta,
   typePredictorMeta,
   a1cAvgGluMeta,
+  driUsdaMeta,
   homaIrMeta,
   lpirMeta,
   quickiMeta,
@@ -40,6 +41,7 @@ const calculators = [
   screeningTreeMeta,
   typePredictorMeta,
   a1cAvgGluMeta,
+  driUsdaMeta,
   homaIrMeta,
   lpirMeta,
   quickiMeta,
@@ -85,6 +87,10 @@ const kaBySlug: Record<string, { title: string; short: string }> = {
   "a1c-to-average-glucose": {
     title: "გლიკემიური შეფასება: A1C-დან საშუალო გლუკოზამდე",
     short: "A1C-სა და საშუალო გლუკოზას შორის კონვერსია (mg/dL / mmol/L).",
+  },
+  "dri-usda": {
+    title: "USDA DRI კალკულატორი (მოზრდილები)",
+    short: "დღიური ენერგიის, AMDR მაკრო დიაპაზონებისა და წყლის მიზნის შეფასება DRI ფორმულებით.",
   },
   "homa-ir": {
     title: "HOMA ფორმულა: ინსულინრეზისტენტობის შეფასება",
