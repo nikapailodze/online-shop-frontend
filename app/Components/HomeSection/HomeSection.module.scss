@@ -6,12 +6,7 @@
   flex-direction: column;
   justify-content: flex-end;
   padding-bottom: 50px;
-  background-image: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0) 45%,
-      #f9f9f9 100%
-    ),
-    url("/mainBG.png");
+  background-image: url("/mainBG.png");
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;

@@ -8,3 +8,6 @@ export const withAuthHeaders = (token: string | null) => {
     Authorization: `Bearer ${token}`,
   };
 };
+
+export const toApiUrl = (path: string) =>
+  `${API_BASE_URL}${path.startsWith("/") ? path : `/${path}`}`;

@@ -4,37 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./ConsultationSection.module.css";
-import { getStoredBlogs, type BlogArticle } from "@/app/lib/blogs";
-import { staticArticles } from "@/app/lib/blogData";
+import { fetchPublishedBlogs, type ApiBlog } from "@/app/lib/blogApi";
 
 const ConsultationSection = () => {
-  const [storedBlogs, setStoredBlogs] = useState<BlogArticle[]>([]);
-  const [featuredIndex, setFeaturedIndex] = useState(0);
+  const [blogs, setBlogs] = useState<ApiBlog[]>([]);
 
   useEffect(() => {
-    setStoredBlogs(getStoredBlogs().filter((blog) => blog.status !== "draft"));
+    fetchPublishedBlogs().then(setBlogs).catch(() => setBlogs([]));
   }, []);
 
   const featuredPool = useMemo(() => {
-    const resolveTime = (article: BlogArticle) => {
-      if (typeof article.createdAt === "number") return article.createdAt;
-      const parsed = Date.parse(article.date);
-      return Number.isNaN(parsed) ? 0 : parsed;
-    };
-    const combined = [...storedBlogs, ...staticArticles];
-    const sorted = combined.sort((a, b) => resolveTime(b) - resolveTime(a));
-    return sorted.slice(0, 5);
-  }, [storedBlogs]);
+    return blogs.slice(0, 5);
+  }, [blogs]);
 
-  const featuredArticle = featuredPool[featuredIndex] ?? null;
-
-  useEffect(() => {
-    if (featuredPool.length <= 1) return;
-    const interval = window.setInterval(() => {
-      setFeaturedIndex((prev) => (prev + 1) % featuredPool.length);
-    }, 5000);
-    return () => window.clearInterval(interval);
-  }, [featuredPool]);
+  const featuredArticle = featuredPool[0] ?? null;
 
   return (
     <section className={styles.section} id="consultation">

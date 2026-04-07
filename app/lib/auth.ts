@@ -2,12 +2,16 @@ export type StoredUser = {
   Name?: string;
   Surname?: string;
   Email?: string;
+  Role?: string;
 };
 
 type JwtPayload = {
   given_name?: string;
   family_name?: string;
   email?: string;
+  name?: string;
+  surname?: string;
+  role?: string;
 };
 
 const AUTH_EVENT = "auth-changed";
@@ -23,6 +27,8 @@ type RawUser = {
   lastName?: string;
   Email?: string;
   email?: string;
+  Role?: string;
+  role?: string;
 };
 
 const normalizeUser = (raw: RawUser | null | undefined): StoredUser | null => {
@@ -31,6 +37,7 @@ const normalizeUser = (raw: RawUser | null | undefined): StoredUser | null => {
     Name: raw.Name ?? raw.name ?? raw.given_name ?? raw.firstName,
     Surname: raw.Surname ?? raw.surname ?? raw.family_name ?? raw.lastName,
     Email: raw.Email ?? raw.email,
+    Role: raw.Role ?? raw.role,
   };
 };
 
@@ -73,6 +80,9 @@ export const setAuth = (token: string, user?: StoredUser) => {
   }
   window.dispatchEvent(new Event(AUTH_EVENT));
 };
+
+export const isAdminUser = (user: StoredUser | null | undefined) =>
+  String(user?.Role ?? "").toLowerCase() === "admin";
 
 export const clearAuth = () => {
   if (typeof window === "undefined") return;

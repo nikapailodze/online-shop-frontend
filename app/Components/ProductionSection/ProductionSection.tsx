@@ -6,6 +6,14 @@ import styles from "./ProductionSection.module.scss";
 import { useLanguage } from "@/app/Context/LanguageContext";
 import { translateText } from "@/app/lib/translate";
 
+type MerchItem = {
+  id: number;
+  imageUrl: string;
+  name: string;
+  price: number;
+  description: string;
+};
+
 const ProductionSection = () => (
   <TranslatedProductionSection />
 );
@@ -14,12 +22,14 @@ const TranslatedProductionSection = () => {
   const { language } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [merchItems, setMerchItems] = useState<MerchItem[]>([]);
 
-  const merchItems = [
-    { id: 1, imageUrl: "/merch2.png" },
-    { id: 2, imageUrl: "/merch1.png" },
-    { id: 3, imageUrl: "/merch3.png" },
-  ];
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5001"}/api/Products`)
+      .then((response) => response.json())
+      .then((body) => setMerchItems(Array.isArray(body) ? body.slice(0, 3) : []))
+      .catch(() => setMerchItems([]));
+  }, []);
 
   useEffect(() => {
     const updateIsMobile = () => setIsMobile(window.innerWidth <= 640);
@@ -53,12 +63,9 @@ const TranslatedProductionSection = () => {
               key={item.id}
               id={item.id}
               imageUrl={item.imageUrl}
-              name={translateText("VANTA Coat", language)}
-              price={320}
-              description={translateText(
-                "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience.",
-                language
-              )}
+              name={translateText(item.name, language)}
+              price={item.price}
+              description={translateText(item.description, language)}
             />
           ))}
         </div>

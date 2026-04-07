@@ -3,52 +3,9 @@
 import Link from "next/link";
 import { FiEdit3, FiSearch } from "react-icons/fi";
 import { useEffect, useMemo, useState } from "react";
-import { getStoredBlogs, type BlogArticle } from "../lib/blogs";
-import { staticArticles, type BlogCard } from "../lib/blogData";
+import { fetchPublishedBlogs, type ApiBlog } from "../lib/blogApi";
+import { getStoredUser, getUserFromToken, isAdminUser } from "../lib/auth";
 import styles from "./page.module.scss";
-
-const categories = [
-  "All",
-  "Endocrinology",
-  "Diabetes Care",
-  "Thyroid",
-  "Metabolism",
-  "Nutrition",
-  "Clinical Research",
-  "Patient Education",
-];
-
-const tags = [
-  "endocrinology",
-  "diabetes",
-  "thyroid",
-  "pcos",
-  "obesity",
-  "insulin",
-  "hba1c",
-  "metabolism",
-  "hormones",
-  "pituitary",
-  "adrenal",
-  "lipids",
-  "cardio-risk",
-  "nutrition",
-  "exercise",
-  "clinical-guidelines",
-  "case-studies",
-  "patient-education",
-  "pregnancy",
-  "pediatrics",
-  "osteoporosis",
-  "vitamin-d",
-  "renal",
-  "research",
-];
-
-const articles: BlogCard[] = staticArticles.map((article) => ({
-  ...article,
-  imageClass: styles[article.imageClass as keyof typeof styles] ?? "",
-}));
 
 const escapeRegExp = (value: string) =>
   value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -56,11 +13,8 @@ const escapeRegExp = (value: string) =>
 const highlightText = (text: string, query: string, className: string) => {
   const q = query.trim();
   if (!q) return text;
-
   const pattern = new RegExp(`(${escapeRegExp(q)})`, "ig");
   const parts = text.split(pattern);
-  if (parts.length === 1) return text;
-
   return parts.map((part, index) =>
     part.toLowerCase() === q.toLowerCase() ? (
       <span key={`${part}-${index}`} className={className}>
@@ -73,53 +27,41 @@ const highlightText = (text: string, query: string, className: string) => {
 };
 
 export default function BlogsPage() {
+  const [articles, setArticles] = useState<ApiBlog[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeTag, setActiveTag] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [storedBlogs, setStoredBlogs] = useState<BlogArticle[]>([]);
-  const [featuredIndex, setFeaturedIndex] = useState(0);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const stored = getStoredBlogs().filter(
-      (blog) => blog.status !== "draft"
-    );
-    setStoredBlogs(stored);
+    fetchPublishedBlogs()
+      .then(setArticles)
+      .catch((loadError) =>
+        setError(loadError instanceof Error ? loadError.message : "Unable to load blogs.")
+      );
   }, []);
 
-  const allArticles = useMemo<BlogCard[]>(() => {
-    const mappedStored = storedBlogs.map<BlogCard>((blog) => ({
-      ...blog,
-      imageClass: styles.cardImageUser,
-    }));
-    return [...mappedStored, ...articles];
-  }, [storedBlogs]);
+  const user = getStoredUser() ?? getUserFromToken();
+  const categories = useMemo(
+    () => ["All", ...new Set(articles.map((article) => article.category))],
+    [articles]
+  );
+  const tags = useMemo(
+    () => [...new Set(articles.flatMap((article) => article.tags))],
+    [articles]
+  );
 
-  const featuredPool = useMemo(() => {
-    const resolveTime = (article: BlogCard) => {
-      if (typeof article.createdAt === "number") return article.createdAt;
-      const parsed = Date.parse(article.date);
-      return Number.isNaN(parsed) ? 0 : parsed;
-    };
-    const sorted = [...allArticles].sort((a, b) => {
-      const timeA = resolveTime(a);
-      const timeB = resolveTime(b);
-      return timeB - timeA;
-    });
-    return sorted.slice(0, 5);
-  }, [allArticles]);
-
-  const featuredFiltered = useMemo(() => {
-    return featuredPool.filter((article) => {
-      const matchesCategory =
-        activeCategory === "All" || article.category === activeCategory;
-      const matchesTag = !activeTag || article.tags.includes(activeTag);
-      return matchesCategory && matchesTag;
-    });
-  }, [featuredPool, activeCategory, activeTag]);
+  const featuredArticle = useMemo(() => {
+    return (
+      articles.find((article) => article.featured) ??
+      articles[0] ??
+      null
+    );
+  }, [articles]);
 
   const filteredArticles = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
-    return allArticles.filter((article) => {
+    return articles.filter((article) => {
       const matchesCategory =
         activeCategory === "All" || article.category === activeCategory;
       const matchesTag = !activeTag || article.tags.includes(activeTag);
@@ -128,27 +70,10 @@ export default function BlogsPage() {
         article.title.toLowerCase().includes(query) ||
         article.excerpt.toLowerCase().includes(query) ||
         article.author.toLowerCase().includes(query) ||
-        article.category.toLowerCase().includes(query) ||
         article.tags.some((tag) => tag.toLowerCase().includes(query));
       return matchesCategory && matchesTag && matchesSearch;
     });
-  }, [activeCategory, activeTag, allArticles, searchQuery]);
-
-  const featuredArticle = useMemo(() => {
-    return featuredFiltered[featuredIndex] ?? null;
-  }, [featuredFiltered, featuredIndex]);
-
-  useEffect(() => {
-    setFeaturedIndex(0);
-  }, [featuredFiltered]);
-
-  useEffect(() => {
-    if (featuredFiltered.length <= 1) return;
-    const interval = window.setInterval(() => {
-      setFeaturedIndex((prev) => (prev + 1) % featuredFiltered.length);
-    }, 5000);
-    return () => window.clearInterval(interval);
-  }, [featuredFiltered]);
+  }, [activeCategory, activeTag, articles, searchQuery]);
 
   return (
     <div className={styles.page}>
@@ -156,15 +81,17 @@ export default function BlogsPage() {
         <div />
         <h2 className={styles.topTitle}>Articles</h2>
         <div className={styles.topActions}>
-          <Link href="/blogs/write" className={styles.writeButton}>
-            <FiEdit3 className={styles.writeIcon} aria-hidden />
-            Write
-          </Link>
+          {isAdminUser(user) && (
+            <Link href="/admin" className={styles.writeButton}>
+              <FiEdit3 className={styles.writeIcon} aria-hidden />
+              Admin
+            </Link>
+          )}
         </div>
       </header>
 
       {featuredArticle && (
-        <section className={styles.hero} key={featuredArticle.id}>
+        <section className={styles.hero}>
           <div className={styles.heroMedia}>
             <div
               className={styles.heroImage}
@@ -177,51 +104,30 @@ export default function BlogsPage() {
           </div>
           <div className={styles.heroContent}>
             <div className={styles.heroTags}>
-              <span className={styles.heroPill}>
-                {highlightText(
-                  featuredArticle.category,
-                  searchQuery,
-                  styles.highlight
-                )}
-              </span>
+              <span className={styles.heroPill}>{featuredArticle.category}</span>
               <span className={styles.heroTab}>Featured</span>
             </div>
             <h1 className={styles.heroTitle}>
               {highlightText(featuredArticle.title, searchQuery, styles.highlight)}
             </h1>
             <p className={styles.heroExcerpt}>
-              {highlightText(
-                featuredArticle.excerpt,
-                searchQuery,
-                styles.highlight
-              )}
+              {highlightText(featuredArticle.excerpt, searchQuery, styles.highlight)}
             </p>
             <div className={styles.heroMeta}>
               <div className={styles.avatar}>
-                <span>
-                  {featuredArticle.author
-                    .split(" ")
-                    .map((word) => word[0])
-                    .join("")}
-                </span>
+                {featuredArticle.author
+                  .split(" ")
+                  .map((word) => word[0])
+                  .join("")}
               </div>
               <div>
-                <div className={styles.metaName}>
-                  {highlightText(
-                    featuredArticle.author,
-                    searchQuery,
-                    styles.highlight
-                  )}
-                </div>
+                <div className={styles.metaName}>{featuredArticle.author}</div>
                 <div className={styles.metaInfo}>
                   {featuredArticle.date} - {featuredArticle.readTime} read
                 </div>
               </div>
             </div>
-            <Link
-              href={`/blogs/${featuredArticle.id}`}
-              className={styles.readMore}
-            >
+            <Link href={`/blogs/${featuredArticle.id}`} className={styles.readMore}>
               Read article
             </Link>
           </div>
@@ -250,7 +156,6 @@ export default function BlogsPage() {
               type="text"
               placeholder="Search articles..."
               className={styles.searchInput}
-              aria-label="Search articles"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
             />
@@ -261,124 +166,42 @@ export default function BlogsPage() {
             <button
               key={tag}
               type="button"
-              className={`${styles.tag} ${
-                activeTag === tag ? styles.tagActive : ""
-              }`}
-              onClick={() =>
-                setActiveTag((current) => (current === tag ? null : tag))
-              }
+              className={`${styles.tag} ${activeTag === tag ? styles.tagActive : ""}`}
+              onClick={() => setActiveTag((current) => (current === tag ? null : tag))}
             >
               #{tag}
             </button>
           ))}
         </div>
-        <div className={styles.resultsRow}>
-          <span className={styles.resultsText}>
-            Showing {filteredArticles.length} results
-          </span>
-          {activeTag && (
-            <button
-              type="button"
-              className={styles.activeTag}
-              onClick={() => setActiveTag(null)}
-            >
-              #{activeTag} <span aria-hidden>×</span>
-            </button>
-          )}
-        </div>
       </section>
 
-      {filteredArticles.length > 0 ? (
-        <section className={styles.grid}>
-          {filteredArticles.map((article) => (
-            <Link
-              key={article.id}
-              href={`/blogs/${article.id}`}
-              className={styles.cardLink}
-            >
-              <article className={styles.card}>
-                <div
-                  className={`${styles.cardImage} ${article.imageClass}`}
-                  style={
-                    article.coverImage
-                      ? { backgroundImage: `url(${article.coverImage})` }
-                      : undefined
-                  }
-                >
-                  <span
-                    className={`${styles.cardBadge} ${
-                      styles[`badge${article.category.replace(/\s+/g, "")}`] ??
-                      ""
-                    }`}
-                  >
-                    {highlightText(article.category, searchQuery, styles.highlight)}
-                  </span>
+      {error && <p>{error}</p>}
+      <section className={styles.grid}>
+        {filteredArticles.map((article) => (
+          <Link key={article.id} href={`/blogs/${article.id}`} className={styles.cardLink}>
+            <article className={styles.card}>
+              <div
+                className={styles.cardImage}
+                style={
+                  article.coverImage
+                    ? { backgroundImage: `url(${article.coverImage})` }
+                    : undefined
+                }
+              >
+                <span className={styles.cardBadge}>{article.category}</span>
+              </div>
+              <div className={styles.cardBody}>
+                <div className={styles.cardMeta}>
+                  <span>{article.readTime}</span>
                 </div>
-                <div className={styles.cardBody}>
-                  <div className={styles.cardMeta}>
-                    <span>{article.readTime}</span>
-                  </div>
-                  <h2 className={styles.cardTitle}>
-                    {highlightText(article.title, searchQuery, styles.highlight)}
-                  </h2>
-                  <p className={styles.cardExcerpt}>
-                    {highlightText(article.excerpt, searchQuery, styles.highlight)}
-                  </p>
-                  <div className={styles.cardFooter}>
-                    <div className={styles.cardAvatar}>
-                      <span>
-                        {article.author
-                          .split(" ")
-                          .map((word) => word[0])
-                          .join("")}
-                      </span>
-                    </div>
-                    <div>
-                      <div className={styles.cardAuthor}>
-                        {highlightText(
-                          article.author,
-                          searchQuery,
-                          styles.highlight
-                        )}
-                      </div>
-                      <div className={styles.cardDate}>{article.date}</div>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </Link>
-          ))}
-        </section>
-      ) : (
-        <section className={styles.emptyState}>
-          <div className={styles.emptyIcon}>Doc</div>
-          <h3>No articles found</h3>
-          <p>
-            Try adjusting your search or filters to find what you&apos;re
-            looking for.
-          </p>
-        </section>
-      )}
-
-      <section className={styles.newsletter}>
-        <div className={styles.newsletterContent}>
-          <h3>Stay in the loop</h3>
-          <p>
-            Get the latest endocrine insights delivered to your inbox. No spam,
-            just clear and practical updates.
-          </p>
-          <div className={styles.newsletterForm}>
-            <input
-              type="email"
-              placeholder="you@email.com"
-              className={styles.newsletterInput}
-              aria-label="Email address"
-            />
-            <button className={styles.newsletterButton} type="button">
-              Send
-            </button>
-          </div>
-        </div>
+                <h3 className={styles.cardTitle}>
+                  {highlightText(article.title, searchQuery, styles.highlight)}
+                </h3>
+                <p className={styles.cardExcerpt}>{article.excerpt}</p>
+              </div>
+            </article>
+          </Link>
+        ))}
       </section>
     </div>
   );
