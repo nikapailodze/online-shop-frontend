@@ -113,10 +113,12 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [editingBlogId, setEditingBlogId] = useState<string | null>(null);
+  const [editingProductId, setEditingProductId] = useState<number | null>(null);
   const [isProductImageProcessing, setIsProductImageProcessing] = useState(false);
   const [productImageError, setProductImageError] = useState<string | null>(null);
   const [productError, setProductError] = useState<string | null>(null);
   const [isSubmittingProduct, setIsSubmittingProduct] = useState(false);
+  const [deletingProductId, setDeletingProductId] = useState<number | null>(null);
 
   const [blogForm, setBlogForm] = useState({
     title: "",
@@ -207,6 +209,20 @@ export default function AdminPage() {
     resetBlogForm();
   }, [adminUser?.Email, resetBlogForm]);
 
+  const resetProductForm = useCallback(() => {
+    setEditingProductId(null);
+    setProductError(null);
+    setProductImageError(null);
+    setProductForm({
+      name: "",
+      description: "",
+      price: "",
+      imageUrl: "",
+      sizes: "S,M,L,XL",
+      colors: "black,white",
+    });
+  }, []);
+
   const handleBlogSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
@@ -278,47 +294,94 @@ export default function AdminPage() {
     setIsSubmittingProduct(true);
 
     try {
-      const response = await fetch(toApiUrl("/api/Products/admin"), {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...authHeaders(),
+      const isEditingProduct = editingProductId !== null;
+      const response = await fetch(
+        isEditingProduct
+          ? toApiUrl(`/api/Products/admin/${editingProductId}`)
+          : toApiUrl("/api/Products/admin"),
+        {
+          method: isEditingProduct ? "PATCH" : "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...authHeaders(),
+          },
+          body: JSON.stringify({
+            name: productForm.name,
+            description: productForm.description,
+            price: Number(productForm.price),
+            imageUrl: productForm.imageUrl,
+            sizes: productForm.sizes.split(",").map((value) => value.trim()).filter(Boolean),
+            colors: productForm.colors.split(",").map((value) => value.trim()).filter(Boolean),
+          }),
         },
-        body: JSON.stringify({
-          name: productForm.name,
-          description: productForm.description,
-          price: Number(productForm.price),
-          imageUrl: productForm.imageUrl,
-          sizes: productForm.sizes.split(",").map((value) => value.trim()).filter(Boolean),
-          colors: productForm.colors.split(",").map((value) => value.trim()).filter(Boolean),
-        }),
-      });
+      );
 
       const body = await response.json().catch(() => null);
       if (!response.ok) {
         const message = Array.isArray(body?.message)
           ? body.message.join(", ")
-          : body?.message ?? "Unable to create product.";
+          : body?.message ?? `Unable to ${isEditingProduct ? "update" : "create"} product.`;
         setProductError(message);
         return;
       }
 
       const refreshedProducts = await fetch(toApiUrl("/api/Products"));
       setProducts(await refreshedProducts.json());
-      setProductForm({
-        name: "",
-        description: "",
-        price: "",
-        imageUrl: "",
-        sizes: "S,M,L,XL",
-        colors: "black,white",
-      });
+      resetProductForm();
     } catch (submitError) {
       setProductError(
-        submitError instanceof Error ? submitError.message : "Unable to create product.",
+        submitError instanceof Error
+          ? submitError.message
+          : `Unable to ${editingProductId !== null ? "update" : "create"} product.`,
       );
     } finally {
       setIsSubmittingProduct(false);
+    }
+  };
+
+  const startEditProduct = (product: Product) => {
+    setEditingProductId(product.id);
+    setProductError(null);
+    setProductImageError(null);
+    setProductForm({
+      name: product.name,
+      description: product.description,
+      price: String(product.price),
+      imageUrl: product.imageUrl,
+      sizes: product.sizes.join(","),
+      colors: product.colors.join(","),
+    });
+  };
+
+  const handleDeleteProduct = async (productId: number) => {
+    setProductError(null);
+    setDeletingProductId(productId);
+
+    try {
+      const response = await fetch(toApiUrl(`/api/Products/admin/${productId}`), {
+        method: "DELETE",
+        headers: authHeaders(),
+      });
+      const body = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        const message = Array.isArray(body?.message)
+          ? body.message.join(", ")
+          : body?.message ?? "Unable to delete product.";
+        setProductError(message);
+        return;
+      }
+
+      setProducts((current) => current.filter((product) => product.id !== productId));
+      if (editingProductId === productId) {
+        resetProductForm();
+      }
+    } catch (deleteError) {
+      setProductError(
+        deleteError instanceof Error ? deleteError.message : "Unable to delete product.",
+      );
+    } finally {
+      setDeletingProductId(null);
     }
   };
 
@@ -479,7 +542,7 @@ export default function AdminPage() {
             </div>
 
             <div className={styles.card}>
-              <h2>Create product</h2>
+              <h2>{editingProductId !== null ? "Edit product" : "Create product"}</h2>
               <form className={styles.form} onSubmit={handleProductSubmit}>
                 <input
                   className={styles.input}
@@ -568,8 +631,24 @@ export default function AdminPage() {
                   type="submit"
                   disabled={isProductImageProcessing || isSubmittingProduct}
                 >
-                  {isSubmittingProduct ? "Creating..." : "Create product"}
+                  {isSubmittingProduct
+                    ? editingProductId !== null
+                      ? "Saving..."
+                      : "Creating..."
+                    : editingProductId !== null
+                      ? "Save product"
+                      : "Create product"}
                 </button>
+                {editingProductId !== null ? (
+                  <button
+                    className={styles.secondaryButton}
+                    type="button"
+                    onClick={resetProductForm}
+                    disabled={isSubmittingProduct}
+                  >
+                    Cancel
+                  </button>
+                ) : null}
               </form>
             </div>
           </section>
@@ -582,6 +661,23 @@ export default function AdminPage() {
                   <strong>{product.name}</strong>
                   <span>{product.price.toFixed(2)} GEL</span>
                   <span>{product.description}</span>
+                  <div className={styles.actions}>
+                    <button
+                      className={styles.secondaryButton}
+                      type="button"
+                      onClick={() => startEditProduct(product)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className={styles.secondaryButton}
+                      type="button"
+                      onClick={() => handleDeleteProduct(product.id)}
+                      disabled={deletingProductId === product.id}
+                    >
+                      {deletingProductId === product.id ? "Deleting..." : "Delete"}
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
