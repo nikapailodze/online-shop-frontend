@@ -85,6 +85,12 @@
   cursor: pointer;
 }
 
+.button:disabled,
+.secondaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .button {
   background: #2f67c8;
   color: #fff;
@@ -119,6 +125,10 @@
 
 .error {
   color: #b42318;
+}
+
+.info {
+  color: #42526b;
 }
 
 @media (max-width: 900px) {

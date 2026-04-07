@@ -5,12 +5,17 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./ConsultationSection.module.css";
 import { fetchPublishedBlogs, type ApiBlog } from "@/app/lib/blogApi";
+import PageLoader from "../PageLoader/PageLoader";
 
 const ConsultationSection = () => {
   const [blogs, setBlogs] = useState<ApiBlog[]>([]);
+  const [isLoadingBlogs, setIsLoadingBlogs] = useState(true);
 
   useEffect(() => {
-    fetchPublishedBlogs().then(setBlogs).catch(() => setBlogs([]));
+    fetchPublishedBlogs()
+      .then(setBlogs)
+      .catch(() => setBlogs([]))
+      .finally(() => setIsLoadingBlogs(false));
   }, []);
 
   const featuredPool = useMemo(() => {
@@ -52,7 +57,8 @@ const ConsultationSection = () => {
           </div>
         </div>
 
-        {featuredArticle && (
+        {isLoadingBlogs && <PageLoader compact minHeight="220px" />}
+        {!isLoadingBlogs && featuredArticle && (
           <>
             <div className={styles.blogHeader}>
               <h3 className={styles.blogHeaderTitle}>Articles</h3>

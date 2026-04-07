@@ -5,6 +5,7 @@ import { FiEdit3, FiSearch } from "react-icons/fi";
 import { useEffect, useMemo, useState } from "react";
 import { fetchPublishedBlogs, type ApiBlog } from "../lib/blogApi";
 import { getStoredUser, getUserFromToken, isAdminUser } from "../lib/auth";
+import PageLoader from "../Components/PageLoader/PageLoader";
 import styles from "./page.module.scss";
 
 const escapeRegExp = (value: string) =>
@@ -32,13 +33,15 @@ export default function BlogsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchPublishedBlogs()
       .then(setArticles)
       .catch((loadError) =>
         setError(loadError instanceof Error ? loadError.message : "Unable to load blogs.")
-      );
+      )
+      .finally(() => setIsLoading(false));
   }, []);
 
   const user = getStoredUser() ?? getUserFromToken();
@@ -176,6 +179,7 @@ export default function BlogsPage() {
       </section>
 
       {error && <p>{error}</p>}
+      {isLoading && <PageLoader compact minHeight="320px" />}
       <section className={styles.grid}>
         {filteredArticles.map((article) => (
           <Link key={article.id} href={`/blogs/${article.id}`} className={styles.cardLink}>

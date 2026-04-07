@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { fetchBlogById, type ApiBlog } from "@/app/lib/blogApi";
+import PageLoader from "@/app/Components/PageLoader/PageLoader";
 import styles from "./page.module.scss";
 
 const renderContent = (content?: string) => {
@@ -74,7 +75,7 @@ export default function BlogDetailPage() {
         <Link href="/blogs" className={styles.backLink}>
           {"<- Back to articles"}
         </Link>
-        <div className={styles.notFound}>Loading article...</div>
+        <PageLoader compact minHeight="320px" />
       </div>
     );
   }

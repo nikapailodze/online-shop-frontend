@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import ShoppingItem from "../ShoppingItem/ShoppingItem";
+import PageLoader from "../PageLoader/PageLoader";
 import styles from "./ProductionSection.module.scss";
 import { useLanguage } from "@/app/Context/LanguageContext";
 import { translateText } from "@/app/lib/translate";
@@ -23,12 +24,14 @@ const TranslatedProductionSection = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [merchItems, setMerchItems] = useState<MerchItem[]>([]);
+  const [isLoadingMerch, setIsLoadingMerch] = useState(true);
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5001"}/api/Products`)
       .then((response) => response.json())
       .then((body) => setMerchItems(Array.isArray(body) ? body.slice(0, 3) : []))
-      .catch(() => setMerchItems([]));
+      .catch(() => setMerchItems([]))
+      .finally(() => setIsLoadingMerch(false));
   }, []);
 
   useEffect(() => {
@@ -58,6 +61,7 @@ const TranslatedProductionSection = () => {
         </h2>
 
         <div className={styles.productionItemsWrapper}>
+          {isLoadingMerch && <PageLoader compact minHeight="220px" />}
           {itemsToRender.map((item) => (
             <ShoppingItem
               key={item.id}

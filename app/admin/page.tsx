@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -53,13 +54,56 @@ const authHeaders = (): Record<string, string> => {
   return { Authorization: `Bearer ${token}` };
 };
 
-const fileToDataUrl = (file: File) =>
+const readFileAsDataUrl = (file: File) =>
   new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(String(reader.result));
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
+
+const loadImage = (src: string) =>
+  new Promise<HTMLImageElement>((resolve, reject) => {
+    const image = new window.Image();
+    image.onload = () => resolve(image);
+    image.onerror = reject;
+    image.src = src;
+  });
+
+const fileToOptimizedDataUrl = async (file: File) => {
+  const originalDataUrl = await readFileAsDataUrl(file);
+
+  if (!file.type.startsWith("image/")) {
+    return originalDataUrl;
+  }
+
+  const image = await loadImage(originalDataUrl);
+  const maxDimension = 1600;
+  const scale = Math.min(1, maxDimension / Math.max(image.width, image.height));
+  const targetWidth = Math.max(1, Math.round(image.width * scale));
+  const targetHeight = Math.max(1, Math.round(image.height * scale));
+  const canvas = document.createElement("canvas");
+
+  canvas.width = targetWidth;
+  canvas.height = targetHeight;
+
+  const context = canvas.getContext("2d");
+  if (!context) {
+    return originalDataUrl;
+  }
+
+  context.drawImage(image, 0, 0, targetWidth, targetHeight);
+
+  const mimeType = file.type === "image/png" ? "image/png" : "image/jpeg";
+  const optimizedDataUrl =
+    mimeType === "image/png"
+      ? canvas.toDataURL(mimeType)
+      : canvas.toDataURL(mimeType, 0.82);
+
+  return optimizedDataUrl.length < originalDataUrl.length
+    ? optimizedDataUrl
+    : originalDataUrl;
+};
 
 export default function AdminPage() {
   const router = useRouter();
@@ -69,6 +113,10 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [editingBlogId, setEditingBlogId] = useState<string | null>(null);
+  const [isProductImageProcessing, setIsProductImageProcessing] = useState(false);
+  const [productImageError, setProductImageError] = useState<string | null>(null);
+  const [productError, setProductError] = useState<string | null>(null);
+  const [isSubmittingProduct, setIsSubmittingProduct] = useState(false);
 
   const [blogForm, setBlogForm] = useState({
     title: "",
@@ -214,39 +262,64 @@ export default function AdminPage() {
   const handleProductSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
+    setProductError(null);
+    setProductImageError(null);
 
-    const response = await fetch(toApiUrl("/api/Products/admin"), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...authHeaders(),
-      },
-      body: JSON.stringify({
-        name: productForm.name,
-        description: productForm.description,
-        price: Number(productForm.price),
-        imageUrl: productForm.imageUrl || "/merch1.png",
-        sizes: productForm.sizes.split(",").map((value) => value.trim()).filter(Boolean),
-        colors: productForm.colors.split(",").map((value) => value.trim()).filter(Boolean),
-      }),
-    });
-
-    const body = await response.json().catch(() => null);
-    if (!response.ok) {
-      setError(body?.message ?? "Unable to create product.");
+    if (isProductImageProcessing) {
+      setProductError("Image upload is still processing. Wait a moment and submit again.");
       return;
     }
 
-    const refreshedProducts = await fetch(toApiUrl("/api/Products"));
-    setProducts(await refreshedProducts.json());
-    setProductForm({
-      name: "",
-      description: "",
-      price: "",
-      imageUrl: "",
-      sizes: "S,M,L,XL",
-      colors: "black,white",
-    });
+    if (!productForm.imageUrl) {
+      setProductError("Upload a product image before creating the product.");
+      return;
+    }
+
+    setIsSubmittingProduct(true);
+
+    try {
+      const response = await fetch(toApiUrl("/api/Products/admin"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...authHeaders(),
+        },
+        body: JSON.stringify({
+          name: productForm.name,
+          description: productForm.description,
+          price: Number(productForm.price),
+          imageUrl: productForm.imageUrl,
+          sizes: productForm.sizes.split(",").map((value) => value.trim()).filter(Boolean),
+          colors: productForm.colors.split(",").map((value) => value.trim()).filter(Boolean),
+        }),
+      });
+
+      const body = await response.json().catch(() => null);
+      if (!response.ok) {
+        const message = Array.isArray(body?.message)
+          ? body.message.join(", ")
+          : body?.message ?? "Unable to create product.";
+        setProductError(message);
+        return;
+      }
+
+      const refreshedProducts = await fetch(toApiUrl("/api/Products"));
+      setProducts(await refreshedProducts.json());
+      setProductForm({
+        name: "",
+        description: "",
+        price: "",
+        imageUrl: "",
+        sizes: "S,M,L,XL",
+        colors: "black,white",
+      });
+    } catch (submitError) {
+      setProductError(
+        submitError instanceof Error ? submitError.message : "Unable to create product.",
+      );
+    } finally {
+      setIsSubmittingProduct(false);
+    }
   };
 
   if (!isAdminUser(adminUser)) {
@@ -367,7 +440,7 @@ export default function AdminPage() {
                     onChange={async (event) => {
                       const file = event.target.files?.[0];
                       if (!file) return;
-                      const dataUrl = await fileToDataUrl(file);
+                      const dataUrl = await fileToOptimizedDataUrl(file);
                       setBlogForm((current) => ({ ...current, coverImage: dataUrl }));
                     }}
                   />
@@ -411,12 +484,14 @@ export default function AdminPage() {
                 <input
                   className={styles.input}
                   placeholder="Name"
+                  required
                   value={productForm.name}
                   onChange={(event) => setProductForm((current) => ({ ...current, name: event.target.value }))}
                 />
                 <textarea
                   className={styles.textarea}
                   placeholder="Description"
+                  required
                   value={productForm.description}
                   onChange={(event) => setProductForm((current) => ({ ...current, description: event.target.value }))}
                 />
@@ -425,6 +500,8 @@ export default function AdminPage() {
                   placeholder="Price"
                   type="number"
                   step="0.01"
+                  min="0"
+                  required
                   value={productForm.price}
                   onChange={(event) => setProductForm((current) => ({ ...current, price: event.target.value }))}
                 />
@@ -447,14 +524,51 @@ export default function AdminPage() {
                     accept="image/*"
                     onChange={async (event) => {
                       const file = event.target.files?.[0];
-                      if (!file) return;
-                      const dataUrl = await fileToDataUrl(file);
-                      setProductForm((current) => ({ ...current, imageUrl: dataUrl }));
+                      setProductImageError(null);
+
+                      if (!file) {
+                        setProductForm((current) => ({ ...current, imageUrl: "" }));
+                        return;
+                      }
+
+                      setIsProductImageProcessing(true);
+                      try {
+                        const dataUrl = await fileToOptimizedDataUrl(file);
+                        setProductForm((current) => ({ ...current, imageUrl: dataUrl }));
+                      } catch {
+                        setProductForm((current) => ({ ...current, imageUrl: "" }));
+                        setProductImageError("Unable to process that image. Try a JPG or PNG file.");
+                      } finally {
+                        setIsProductImageProcessing(false);
+                      }
                     }}
                   />
                 </label>
-                <button className={styles.button} type="submit">
-                  Create product
+                {isProductImageProcessing ? <p className={styles.info}>Processing image...</p> : null}
+                {productImageError ? <p className={styles.error}>{productImageError}</p> : null}
+                {productError ? <p className={styles.error}>{productError}</p> : null}
+                {productForm.imageUrl ? (
+                  <Image
+                    src={productForm.imageUrl}
+                    alt="Product preview"
+                    width={240}
+                    height={240}
+                    unoptimized
+                    style={{
+                      width: "100%",
+                      maxWidth: "240px",
+                      height: "auto",
+                      borderRadius: "12px",
+                      objectFit: "cover",
+                    }}
+                  />
+                ) : null}
+                <button
+                  className={styles.button}
+                  type="submit"
+                  disabled={isProductImageProcessing || isSubmittingProduct}
+                >
+                  {isSubmittingProduct ? "Creating..." : "Create product"}
                 </button>
               </form>
             </div>

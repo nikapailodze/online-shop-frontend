@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { API_BASE_URL } from "../lib/api";
+import PageLoader from "../Components/PageLoader/PageLoader";
 import {
   authEventName,
   clearAuth,
@@ -21,6 +22,7 @@ export default function ProfilePage() {
   >([]);
   const [error, setError] = useState<string | null>(null);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [isLoadingOrders, setIsLoadingOrders] = useState(true);
 
   useEffect(() => {
     const loadUser = () => {
@@ -34,7 +36,10 @@ export default function ProfilePage() {
 
     const loadOrders = async () => {
       const token = getStoredToken();
-      if (!token) return;
+      if (!token) {
+        setIsLoadingOrders(false);
+        return;
+      }
       try {
         const response = await fetch(`${API_BASE_URL}/api/Orders`, {
           headers: {
@@ -50,6 +55,8 @@ export default function ProfilePage() {
         const message =
           err instanceof Error ? err.message : "Failed to load orders.";
         setError(message);
+      } finally {
+        setIsLoadingOrders(false);
       }
     };
 
@@ -87,7 +94,8 @@ export default function ProfilePage() {
         <div className={styles.ordersSection}>
           <h2 className={styles.subtitle}>Order History</h2>
           {error && <p className={styles.info}>{error}</p>}
-          {!orders.length && !error && (
+          {isLoadingOrders && <PageLoader compact minHeight="220px" />}
+          {!isLoadingOrders && !orders.length && !error && (
             <p className={styles.info}>No orders yet.</p>
           )}
           {orders.map((order) => (
