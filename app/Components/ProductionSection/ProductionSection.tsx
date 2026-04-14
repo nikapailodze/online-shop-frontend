@@ -42,7 +42,7 @@ const TranslatedProductionSection = () => {
   }, []);
 
   useEffect(() => {
-    if (!isMobile) return;
+    if (!isMobile || merchItems.length === 0) return;
     const timer = window.setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % merchItems.length);
     }, 4500);
@@ -50,7 +50,9 @@ const TranslatedProductionSection = () => {
   }, [isMobile, merchItems.length]);
 
   const itemsToRender = isMobile
-    ? [merchItems[activeIndex]]
+    ? merchItems.length > 0
+      ? [merchItems[activeIndex]]
+      : []
     : merchItems;
 
   return (
