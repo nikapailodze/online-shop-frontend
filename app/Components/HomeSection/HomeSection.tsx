@@ -1,26 +1,25 @@
-"use client";
+import Image from "next/image";
 import styles from "./HomeSection.module.scss";
-import { useLanguage } from "@/app/Context/LanguageContext";
 
 const HomeSection = () => {
-  const { language } = useLanguage();
-
   return (
     <section className={styles.homeSectionWrapper}>
+      <Image
+        src="/mainBG.png"
+        alt=""
+        fill
+        priority
+        fetchPriority="high"
+        sizes="100vw"
+        className={styles.heroImage}
+        aria-hidden="true"
+      />
       <div className={styles.homeSectionContent}>
         <div className={styles.heroText}>
-          <h1
-            className={`${styles.title} ${
-              language === "ka" ? styles.titleKa : ""
-            }`}
-          >
+          <h1 className={styles.title}>
             Welcome to EndoPail
           </h1>
-          <p
-            className={`${styles.title} ${
-              language === "ka" ? styles.titleKa : ""
-            }`}
-          >
+          <p className={styles.title}>
             Smart Calculators for Smarter Care
           </p>
         </div>

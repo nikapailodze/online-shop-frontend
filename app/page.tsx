@@ -1,8 +1,5 @@
-"use client";
-import CalculatorSection from "./Components/CalculatorSection/CalculatorSection";
+import DeferredHomeSections from "./Components/DeferredHomeSections/DeferredHomeSections";
 import HomeSection from "./Components/HomeSection/HomeSection";
-import ProductionSection from "./Components/ProductionSection/ProductionSection";
-import ConsultationSection from "./Components/ConsultationSection/ConsultationSection";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -13,17 +10,7 @@ export default function Home() {
           <HomeSection />
         </div>
 
-        <div className={styles.productionSection}>
-          <CalculatorSection />
-        </div>
-
-        <div className={styles.consultationSection}>
-          <ConsultationSection />
-        </div>
-
-        <div className={styles.productionSection}>
-          <ProductionSection />
-        </div>
+        <DeferredHomeSections />
       </div>
     </div>
   );
