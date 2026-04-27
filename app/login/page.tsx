@@ -72,12 +72,6 @@ export default function Home() {
         <div className={styles.content}>
           <div className={styles.conntentUpper}>
             <div className={styles.titleWrapper}>
-              <span className={styles.signUpIndicator}>
-                Don&apos;t have an account?{" "}
-                <a className={styles.signUpIndicatorAnch} href="signup">
-                  Sign Up
-                </a>
-              </span>
               <h1 className={styles.title}>Sign In</h1>
             </div>
 
@@ -145,6 +139,12 @@ export default function Home() {
                 >
                   {isSubmitting ? "Signing In..." : "Sign In"}
                 </button>
+                <span className={styles.signUpIndicator}>
+                  Don&apos;t have an account?
+                  <a className={styles.signUpIndicatorAnch} href="signup">
+                    Sign Up
+                  </a>
+                </span>
               </div>
             </form>
           </div>

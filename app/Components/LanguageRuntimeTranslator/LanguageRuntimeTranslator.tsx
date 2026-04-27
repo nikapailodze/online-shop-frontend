@@ -20,6 +20,10 @@ export default function LanguageRuntimeTranslator() {
   );
 
   useEffect(() => {
+    if (language === "en") {
+      return;
+    }
+
     const textNodeOriginals = textNodeOriginalsRef.current;
     const elementAttributeOriginals = elementAttributeOriginalsRef.current;
 

@@ -112,8 +112,15 @@ export default function ConsultationPage() {
         }),
       });
 
+      const body = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error("Unable to schedule consultation.");
+        const apiMessage =
+          typeof body?.message === "string"
+            ? body.message
+            : Array.isArray(body?.message)
+            ? body.message.join(" ")
+            : "Unable to schedule consultation.";
+        throw new Error(apiMessage);
       }
 
       setStatus("success");
@@ -127,7 +134,11 @@ export default function ConsultationPage() {
     } catch (error) {
       setStatus("error");
       setStatusMessage(
-        error instanceof Error ? error.message : "Something went wrong. Please try again."
+        error instanceof TypeError
+          ? "Unable to reach the consultation server. Please make sure the backend is running."
+          : error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
       );
     }
   };

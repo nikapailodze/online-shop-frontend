@@ -1,6 +1,7 @@
 "use client";
 
 import ShoppingItem from "../Components/ShoppingItem/ShoppingItem";
+import PageLoader from "../Components/PageLoader/PageLoader";
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../lib/api";
@@ -16,6 +17,7 @@ type Product = {
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -30,6 +32,8 @@ export default function Home() {
         const message =
           err instanceof Error ? err.message : "Failed to load products.";
         setError(message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -56,6 +60,7 @@ export default function Home() {
       </div>
       <div className={styles.productionItemsWrapper}>
         {error && <p className={styles.subTitle}>{error}</p>}
+        {isLoading && <PageLoader compact minHeight="280px" />}
         {products.map((product) => (
           <ShoppingItem
             key={product.id}

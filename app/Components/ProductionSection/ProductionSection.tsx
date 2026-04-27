@@ -2,9 +2,18 @@
 
 import { useEffect, useState } from "react";
 import ShoppingItem from "../ShoppingItem/ShoppingItem";
+import PageLoader from "../PageLoader/PageLoader";
 import styles from "./ProductionSection.module.scss";
 import { useLanguage } from "@/app/Context/LanguageContext";
 import { translateText } from "@/app/lib/translate";
+
+type MerchItem = {
+  id: number;
+  imageUrl: string;
+  name: string;
+  price: number;
+  description: string;
+};
 
 const ProductionSection = () => (
   <TranslatedProductionSection />
@@ -14,12 +23,16 @@ const TranslatedProductionSection = () => {
   const { language } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [merchItems, setMerchItems] = useState<MerchItem[]>([]);
+  const [isLoadingMerch, setIsLoadingMerch] = useState(true);
 
-  const merchItems = [
-    { id: 1, imageUrl: "/merch2.png" },
-    { id: 2, imageUrl: "/merch1.png" },
-    { id: 3, imageUrl: "/merch3.png" },
-  ];
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5001"}/api/Products`)
+      .then((response) => response.json())
+      .then((body) => setMerchItems(Array.isArray(body) ? body.slice(0, 3) : []))
+      .catch(() => setMerchItems([]))
+      .finally(() => setIsLoadingMerch(false));
+  }, []);
 
   useEffect(() => {
     const updateIsMobile = () => setIsMobile(window.innerWidth <= 640);
@@ -29,7 +42,7 @@ const TranslatedProductionSection = () => {
   }, []);
 
   useEffect(() => {
-    if (!isMobile) return;
+    if (!isMobile || merchItems.length === 0) return;
     const timer = window.setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % merchItems.length);
     }, 4500);
@@ -37,7 +50,9 @@ const TranslatedProductionSection = () => {
   }, [isMobile, merchItems.length]);
 
   const itemsToRender = isMobile
-    ? [merchItems[activeIndex]]
+    ? merchItems.length > 0
+      ? [merchItems[activeIndex]]
+      : []
     : merchItems;
 
   return (
@@ -48,17 +63,15 @@ const TranslatedProductionSection = () => {
         </h2>
 
         <div className={styles.productionItemsWrapper}>
+          {isLoadingMerch && <PageLoader compact minHeight="220px" />}
           {itemsToRender.map((item) => (
             <ShoppingItem
               key={item.id}
               id={item.id}
               imageUrl={item.imageUrl}
-              name={translateText("VANTA Coat", language)}
-              price={320}
-              description={translateText(
-                "Extreme warmth meets sculptural form. A cocoon of protection, designed for resilience.",
-                language
-              )}
+              name={translateText(item.name, language)}
+              price={item.price}
+              description={translateText(item.description, language)}
             />
           ))}
         </div>

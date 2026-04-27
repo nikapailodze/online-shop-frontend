@@ -1,0 +1,35 @@
+.overlay {
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  background: transparent;
+}
+
+.compact {
+  min-height: 220px;
+  padding: 16px;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.image {
+  width: min(220px, 42vw);
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.imageCompact {
+  width: min(160px, 32vw);
+}

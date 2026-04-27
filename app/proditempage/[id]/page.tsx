@@ -10,6 +10,7 @@ import { gsap } from "gsap";
 import { useCartRef } from "@/app/Context/CartRefContext";
 import { useCart } from "@/app/Context/CartContext";
 import { API_BASE_URL } from "@/app/lib/api";
+import PageLoader from "@/app/Components/PageLoader/PageLoader";
 
 export type ColorOption = string;
 
@@ -125,7 +126,7 @@ export default function Home({ params }: { params: Promise<{ id: string }> }) {
   if (isLoading) {
     return (
       <div className={styles.page}>
-        <p className={styles.description}>Loading product...</p>
+        <PageLoader compact minHeight="320px" />
       </div>
     );
   }

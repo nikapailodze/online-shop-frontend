@@ -1,6 +1,7 @@
 "use client";
 import styles from "./FooterSection.module.scss";
 import Image from "next/image";
+import Link from "next/link";
 import { useLanguage } from "@/app/Context/LanguageContext";
 import { translateText } from "@/app/lib/translate";
 
@@ -27,7 +28,7 @@ const FooterSection = () => {
         </div>
 
         <div className={styles.links}>
-          <a href="#">{translateText("Admin Log In", language)}</a>
+          <Link href="/admin">{translateText("Admin Log In", language)}</Link>
           <span className={styles.divider}>|</span>
           <a href="#">{translateText("Site Map", language)}</a>
           <span className={styles.divider}>|</span>

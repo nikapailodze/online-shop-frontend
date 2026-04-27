@@ -49,6 +49,11 @@
     flex-shrink: 0;
 }
 
+.deferredSectionPlaceholder {
+    width: 100%;
+    min-height: 240px;
+}
+
 @media (max-width: 1300px) {
     .homeSection,
     .productionSection,

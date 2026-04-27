@@ -59,7 +59,7 @@ const Navigaton = () => {
         <nav className={styles.nav}>
           <div onClick={() => router.push("/")} className={styles.logo}>
             <Image
-              src="/Logo/logoName.png"
+              src="/Logo/endopaiFullLogo.svg"
               alt="Endopail"
               width={140}
               height={32}

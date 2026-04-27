@@ -73,12 +73,6 @@ export default function Home() {
         <div className={styles.content}>
           <div className={styles.conntentUpper}>
             <div className={styles.titleWrapper}>
-              <span className={styles.signUpIndicator}>
-                Already have an account?{" "}
-                <a className={styles.signUpIndicatorAnch} href="login">
-                  Log in
-                </a>
-              </span>
               <h1 className={styles.title}>Sign Up</h1>
             </div>
 
@@ -202,6 +196,12 @@ export default function Home() {
                 >
                   {isSubmitting ? "Creating Account..." : "Create an Account"}
                 </button>
+                <span className={styles.signUpIndicator}>
+                  Already have an account?
+                  <a className={styles.signUpIndicatorAnch} href="login">
+                    Log in
+                  </a>
+                </span>
               </div>
             </form>
           </div>
