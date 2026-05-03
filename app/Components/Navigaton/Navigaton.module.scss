@@ -37,53 +37,11 @@
   cursor: pointer;
 }
 
-.logoStage {
-  position: relative;
-  width: 220px;
-  height: 68px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  overflow: visible;
-}
-
-.logoStageAnimated {
-  filter: drop-shadow(0 10px 16px rgba(7, 7, 7, 0.08));
-}
-
 .logoImage {
   width: 140px;
   height: auto;
   display: block;
   border: none;
-  position: relative;
-  z-index: 1;
-  transition: opacity 320ms ease, transform 380ms ease;
-}
-
-.logoImageHidden {
-  opacity: 0;
-  transform: translateY(4px) scale(0.96);
-}
-
-.logoGif {
-  position: absolute;
-  left: -10px;
-  top: 50%;
-  transform: translateY(-50%) scale(0.96);
-  width: 220px;
-  height: auto;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 2;
-  mix-blend-mode: normal;
-  filter: saturate(0.92) contrast(0.96);
-  transition: opacity 360ms ease, transform 460ms ease;
-}
-
-.logoGifVisible {
-  opacity: 1;
-  transform: translateY(-50%) scale(1);
 }
 
 .navItemsRight {
@@ -237,16 +195,6 @@
 
   .logoImage {
     width: 92px;
-  }
-
-  .logoStage {
-    width: 132px;
-    height: 42px;
-  }
-
-  .logoGif {
-    left: -6px;
-    width: 132px;
   }
 
   .navItemsRight {
