@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./CalculatorSection.module.scss";
 import { FaBone } from "react-icons/fa6";
 import { PiBoneFill } from "react-icons/pi";
