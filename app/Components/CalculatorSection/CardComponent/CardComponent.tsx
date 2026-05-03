@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./CardComponent.module.scss";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Link from "next/link";

@@ -32,7 +32,6 @@ const publicaPlay = localFont({
   display: "swap",
 });
 
-
 export const metadata: Metadata = {
   title: "Endopai",
   description: "Endopai",
