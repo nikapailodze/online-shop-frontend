@@ -1,10 +1,14 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import CardComponent from "../Components/CalculatorSection/CardComponent/CardComponent";
 import styles from "./page.module.scss";
 import { useLanguage } from "../Context/LanguageContext";
 import { translateText } from "../lib/translate";
+import {
+  fetchPublishedCalculators,
+  type ApiCalculator,
+} from "../lib/calculatorsApi";
 import {
   diabetesRiskMeta,
   drsGriffinMeta,
@@ -67,6 +71,17 @@ const calculators = [
   ostFemaleMeta,
 
 ];
+
+type BuiltInCalculator = (typeof calculators)[number];
+
+type DisplayCalculator = {
+  slug: string;
+  title: string;
+  short: string;
+  category: string;
+  icon?: BuiltInCalculator["icon"];
+  isCustom?: boolean;
+};
 
 const kaBySlug: Record<string, { title: string; short: string }> = {
   "diabetes-risk": {
@@ -178,6 +193,13 @@ const kaBySlug: Record<string, { title: string; short: string }> = {
 export default function CalculatorsIndex() {
   const { language } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
+  const [customCalculators, setCustomCalculators] = useState<ApiCalculator[]>([]);
+
+  useEffect(() => {
+    fetchPublishedCalculators()
+      .then((items) => setCustomCalculators(items))
+      .catch(() => setCustomCalculators([]));
+  }, []);
 
   const localizeCard = useCallback(
     (slug: string, title: string, short: string) => {
@@ -193,10 +215,21 @@ export default function CalculatorsIndex() {
   );
 
   const filteredCalculators = useMemo(() => {
-    const query = searchQuery.trim().toLowerCase();
-    if (!query) return calculators;
+    const mergedCalculators: DisplayCalculator[] = [
+      ...calculators,
+      ...customCalculators.map((calculator) => ({
+        slug: calculator.slug,
+        title: calculator.title,
+        short: calculator.short,
+        category: calculator.category,
+        isCustom: true,
+      })),
+    ];
 
-    return calculators.filter((c) => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return mergedCalculators;
+
+    return mergedCalculators.filter((c) => {
       const localized = localizeCard(c.slug, c.title, c.short);
       return (
         localized.title.toLowerCase().includes(query) ||
@@ -204,10 +237,14 @@ export default function CalculatorsIndex() {
         c.category.toLowerCase().includes(query)
       );
     });
-  }, [searchQuery, localizeCard]);
+  }, [customCalculators, searchQuery, localizeCard]);
 
   const hasResults = filteredCalculators.length > 0;
-  const categories = ["Diabetes", "Fracture Risk", "Metabolic Syndrome", "Osteoporosis"] as const;
+  const categories = useMemo(
+    () =>
+      Array.from(new Set(filteredCalculators.map((calculator) => calculator.category))),
+    [filteredCalculators],
+  );
 
   return (
     <main className={styles.main}>
