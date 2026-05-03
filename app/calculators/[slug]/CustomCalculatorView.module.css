@@ -1,0 +1,114 @@
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 32px 0 72px;
+}
+
+.card {
+  width: 100%;
+  max-width: 840px;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 18px 50px rgba(7, 7, 7, 0.08);
+  display: grid;
+  gap: 20px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(32px, 4vw, 44px);
+  line-height: 1.05;
+}
+
+.description {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #3f3f46;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.inputWrap {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid #d4d4d8;
+  border-radius: 14px;
+  background: #f7f7f8;
+  padding: 14px 16px;
+  padding-right: 56px;
+  font-size: 16px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+}
+
+.unit {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: #71717a;
+}
+
+.result {
+  border-radius: 20px;
+  background: linear-gradient(145deg, #f0f6ff 0%, #eef2ff 100%);
+  padding: 20px;
+  display: grid;
+  gap: 6px;
+}
+
+.resultLabel {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.resultValue {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  color: #111827;
+}
+
+.formula {
+  font-size: 13px;
+  color: #6b7280;
+  word-break: break-word;
+}
+
+.error {
+  color: #b91c1c;
+  font-size: 14px;
+}

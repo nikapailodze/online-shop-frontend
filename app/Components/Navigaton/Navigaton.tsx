@@ -6,7 +6,7 @@ import NavItems from "./Components/NavItems/NavItems";
 import { useEffect, useRef, useState } from "react";
 import Clock from "./Components/Clock/Clock";
 import AsideCart from "../AsideCart/AsideCart";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useCartRef } from "@/app/Context/CartRefContext";
 import { useCart } from "@/app/Context/CartContext";
 import { useLanguage } from "@/app/Context/LanguageContext";
@@ -15,13 +15,10 @@ import Image from "next/image";
 const Navigaton = () => {
   const [showNavItems, setShowNavItems] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const [showAnimatedLogo, setShowAnimatedLogo] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
   const languageMenuRef = useRef<HTMLDivElement>(null);
   const { language, setLanguage } = useLanguage();
 
   const router = useRouter();
-  const pathname = usePathname();
   const cartRef = useCartRef();
   const { toggleCart, isCartOpen, closeCart } = useCart();
 
@@ -42,27 +39,6 @@ const Navigaton = () => {
     };
   }, []);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (pathname !== "/") {
-      setShowAnimatedLogo(false);
-      return;
-    }
-
-    if (!isMounted) return;
-
-    setShowAnimatedLogo(true);
-
-    const timeoutId = window.setTimeout(() => {
-      setShowAnimatedLogo(false);
-    }, 3200);
-
-    return () => window.clearTimeout(timeoutId);
-  }, [isMounted, pathname]);
-
   const languageLabel = language === "en" ? "EN" : "GE";
   const applyLanguage = (nextLanguage: "en" | "ka") => {
     if (nextLanguage === language) {
@@ -82,30 +58,14 @@ const Navigaton = () => {
       <div className={styles.navContent}>
         <nav className={styles.nav}>
           <div onClick={() => router.push("/")} className={styles.logo}>
-            <div
-              className={`${styles.logoStage} ${
-                showAnimatedLogo ? styles.logoStageAnimated : ""
-              }`}
-            >
-              <Image
-                src="/Logo/endopaiFullLogo.svg"
-                alt="Endopail"
-                width={140}
-                height={32}
-                className={`${styles.logoImage} ${
-                  showAnimatedLogo ? styles.logoImageHidden : ""
-                }`}
-                priority
-              />
-              <img
-                src="/gif/endopailp-gray.gif"
-                alt=""
-                aria-hidden="true"
-                className={`${styles.logoGif} ${
-                  showAnimatedLogo ? styles.logoGifVisible : ""
-                }`}
-              />
-            </div>
+            <Image
+              src="/Logo/endopaiFullLogo.svg"
+              alt="Endopail"
+              width={140}
+              height={32}
+              className={styles.logoImage}
+              priority
+            />
           </div>
 
           <div className={styles.navItemsRight}>
