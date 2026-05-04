@@ -111,6 +111,10 @@ export default function Home({ params }: { params: Promise<{ id: string }> }) {
 
     addToCart({
       productId: product.id,
+      name: product.name,
+      price: product.price,
+      imageUrl: product.imageUrl,
+      description: product.description,
       quantity: 1,
       color: selectedColor,
       size: selectedSize,

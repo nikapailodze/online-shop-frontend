@@ -31,7 +31,7 @@ const InformationCard: React.FC<InformationCardProps> = ({
         >
           <GoPlus
             size={24}
-            color="white"
+            color="currentColor"
             className={`${styles.informationCardIcon} ${
               isVisible ? styles.active : ""
             }`}
