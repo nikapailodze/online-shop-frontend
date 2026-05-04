@@ -112,14 +112,16 @@
 }
 .cartItemCloseButton {
   border: none;
-  background: var(--color-bg);
+  background: var(--color-text);
+  color: var(--color-bg);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
+  flex: 0 0 auto;
 }
 .asideCartFooter {
   padding: 16px 16px 24px 16px;

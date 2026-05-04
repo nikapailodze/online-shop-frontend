@@ -12,6 +12,7 @@ import BlogListCard from "./components/BlogListCard";
 import CalculatorEditorCard from "./components/CalculatorEditorCard";
 import CalculatorListCard from "./components/CalculatorListCard";
 import ConsultationsCard from "./components/ConsultationsCard";
+import OrdersCard from "./components/OrdersCard";
 import ProductEditorCard from "./components/ProductEditorCard";
 import ProductListCard from "./components/ProductListCard";
 import {
@@ -22,6 +23,7 @@ import {
   type CalculatorField,
   type CalculatorFormState,
   type Consultation,
+  type Order,
   type Product,
   type ProductFormState,
 } from "./types";
@@ -32,6 +34,7 @@ export default function AdminPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [calculators, setCalculators] = useState<Calculator[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [editingBlogId, setEditingBlogId] = useState<string | null>(null);
@@ -97,6 +100,7 @@ export default function AdminPage() {
           blogResponse,
           productResponse,
           calculatorResponse,
+          orderResponse,
         ] = await Promise.all([
           fetch(toApiUrl("/api/Consultations/admin/all"), {
             headers: authHeaders(),
@@ -108,29 +112,41 @@ export default function AdminPage() {
           fetch(toApiUrl("/api/Calculators/admin/all"), {
             headers: authHeaders(),
           }),
+          fetch(toApiUrl("/api/Orders/admin/all"), {
+            headers: authHeaders(),
+          }),
         ]);
 
         if (
           !consultationResponse.ok ||
           !blogResponse.ok ||
           !productResponse.ok ||
-          !calculatorResponse.ok
+          !calculatorResponse.ok ||
+          !orderResponse.ok
         ) {
           throw new Error("Unable to load admin data.");
         }
 
-        const [consultationBody, blogBody, productBody, calculatorBody] =
+        const [
+          consultationBody,
+          blogBody,
+          productBody,
+          calculatorBody,
+          orderBody,
+        ] =
           await Promise.all([
             consultationResponse.json(),
             blogResponse.json(),
             productResponse.json(),
             calculatorResponse.json(),
+            orderResponse.json(),
           ]);
 
         setConsultations(Array.isArray(consultationBody) ? consultationBody : []);
         setBlogs(Array.isArray(blogBody) ? blogBody : []);
         setProducts(Array.isArray(productBody) ? productBody : []);
         setCalculators(Array.isArray(calculatorBody) ? calculatorBody : []);
+        setOrders(Array.isArray(orderBody) ? orderBody : []);
       } catch (loadError) {
         setError(loadError instanceof Error ? loadError.message : "Unable to load admin data.");
       } finally {
@@ -599,6 +615,7 @@ export default function AdminPage() {
         <>
           <section className={styles.grid}>
             <ConsultationsCard consultations={consultations} />
+            <OrdersCard orders={orders} />
             <BlogEditorCard
               editingBlogId={editingBlogId}
               blogForm={blogForm}
