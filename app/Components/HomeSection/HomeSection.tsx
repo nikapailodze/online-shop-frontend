@@ -11,7 +11,17 @@ const HomeSection = () => {
         priority
         fetchPriority="high"
         sizes="100vw"
-        className={styles.heroImage}
+        className={`${styles.heroImage} ${styles.heroImageDesktop}`}
+        aria-hidden="true"
+      />
+      <Image
+        src="/mainBGPhone.png"
+        alt=""
+        fill
+        priority
+        fetchPriority="high"
+        sizes="100vw"
+        className={`${styles.heroImage} ${styles.heroImageMobile}`}
         aria-hidden="true"
       />
       <div className={styles.homeSectionContent}>
