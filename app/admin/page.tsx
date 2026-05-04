@@ -200,11 +200,53 @@ export default function AdminPage() {
   }, []);
 
   const handleCalculatorFieldChange = useCallback(
-    (index: number, key: keyof CalculatorField, value: string) => {
+    (
+      index: number,
+      key:
+        | "name"
+        | "label"
+        | "type"
+        | "unit"
+        | "placeholder"
+        | "defaultValue"
+        | "options",
+      value: string,
+    ) => {
       setCalculatorForm((current) => ({
         ...current,
         fields: current.fields.map((field, fieldIndex) =>
-          fieldIndex === index ? { ...field, [key]: value } : field,
+          fieldIndex === index
+            ? {
+                ...field,
+                ...(key === "options"
+                  ? {
+                      options: value
+                        .split("\n")
+                        .map((line) => line.trim())
+                        .filter(Boolean)
+                        .map((line) => {
+                          const [label, rawValue] = line.split("=");
+                          return {
+                            label: (label || "").trim(),
+                            value: (rawValue || "").trim(),
+                          };
+                        }),
+                    }
+                  : key === "type"
+                    ? {
+                        type: value as CalculatorField["type"],
+                        options:
+                          value === "select"
+                            ? field.options
+                            : [],
+                        defaultValue:
+                          value === "boolean" && field.defaultValue === ""
+                            ? "0"
+                            : field.defaultValue,
+                      }
+                    : { [key]: value }),
+              }
+            : field,
         ),
       }));
     },
@@ -249,6 +291,13 @@ export default function AdminPage() {
               placeholder: field.placeholder ?? "",
               defaultValue:
                 field.defaultValue == null ? "" : String(field.defaultValue),
+              type: field.type ?? "number",
+              options: Array.isArray(field.options)
+                ? field.options.map((option) => ({
+                    label: option.label,
+                    value: String(option.value),
+                  }))
+                : [],
             }))
           : [createEmptyCalculatorField()],
     });
@@ -282,12 +331,26 @@ export default function AdminPage() {
             fields: calculatorForm.fields.map((field) => ({
               name: field.name.trim(),
               label: field.label.trim(),
+              type: field.type,
               unit: field.unit.trim(),
               placeholder: field.placeholder.trim(),
               defaultValue:
                 field.defaultValue.trim() === ""
                   ? null
                   : Number(field.defaultValue),
+              options:
+                field.type === "select"
+                  ? field.options
+                      .map((option) => ({
+                        label: option.label.trim(),
+                        value: Number(option.value),
+                      }))
+                      .filter(
+                        (option) =>
+                          option.label &&
+                          Number.isFinite(option.value),
+                      )
+                  : [],
             })),
           }),
         },

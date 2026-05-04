@@ -15,6 +15,14 @@
   z-index: 0;
 }
 
+.heroImageDesktop {
+  display: block;
+}
+
+.heroImageMobile {
+  display: none;
+}
+
 .homeSectionContent {
   display: flex;
   flex-direction: column;
@@ -86,6 +94,27 @@
 }
 
 @media (max-width: 640px) {
+  .homeSectionWrapper {
+    min-height: 100svh;
+    padding-bottom: 28px;
+    justify-content: flex-end;
+  }
+
+  .heroImageDesktop {
+    display: none;
+  }
+
+  .heroImageMobile {
+    display: block;
+    object-fit: cover;
+    object-position: center top;
+    opacity: 0.96;
+  }
+
+  .homeSectionContent {
+    gap: 10px;
+  }
+
   .title {
     font-size: 48px;
     line-height: 1.15;
