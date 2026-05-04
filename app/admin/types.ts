@@ -11,6 +11,26 @@ export type Consultation = {
   createdAtUtc: string;
 };
 
+export type OrderItem = {
+  orderItemId: number;
+  productId: number;
+  productName: string;
+  quantity: number;
+  unitPrice: number;
+  color?: string;
+  size?: string;
+};
+
+export type Order = {
+  orderId: number;
+  userId: number;
+  customerName: string;
+  customerEmail: string;
+  totalPrice: number;
+  createdAtUtc: string;
+  items: OrderItem[];
+};
+
 export type Blog = {
   id: string;
   title: string;

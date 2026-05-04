@@ -4,6 +4,7 @@ import Image from "next/image";
 import { GoPlus } from "react-icons/go";
 import { AiOutlineMinus } from "react-icons/ai";
 import { IoMdClose } from "react-icons/io";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { useCart } from "@/app/Context/CartContext";
 
 interface AsideCartProps {
@@ -128,8 +129,9 @@ const AsideCart: React.FC<AsideCartProps> = ({ isOpen, onClose }) => {
                 <button
                   className={styles.cartItemCloseButton}
                   onClick={() => onDeleteButtonClick(item.id)}
+                  aria-label={`Remove ${item.name} from cart`}
                 >
-                  <IoMdClose color="white" size={20} />
+                  <RiDeleteBin6Line size={18} />
                 </button>
               </div>
             </div>

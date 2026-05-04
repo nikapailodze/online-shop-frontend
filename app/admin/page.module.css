@@ -141,6 +141,21 @@
   border-radius: 16px;
 }
 
+.subList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.subListItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  color: #42526b;
+}
+
 .checkbox {
   display: flex;
   align-items: center;
