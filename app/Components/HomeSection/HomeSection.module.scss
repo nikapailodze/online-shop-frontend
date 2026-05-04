@@ -106,9 +106,9 @@
 
   .heroImageMobile {
     display: block;
-    object-fit: cover;
-    object-position: center top;
-    opacity: 0.96;
+    object-fit: contain;
+    object-position: center center;
+    opacity: 0.98;
   }
 
   .homeSectionContent {
