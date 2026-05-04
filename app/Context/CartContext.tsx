@@ -23,19 +23,15 @@ export type CartItem = {
   size?: string;
 };
 
-type CartItemDto = {
-  cartItemId?: number;
-  id?: number;
+type AddToCartPayload = {
   productId: number;
-  productName?: string;
-  name?: string;
-  description?: string;
-  price?: number;
-  quantity?: number;
+  name: string;
+  price: number;
   imageUrl?: string;
-  image?: string;
-  color?: string;
-  size?: string;
+  description?: string;
+  quantity?: number;
+  color?: string | null;
+  size?: string | null;
 };
 
 type CartContextValue = {
@@ -46,12 +42,7 @@ type CartContextValue = {
   openCart: () => void;
   closeCart: () => void;
   toggleCart: () => void;
-  addToCart: (payload: {
-    productId: number;
-    quantity?: number;
-    color?: string | null;
-    size?: string | null;
-  }) => Promise<void>;
+  addToCart: (payload: AddToCartPayload) => Promise<void>;
   updateQuantity: (cartItemId: number, quantity: number) => Promise<void>;
   removeItem: (cartItemId: number) => Promise<void>;
   clearCart: () => Promise<void>;
@@ -60,6 +51,37 @@ type CartContextValue = {
 };
 
 const CartContext = createContext<CartContextValue | undefined>(undefined);
+const CART_STORAGE_KEY = "cartItems";
+
+const parseStoredCart = (raw: string | null): CartItem[] => {
+  if (!raw) return [];
+
+  try {
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+
+    return parsed
+      .map((item) => ({
+        id: Number(item?.id) || Date.now(),
+        productId: Number(item?.productId) || 0,
+        name: String(item?.name || "Item"),
+        description: String(item?.description || ""),
+        price: Number(item?.price) || 0,
+        quantity: Math.max(1, Number(item?.quantity) || 1),
+        imageUrl: item?.imageUrl ? String(item.imageUrl) : undefined,
+        color: item?.color ? String(item.color) : undefined,
+        size: item?.size ? String(item.size) : undefined,
+      }))
+      .filter((item) => item.productId > 0);
+  } catch {
+    return [];
+  }
+};
+
+const loadCart = () => {
+  if (typeof window === "undefined") return [];
+  return parseStoredCart(window.localStorage.getItem(CART_STORAGE_KEY));
+};
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -71,11 +93,12 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const storedToken = getStoredToken();
-    setToken(storedToken);
+    setToken(getStoredToken());
+    setItems(loadCart());
 
     const handleStorageChange = () => {
       setToken(getStoredToken());
+      setItems(loadCart());
     };
 
     window.addEventListener("storage", handleStorageChange);
@@ -87,49 +110,34 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    if (!token) {
-      setItems([]);
-    }
-  }, [token]);
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+  }, [items]);
 
-  const mapCartItem = useCallback((dto: CartItemDto): CartItem => {
-    return {
-      id: dto.cartItemId ?? dto.id ?? 0,
-      productId: dto.productId,
-      name: dto.productName ?? dto.name ?? "Item",
-      description: dto.description ?? "",
-      price: dto.price ?? 0,
-      quantity: dto.quantity ?? 1,
-      imageUrl: dto.imageUrl ?? dto.image,
-      color: dto.color ?? undefined,
-      size: dto.size ?? undefined,
-    };
-  }, []);
-
-  const authFetch = useCallback(
-    async (path: string, init?: RequestInit) => {
+  const checkoutFetch = useCallback(
+    async (body: Record<string, unknown>) => {
       if (!token) {
-        throw new Error("Please sign in to manage your cart.");
+        throw new Error("Please sign in before checking out.");
       }
 
-      const buildHeaders = (input?: HeadersInit) => {
-        const headers = new Headers(input);
-        headers.set("Content-Type", "application/json");
-        const authHeaders = withAuthHeaders(token);
-        Object.entries(authHeaders).forEach(([key, value]) => {
-          if (value) headers.set(key, value);
-        });
-        return headers;
-      };
+      const headers = new Headers({
+        "Content-Type": "application/json",
+      });
 
-      const response = await fetch(`${API_BASE_URL}${path}`, {
-        ...init,
-        headers: buildHeaders(init?.headers),
+      const authHeaders = withAuthHeaders(token);
+      Object.entries(authHeaders).forEach(([key, value]) => {
+        if (value) headers.set(key, value);
+      });
+
+      const response = await fetch(`${API_BASE_URL}/api/Orders/checkout`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
       });
 
       if (!response.ok) {
-        const body = await response.json().catch(() => ({}));
-        throw new Error(body?.message ?? "Something went wrong.");
+        const payload = await response.json().catch(() => ({}));
+        throw new Error(payload?.message ?? "Something went wrong.");
       }
 
       return response;
@@ -138,137 +146,94 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   );
 
   const refreshCart = useCallback(async () => {
-    if (!token) return;
-    setIsLoading(true);
+    setItems(loadCart());
+  }, []);
+
+  const addToCart = useCallback(async (payload: AddToCartPayload) => {
     setError(null);
-    try {
-      const response = await authFetch("/api/Cart");
-      const body = await response.json();
-      const parsed: CartItemDto[] = Array.isArray(body) ? body : [];
-      setItems(parsed.map((item) => mapCartItem(item)));
-    } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Unable to load cart items.";
-      setError(message);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [authFetch, mapCartItem, token]);
+    setItems((prev) => {
+      const quantity = payload.quantity ?? 1;
+      const existingIndex = prev.findIndex(
+        (item) =>
+          item.productId === payload.productId &&
+          (item.color ?? null) === (payload.color ?? null) &&
+          (item.size ?? null) === (payload.size ?? null)
+      );
 
-  useEffect(() => {
-    refreshCart();
-  }, [refreshCart]);
-
-  const addToCart = useCallback(
-    async ({
-      productId,
-      quantity = 1,
-      color,
-      size,
-    }: {
-      productId: number;
-      quantity?: number;
-      color?: string | null;
-      size?: string | null;
-    }) => {
-      setError(null);
-      setIsLoading(true);
-      try {
-        const response = await authFetch("/api/Cart", {
-          method: "POST",
-          body: JSON.stringify({
-            productId,
-            quantity,
-            color: color ?? undefined,
-            size: size ?? undefined,
-          }),
-        });
-
-        const body = await response.json();
-        const mapped = mapCartItem(body);
-
-        setItems((prev) => {
-          const index = prev.findIndex((item) => item.id === mapped.id);
-          if (index >= 0) {
-            const copy = [...prev];
-            copy[index] = mapped;
-            return copy;
-          }
-          return [...prev, mapped];
-        });
-        setIsCartOpen(true);
-      } finally {
-        setIsLoading(false);
+      if (existingIndex >= 0) {
+        const next = [...prev];
+        next[existingIndex] = {
+          ...next[existingIndex],
+          quantity: next[existingIndex].quantity + quantity,
+        };
+        return next;
       }
-    },
-    [authFetch, mapCartItem]
-  );
 
-  const updateQuantity = useCallback(
-    async (cartItemId: number, quantity: number) => {
-      setError(null);
-      setIsLoading(true);
-      try {
-        const response = await authFetch(`/api/Cart/${cartItemId}`, {
-          method: "PATCH",
-          body: JSON.stringify({ quantity }),
-        });
+      return [
+        ...prev,
+        {
+          id: Date.now() + Math.floor(Math.random() * 1000),
+          productId: payload.productId,
+          name: payload.name,
+          description: payload.description ?? "",
+          price: payload.price,
+          quantity,
+          imageUrl: payload.imageUrl,
+          color: payload.color ?? undefined,
+          size: payload.size ?? undefined,
+        },
+      ];
+    });
+    setIsCartOpen(true);
+  }, []);
 
-        const body = await response.json();
-        const mapped = mapCartItem(body);
+  const updateQuantity = useCallback(async (cartItemId: number, quantity: number) => {
+    setError(null);
+    setItems((prev) =>
+      prev.map((item) =>
+        item.id === cartItemId
+          ? { ...item, quantity: Math.max(1, quantity) }
+          : item
+      )
+    );
+  }, []);
 
-        setItems((prev) =>
-          prev.map((item) => (item.id === mapped.id ? mapped : item))
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [authFetch, mapCartItem]
-  );
-
-  const removeItem = useCallback(
-    async (cartItemId: number) => {
-      setError(null);
-      setIsLoading(true);
-      try {
-        await authFetch(`/api/Cart/${cartItemId}`, {
-          method: "DELETE",
-        });
-
-        setItems((prev) => prev.filter((item) => item.id !== cartItemId));
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [authFetch]
-  );
+  const removeItem = useCallback(async (cartItemId: number) => {
+    setError(null);
+    setItems((prev) => prev.filter((item) => item.id !== cartItemId));
+  }, []);
 
   const clearCart = useCallback(async () => {
     setError(null);
-    setIsLoading(true);
-    try {
-      await authFetch("/api/Cart", { method: "DELETE" });
-      setItems([]);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [authFetch]);
+    setItems([]);
+  }, []);
 
   const checkout = useCallback(async () => {
     setError(null);
     setIsLoading(true);
+
     try {
-      const response = await authFetch("/api/Orders/checkout", {
-        method: "POST",
+      const response = await checkoutFetch({
+        items: items.map((item) => ({
+          productId: item.productId,
+          quantity: item.quantity,
+          color: item.color,
+          size: item.size,
+        })),
       });
+
       const body = await response.json();
       setItems([]);
       return { orderId: body.orderId, totalPrice: body.totalPrice };
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Unable to place the order.";
+      setError(message);
+      throw err;
     } finally {
       setIsLoading(false);
     }
-  }, [authFetch]);
+  }, [checkoutFetch, items]);
 
   const value = useMemo(
     () => ({
