@@ -83,6 +83,11 @@ const loadCart = () => {
   return parseStoredCart(window.localStorage.getItem(CART_STORAGE_KEY));
 };
 
+const persistCart = (nextItems: CartItem[]) => {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(nextItems));
+};
+
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -111,7 +116,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+    persistCart(items);
   }, [items]);
 
   const checkoutFetch = useCallback(
@@ -169,7 +174,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         return next;
       }
 
-      return [
+      const nextItems = [
         ...prev,
         {
           id: Date.now() + Math.floor(Math.random() * 1000),
@@ -183,6 +188,9 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
           size: payload.size ?? undefined,
         },
       ];
+
+      persistCart(nextItems);
+      return nextItems;
     });
     setIsCartOpen(true);
   }, []);
@@ -190,21 +198,30 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const updateQuantity = useCallback(async (cartItemId: number, quantity: number) => {
     setError(null);
     setItems((prev) =>
-      prev.map((item) =>
+      (() => {
+        const nextItems = prev.map((item) =>
         item.id === cartItemId
           ? { ...item, quantity: Math.max(1, quantity) }
           : item
-      )
+        );
+        persistCart(nextItems);
+        return nextItems;
+      })()
     );
   }, []);
 
   const removeItem = useCallback(async (cartItemId: number) => {
     setError(null);
-    setItems((prev) => prev.filter((item) => item.id !== cartItemId));
+    setItems((prev) => {
+      const nextItems = prev.filter((item) => item.id !== cartItemId);
+      persistCart(nextItems);
+      return nextItems;
+    });
   }, []);
 
   const clearCart = useCallback(async () => {
     setError(null);
+    persistCart([]);
     setItems([]);
   }, []);
 
@@ -223,6 +240,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       });
 
       const body = await response.json();
+      persistCart([]);
       setItems([]);
       return { orderId: body.orderId, totalPrice: body.totalPrice };
     } catch (err) {
