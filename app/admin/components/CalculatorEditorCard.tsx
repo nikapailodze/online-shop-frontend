@@ -3,7 +3,6 @@
 import styles from "../page.module.css";
 import {
   calculatorCategoryOptions,
-  type CalculatorField,
   type CalculatorFormState,
 } from "../types";
 
