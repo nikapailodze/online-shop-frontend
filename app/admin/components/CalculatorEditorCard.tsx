@@ -15,7 +15,18 @@ type Props = {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   onCancel: () => void;
   setCalculatorForm: React.Dispatch<React.SetStateAction<CalculatorFormState>>;
-  onFieldChange: (index: number, key: keyof CalculatorField, value: string) => void;
+  onFieldChange: (
+    index: number,
+    key:
+      | "name"
+      | "label"
+      | "type"
+      | "unit"
+      | "placeholder"
+      | "defaultValue"
+      | "options",
+    value: string,
+  ) => void;
   onAddField: () => void;
   onRemoveField: (index: number) => void;
 };
@@ -161,6 +172,15 @@ export default function CalculatorEditorCard({
                 value={field.label}
                 onChange={(event) => onFieldChange(index, "label", event.target.value)}
               />
+              <select
+                className={styles.input}
+                value={field.type}
+                onChange={(event) => onFieldChange(index, "type", event.target.value)}
+              >
+                <option value="number">Number</option>
+                <option value="select">Select</option>
+                <option value="boolean">Yes / No</option>
+              </select>
               <input
                 className={styles.input}
                 placeholder="Unit"
@@ -179,6 +199,18 @@ export default function CalculatorEditorCard({
                 value={field.defaultValue}
                 onChange={(event) => onFieldChange(index, "defaultValue", event.target.value)}
               />
+              {field.type === "select" ? (
+                <textarea
+                  className={styles.textarea}
+                  placeholder={"Options: Male=1\nFemale=0"}
+                  value={field.options
+                    .map((option) => `${option.label}=${option.value}`)
+                    .join("\n")}
+                  onChange={(event) =>
+                    onFieldChange(index, "options", event.target.value)
+                  }
+                />
+              ) : null}
               <button
                 className={styles.secondaryButton}
                 type="button"

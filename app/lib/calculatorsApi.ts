@@ -3,9 +3,14 @@ import { toApiUrl } from "./api";
 export type ApiCalculatorField = {
   name: string;
   label: string;
+  type?: "number" | "select" | "boolean";
   unit?: string;
   placeholder?: string;
   defaultValue?: number | null;
+  options?: Array<{
+    label: string;
+    value: number;
+  }>;
 };
 
 export type ApiCalculator = {

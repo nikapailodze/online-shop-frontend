@@ -38,17 +38,27 @@ export type Product = {
 export type CalculatorField = {
   name: string;
   label: string;
+  type: "number" | "select" | "boolean";
   unit: string;
   placeholder: string;
   defaultValue: string;
+  options: Array<{
+    label: string;
+    value: string;
+  }>;
 };
 
 export type CalculatorApiField = {
   name: string;
   label: string;
+  type?: "number" | "select" | "boolean";
   unit?: string;
   placeholder?: string;
   defaultValue?: number | null;
+  options?: Array<{
+    label: string;
+    value: number;
+  }>;
 };
 
 export type Calculator = {
@@ -109,7 +119,9 @@ export const calculatorCategoryOptions = [
 export const createEmptyCalculatorField = (): CalculatorField => ({
   name: "",
   label: "",
+  type: "number",
   unit: "",
   placeholder: "",
   defaultValue: "",
+  options: [],
 });

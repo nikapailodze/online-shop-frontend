@@ -31,7 +31,13 @@ export default function CustomCalculatorView({
     Object.fromEntries(
       calculator.fields.map((field) => [
         field.name,
-        field.defaultValue == null ? "" : String(field.defaultValue),
+        field.defaultValue == null
+          ? field.type === "boolean"
+            ? "0"
+            : field.type === "select" && field.options?.[0]
+              ? String(field.options[0].value)
+              : ""
+          : String(field.defaultValue),
       ]),
     ),
   );
@@ -97,19 +103,52 @@ export default function CustomCalculatorView({
             <label key={field.name} className={styles.field}>
               <span className={styles.label}>{field.label}</span>
               <span className={styles.inputWrap}>
-                <input
-                  className={styles.input}
-                  type="number"
-                  inputMode="decimal"
-                  value={values[field.name] ?? ""}
-                  placeholder={field.placeholder || ""}
-                  onChange={(event) =>
-                    setValues((current) => ({
-                      ...current,
-                      [field.name]: event.target.value,
-                    }))
-                  }
-                />
+                {field.type === "select" ? (
+                  <select
+                    className={styles.input}
+                    value={values[field.name] ?? ""}
+                    onChange={(event) =>
+                      setValues((current) => ({
+                        ...current,
+                        [field.name]: event.target.value,
+                      }))
+                    }
+                  >
+                    {(field.options ?? []).map((option) => (
+                      <option key={`${option.label}-${option.value}`} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                ) : field.type === "boolean" ? (
+                  <select
+                    className={styles.input}
+                    value={values[field.name] ?? "0"}
+                    onChange={(event) =>
+                      setValues((current) => ({
+                        ...current,
+                        [field.name]: event.target.value,
+                      }))
+                    }
+                  >
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                ) : (
+                  <input
+                    className={styles.input}
+                    type="number"
+                    inputMode="decimal"
+                    value={values[field.name] ?? ""}
+                    placeholder={field.placeholder || ""}
+                    onChange={(event) =>
+                      setValues((current) => ({
+                        ...current,
+                        [field.name]: event.target.value,
+                      }))
+                    }
+                  />
+                )}
                 {field.unit ? <span className={styles.unit}>{field.unit}</span> : null}
               </span>
             </label>
