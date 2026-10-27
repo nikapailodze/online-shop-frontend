@@ -14,10 +14,10 @@ const PageLoader = ({ compact = false, minHeight }: PageLoaderProps) => {
     >
       <div className={styles.inner}>
         <Image
-          src="/gif/endopailp-gray.gif"
+          src="/gif/endopai-loader.webp"
           alt="Endopai loading"
-          width={220}
-          height={220}
+          width={440}
+          height={430}
           unoptimized
           className={`${styles.image} ${compact ? styles.imageCompact : ""}`}
           priority
